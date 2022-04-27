@@ -10,20 +10,20 @@ export const productsStore = createSlice({
         error: null,
     },
     reducers: {
-        setProducts: (state, action) => state.value = action.payload,
+
     },
-    extraReducers(builder) {
+    extraReducers (builder) {
         builder
             .addCase(fetchProducts.pending, (state, action) => {
                 state.status = STATUS_LOADING
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = STATUS_SUCCEEDED
-                state.value = action.payload
+                state.value  = action.payload
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.status = STATUS_FAILED
-                state.error = action.error.message
+                state.error  = action.error.message
             })
     }
 })
