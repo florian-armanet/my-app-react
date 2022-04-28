@@ -20,12 +20,12 @@ const Products = () => {
         }
 
         if (productsStatusRequest === STATUS_LOADING) {
-            setContent('Loading...')
+            setContent(<div className="Loader mx-auto my-20"></div>)
             return
         }
 
         if (productsStatusRequest === STATUS_SUCCEEDED) {
-            setContent('Succès de la requête !')
+            setContent('')
             dispatch(setProductsBySearcher(getSearcher))
             return
         }
@@ -40,9 +40,9 @@ const Products = () => {
     }, [productsStatusRequest, products, getSearcher, dispatch])
 
     return (
-        <div>
-            <p className="mb-8">{ content }</p>
-            <ul className="flex flex-wrap justify-between -mx-2">
+        <div className="flex-1">
+            {content}
+            <ul className="flex flex-wrap -mx-2">
                 { productsFiltered.map(product => <ProductItem product={ product } key={ product.id }/>) }
             </ul>
         </div>

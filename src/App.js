@@ -7,13 +7,14 @@ import Filters from './components/Filters'
 function App () {
     return (
         <div className="App">
-            <div className="max-w-container px-4 w-full mx-auto">
-                <img src={ logo } className="App-logo" alt="logo"/>
-                <div className="flex flex-wrap justify-between mb-4">
+            <div className="max-w-container px-4 py-12 w-full mx-auto">
+                <div className="flex flex-wrap justify-center mb-10">
                     <Searcher/>
-                    <Filters/>
                 </div>
-                <Products/>
+                <div className="flex flex-wrap items-start">
+                    <Filters/>
+                    <Products/>
+                </div>
             </div>
         </div>
     )

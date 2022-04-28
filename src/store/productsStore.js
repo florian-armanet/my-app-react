@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import fetchProducts from '../api/products'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
+import matchStrings from '../utils/matchStrings'
+import uppercaseFirstLetter from '../utils/uppercaseFirstLetter'
 
 export const productsStore = createSlice({
     name: 'products',
@@ -12,10 +14,11 @@ export const productsStore = createSlice({
     },
     reducers: {
         setProductsBySearcher: (state, action) => {
-            state.filtered = [...state.value].filter(product => {
-                return product.title.trim().toLowerCase().includes(action.payload.trim().toLowerCase())
-            })
-        }
+            state.filtered = [...state.value].filter(product => matchStrings(product.title, action.payload))
+        },
+        setProductsByCategories: (state, action) => {
+            state.filtered = [...state.filtered].filter(product => matchStrings(product.category, action.payload))
+        },
     },
     extraReducers (builder) {
         builder
@@ -24,7 +27,17 @@ export const productsStore = createSlice({
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = STATUS_SUCCEEDED
-                state.value  = action.payload
+                state.value  = action.payload.reduce((acc, currObj) => {
+                    acc.push({
+                        ...currObj,
+                        category: {
+                            categoryLabel: uppercaseFirstLetter(currObj.category),
+                            categoryCode: currObj.category.replace(' ', '_').replace('\'', '')
+                        }
+                    })
+
+                    return acc
+                }, [])
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.status = STATUS_FAILED
@@ -33,6 +46,6 @@ export const productsStore = createSlice({
     }
 })
 
-export const { setProductsBySearcher } = productsStore.actions
+export const { setProductsBySearcher, setProductsByCategories } = productsStore.actions
 
 export default productsStore.reducer

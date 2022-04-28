@@ -1,6 +1,6 @@
 .App {
     background-color: #eeeeee;
-    @apply text-base text-center text-primary-base;
+    @apply text-base text-primary-base;
     min-height: 100vh;
 }
 
@@ -10,11 +10,26 @@
 }
 
 .box-shadow-inset-2 {
-    box-shadow: inset 2px 2px #61dafb, inset -2px -2px #61dafb;
+    box-shadow: inset 2px 2px #FC766AFF, inset -2px -2px #FC766AFF;
 }
 
 .box-shadow-inset-3 {
-    box-shadow: inset 3px 3px #61dafb, inset -3px -3px #61dafb;
+    box-shadow: inset 3px 3px #FC766AFF, inset -3px -3px #FC766AFF;
+}
+
+.Loader {
+    border: 10px solid #fcb6b0;
+    border-radius: 50%;
+    border-top: 10px solid #FC766AFF;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: no-preference) {

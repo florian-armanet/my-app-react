@@ -1,20 +1,51 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { setProductsByCategories } from '../store/productsStore'
+import { useSelector } from 'react-redux'
+import FiltersCategories from './FiltersCategories'
 
 const Filters = () => {
-    const [modalIsOpen, setModalIsOpen] = useState(false)
+    const productsFiltered            = useSelector(state => state.products.filtered)
+    const [categories, setCategories] = useState([])
 
-    const clickOpenModal = (event) => setModalIsOpen(!modalIsOpen)
+    useEffect(() => {
+        setCategories(
+            [...productsFiltered]
+                .map(({ category }) => category)
+                .filter((category, index, array) =>
+                        index === array.findIndex((cat) => (
+                            cat.categoryLabel === category.categoryLabel && cat.categoryCode === category.categoryCode
+                        ))
+                )
+        )
+    }, [productsFiltered])
 
     return (
-        <div className="z-1 relative bg-white px-4 py-2 outline-none box-shadow-inset-3">
-            <p className="text-primary-base font-bold cursor-pointer" onClick={ clickOpenModal }>Filtres</p>
-            <ul className={
-                'absolute top-100 right-0 bg-white w-xs p-4 shadow-lg origin-top-left transition-fast divide-y-2 divide-primary-base font-bold ' + ( modalIsOpen ? 'block' : 'hidden' )
-            }>
-                <li className="pb-2">Categories</li>
-                <li className="py-2">Price</li>
-                <li className="pt-2">Rating</li>
-            </ul>
+        <div className="flex flex-col mr-8">
+            <p className="text-primary-base font-bold mb-4">Filtres</p>
+            <div className="bg-white border border-primary-light/50 rounded w-xs">
+                <ul className="border-b border-primary-light/50">
+                    <li>
+                        <p className="px-4 py-2 bg-tertiary-light/30">Categories</p>
+                        <ul className="px-4 pt-4 mb-8">
+                            { categories.map((category, index) => <FiltersCategories category={ category } key={ index }/>) }
+                        </ul>
+                    </li>
+                    <li>
+                        <p className="px-4 py-2 bg-tertiary-light/30">Price</p>
+                    </li>
+                    <li>
+                        <p className="px-4 py-2 bg-tertiary-light/30">Rating</p>
+                    </li>
+                </ul>
+                <div className="flex flex-wrap justify-between px-4 py-4">
+                    <button className="underline">
+                        Reset All
+                    </button>
+                    <button className="bg-primary-base hover:bg-primary-hover transition text-white px-3 py-2 rounded">
+                        Apply filters
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
