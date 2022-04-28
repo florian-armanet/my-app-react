@@ -6,11 +6,16 @@ export const productsStore = createSlice({
     name: 'products',
     initialState: {
         value: [],
+        filtered: [],
         status: '',
         error: null,
     },
     reducers: {
-
+        setProductsBySearcher: (state, action) => {
+            state.filtered = [...state.value].filter(product => {
+                return product.title.trim().toLowerCase().includes(action.payload.trim().toLowerCase())
+            })
+        }
     },
     extraReducers (builder) {
         builder
@@ -27,5 +32,7 @@ export const productsStore = createSlice({
             })
     }
 })
+
+export const { setProductsBySearcher } = productsStore.actions
 
 export default productsStore.reducer

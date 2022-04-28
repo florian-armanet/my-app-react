@@ -1,25 +1,26 @@
 .App {
-    background-color: #282c34;
-    text-align: center;
-    font-size: 1rem;
-    color: white;
+    background-color: #eeeeee;
+    @apply text-base text-center text-primary-base;
     min-height: 100vh;
 }
 
 .App-logo {
     height: 20vmin;
     @apply mx-auto;
-    pointer-events: none;
+}
+
+.box-shadow-inset-2 {
+    box-shadow: inset 2px 2px #61dafb, inset -2px -2px #61dafb;
+}
+
+.box-shadow-inset-3 {
+    box-shadow: inset 3px 3px #61dafb, inset -3px -3px #61dafb;
 }
 
 @media (prefers-reduced-motion: no-preference) {
     .App-logo {
         animation: App-logo-spin infinite 20s linear;
     }
-}
-
-.App-link {
-    color: #61dafb;
 }
 
 @keyframes App-logo-spin {

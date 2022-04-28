@@ -54,6 +54,7 @@ module.exports = {
             xs: '320px',
             full: '100%',
         }),
+        width: (theme) => ({...theme('maxWidth')}),
         minHeight: {
             'half': '50vh'
         },
