@@ -1,21 +1,36 @@
-import { setResetCheckedValues } from '../../store/filtersStore'
+import {
+    setResetCheckedValues,
+    addCategoriesSelected,
+    removeCategoriesSelected,
+    resetCategoriesSelected
+} from '../../store/filtersStore'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const FiltersCategoriesItem = ({ category }) => {
     const [currentCheckedValue, setCurrentCheckedValue] = useState(false)
 
-    const dispatch           = useDispatch()
+    const dispatch = useDispatch()
     const getResetCheckedValues = useSelector(state => state.filters.resetCheckedValues)
+    const getCategoriesSelected = useSelector(state => state.filters.categoriesSelected)
 
     const handleChange = (event) => {
         dispatch(setResetCheckedValues(false))
         setCurrentCheckedValue(!currentCheckedValue)
+
+        if (event.target.checked && !getCategoriesSelected.includes(category.categoryCode)) {
+            dispatch(addCategoriesSelected(category.categoryCode))
+        }
+
+        if (!event.target.checked && getCategoriesSelected.includes(category.categoryCode)) {
+            dispatch(removeCategoriesSelected(category.categoryCode))
+        }
     }
 
     useEffect(() => {
         if (getResetCheckedValues) {
             setCurrentCheckedValue(false)
+            dispatch(resetCategoriesSelected())
         }
     }, [getResetCheckedValues])
 
