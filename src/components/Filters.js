@@ -1,16 +1,16 @@
 import FiltersCategories from './Filters/FiltersCategories'
-import { useDispatch, useSelector } from 'react-redux'
-import { setProductsByCategories } from '../store/productsStore'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { setProductsByCategories } from '../store/productsStore'
 
 const Filters = () => {
-    const dispatch              = useDispatch()
-    const getCategoriesSelected = useSelector(state => state.filters.categoriesSelected)
+    // const dispatch              = useDispatch()
+    // const getCategoriesSelected = useSelector(state => state.filters.categoriesSelected)
     // const productsFiltered      = useSelector(state => state.products.filtered)
 
     const applyFilters = (event) => {
         // console.log(getCategoriesSelected)
         // console.log(productsFiltered)
-        dispatch(setProductsByCategories(getCategoriesSelected))
+        // dispatch(setProductsByCategories(getCategoriesSelected))
     }
 
     return (

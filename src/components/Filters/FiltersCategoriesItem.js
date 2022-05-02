@@ -3,7 +3,7 @@ import {
     addCategoriesSelected,
     removeCategoriesSelected,
     setCategoriesSelected
-} from '../../store/filtersStore'
+} from '../../store/filtersCategoriesStore'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 

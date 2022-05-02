@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import productsReducer from './productsStore'
 import searcherReducer from './searcherStore'
-import filtersReducer from './filtersStore'
+import filtersReducer from './filtersCategoriesStore'
 
 export default configureStore({
     reducer: {

@@ -1,7 +1,7 @@
 import FiltersCategoriesItem from './FiltersCategoriesItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { setCategories, setResetCheckedValues } from '../../store/filtersStore'
+import { useEffect } from 'react'
+import { fetchCategories, setResetCheckedValues } from '../../store/filtersCategoriesStore'
 
 const FiltersCategories = () => {
     const dispatch   = useDispatch()
@@ -9,7 +9,7 @@ const FiltersCategories = () => {
     const categories = useSelector(state => state.filters.categories)
 
     useEffect(() => {
-        dispatch(setCategories([...products]))
+        dispatch(fetchCategories([...products]))
     }, [products])
 
     const clickResetCheckedValue = () => dispatch(setResetCheckedValues(true))

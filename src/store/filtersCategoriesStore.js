@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const filtersStore = createSlice({
+export const filtersCategoriesStore = createSlice({
     name: 'filters',
     initialState: {
         categories: [],
@@ -8,42 +8,41 @@ export const filtersStore = createSlice({
         resetCheckedValues: false,
     },
     reducers: {
-        setCategories: (state, action) => {
-            state.categories = action.payload
-                .map(({ category }) => category)
+        fetchCategories: (state, { payload }) => {
+            state.categories = payload.map(({ category }) => category)
                 .filter((category, index, array) =>
                         index === array.findIndex((cat) => (
                             cat.categoryLabel === category.categoryLabel && cat.categoryCode === category.categoryCode
                         ))
                 )
         },
-        setCategoriesSelected: (state, action) => {
-            state.categoriesSelected = action.payload
+        setCategoriesSelected: (state, { payload }) => {
+            state.categoriesSelected = payload
         },
-        addCategoriesSelected: (state, action) => {
+        addCategoriesSelected: (state, { payload }) => {
             const categoriesSelectedClone = [...state.categoriesSelected]
 
-            categoriesSelectedClone.push(action.payload)
+            categoriesSelectedClone.push(payload)
             state.categoriesSelected = categoriesSelectedClone
         },
-        removeCategoriesSelected: (state, action) => {
+        removeCategoriesSelected: (state, { payload }) => {
             const categoriesSelectedClone = [...state.categoriesSelected]
 
-            categoriesSelectedClone.splice(categoriesSelectedClone.indexOf(action.payload), 1)
+            categoriesSelectedClone.splice(categoriesSelectedClone.indexOf(payload), 1)
             state.categoriesSelected = categoriesSelectedClone
         },
-        setResetCheckedValues: (state, action) => {
-            state.resetCheckedValues = action.payload
+        setResetCheckedValues: (state, { payload }) => {
+            state.resetCheckedValues = payload
         }
     },
 })
 
-export default filtersStore.reducer
+export default filtersCategoriesStore.reducer
 
 export const {
-                 setCategories,
+                 fetchCategories,
                  addCategoriesSelected,
                  removeCategoriesSelected,
                  setResetCheckedValues,
                  setCategoriesSelected
-             } = filtersStore.actions
+             } = filtersCategoriesStore.actions
