@@ -1,0 +1,20 @@
+/*
+ * [ base / font ]
+ */
+
+// -----------------------------------------------------------------------------
+
+//$fonts: (
+//                ('Epilogue', 400, 'Regular'),
+//                ('Epilogue', 700, 'Bold'),
+//                ('Epilogue', 900, 'Black'),
+//                ('RobotoMono', 300, 'Light'),
+//                ('RobotoMono', 400, 'Regular'),
+//                ('RobotoMono', 700, 'Bold'),
+//);
+//
+//@each $nameFont, $weight, $variant in $fonts {
+//    @include fontFace($nameFont, $weight, $variant)
+//}
+
+@include icomoon()

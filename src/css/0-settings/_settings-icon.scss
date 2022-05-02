@@ -1,0 +1,54 @@
+/*
+ * [ settings / icon ]
+ */
+
+// -----------------------------------------------------------------------------
+
+$icons: (
+        trash: 'e900',
+        home: 'e901',
+        card: 'e902',
+        facebook: 'e903',
+        garantied: 'e904',
+        handshake: 'e905',
+        delivery: 'e906',
+        quote: 'e907',
+        instagram: 'e908',
+        arrow-top-light: 'e909',
+        arrow-right-light: 'e90a',
+        plus: 'e90b',
+        arrow-bottom: 'e90c',
+        arrow-top: 'e90d',
+        arrow-right: 'e90e',
+        arrow-left: 'e90f',
+        angle-top: 'e910',
+        angle-right: 'e911',
+        angle-left: 'e912',
+        angle-bottom: 'e913',
+        check: 'e914',
+        star: 'e915',
+        minus: 'e916',
+        tool: 'e917',
+        cancel: 'e918',
+        twitter: 'e919',
+        facebook1: 'e91a',
+        linkedin: 'e91b',
+        code: 'e91c',
+        search: 'e91d',
+        map: 'e91e',
+        basket: 'e91f',
+        contact: 'e920',
+        login: 'e921',
+        phone: 'e92b',
+        smartphone: 'e92c',
+        menu: 'e92d',
+        close-light: 'e92e',
+);
+
+@function str-unicode($str) {
+    @return unquote("\"") + unquote(str-insert($str, "\\", 1)) + unquote("\"")
+}
+
+@function unicode($icon) {
+    @return str-unicode(quote(map-get($icons, $icon)));
+}

@@ -1,0 +1,251 @@
+/*
+ * [ settings / utils ]
+ */
+
+// -----------------------------------------------------------------------------
+
+@layer components {
+    .transition-fast {
+        transition: all 0.25s ease-out;
+    }
+
+    .transition-normal {
+        transition: all 0.5s ease-out;
+    }
+
+    .absolute-y-center {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .absolute-x-center {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .absolute-center {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .flex-flow-center {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flex-flow-centerY {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .flex-flow-centerX {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .flex-flow-between {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    //.flex-377 {
+    //    max-width: 377px;
+    //    flex: 0 0 377px;
+    //}
+    //
+    //.flex-580 {
+    //    max-width: 580px;
+    //    flex: 0 0 580px;
+    //}
+    .blur {
+        filter: blur(3px);
+    }
+
+    .backdrop-blur-5 {
+        backdrop-filter: blur(5px);
+    }
+
+    .flex-flow-endX {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .shadow-asdo {
+        box-shadow: 1px 1px 60px rgba(0, 0, 0, 0.05);
+    }
+
+    .shadow-md-asdo {
+        box-shadow: 1px 1px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .shadow-lg-asdo {
+        box-shadow: 1px 1px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .text-shadow {
+        text-shadow: -1px 3px 4px #000000d9;
+    }
+
+    .translateX-0 {
+        transform: translateX(0);
+    }
+
+    .-translateX-100 {
+        transform: translateX(-100%);
+    }
+
+    .translateX-100 {
+        transform: translateX(100%);
+    }
+
+    .translateY-0 {
+        transform: translateY(0);
+    }
+
+    .-translateY-50 {
+        transform: translateY(-50%);
+    }
+
+    .translateY-50 {
+        transform: translateY(50%);
+    }
+
+    .-translateY-100 {
+        transform: translateY(-100%);
+    }
+
+    .translateY-100 {
+        transform: translateY(100%);
+    }
+
+    .top-100 {
+        top: 100%;
+    }
+
+    .right-100 {
+        right: 100%;
+    }
+
+    .bottom-100 {
+        bottom: 100%;
+    }
+
+    .left-100 {
+        left: 100%;
+    }
+
+    .partial-col {
+        min-height: 1px;
+        position: relative;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .mr-right {
+        margin-right: calc(-50vw + 50%);
+    }
+
+    .ml-left {
+        margin-left: calc(-50vw + 50%);
+    }
+
+    .box-shadow-inset-2 {
+        box-shadow: inset 2px 2px #FC766AFF, inset -2px -2px #FC766AFF;
+    }
+
+    .box-shadow-inset-3 {
+        box-shadow: inset 3px 3px #FC766AFF, inset -3px -3px #FC766AFF;
+    }
+
+    .has-underline {
+        @apply relative inline-block;
+
+        &:after {
+            content: '';
+            height: 3px;
+            top: calc(100% - 3px);
+            @apply bg-primary-base transition-fast absolute left-0 w-0;
+        }
+
+        &:hover:after {
+            @apply w-full;
+        }
+
+        &:not(:hover):after {
+            @apply right-0 left-auto;
+        }
+
+        &.has-underline.isActive:after {
+            @apply w-full right-0 left-0;
+        }
+
+        &--invert {
+            &:after {
+                @apply left-0 w-full;
+            }
+
+            &:hover:after {
+                @apply w-0;
+            }
+        }
+
+        $underline_colors: (
+                'white': 'white',
+                'black': 'black',
+                'gray': 'gray-600',
+                'primary': 'primary-base',
+                'secondary': 'secondary-base',
+                'tertiary': 'tertiary-base',
+        );
+
+        @each $modifier, $color in $underline_colors {
+            &--#{$modifier} {
+                &:after {
+                    @apply bg-#{$color};
+                }
+            }
+        }
+    }
+}
+
+/* purgecss start ignore */
+@for $i from 1 through 5 {
+    .line-clamp-#{$i} {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: $i;
+        -webkit-box-orient: vertical;
+    }
+}
+/* purgecss end ignore */
+
+.has-trigger-transition {
+    transform: rotateX(0deg);
+    transform-origin: top center;
+    opacity: 1;
+    will-change: transform;
+    transition: all 0.25s ease-out;
+
+    &:not(.is-visible) {
+        transform: rotateX(-90deg);
+        opacity: 0;
+    }
+}
+
+.cacheElement {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}

@@ -1,5 +1,4 @@
-import logo from './logo.svg'
-import './App.css'
+import './App.scss'
 import Products from '../src/components/Products'
 import Searcher from './components/Searcher'
 import Filters from './components/Filters'

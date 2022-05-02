@@ -1,0 +1,18 @@
+@import "css/import-tailwind";
+
+@import
+'css/0-settings/settings-icon',
+'css/0-settings/settings-mixins',
+'css/0-settings/settings-path',
+'css/0-settings/settings-utils'
+;
+
+@import
+'css/1-base/base-default',
+'css/1-base/base-font'
+;
+
+@import
+"css/2-components/components-loader",
+"css/2-components/components-icon"
+;
