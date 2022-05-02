@@ -7,17 +7,24 @@ import uppercaseFirstLetter from '../utils/uppercaseFirstLetter'
 export const productsStore = createSlice({
     name: 'products',
     initialState: {
-        value: [],
+        all: [],
         filtered: [],
         status: '',
         error: null,
     },
     reducers: {
+        setProductsFiltered: (state, action) => {
+            state.filtered = action.payload
+        },
         setProductsBySearcher: (state, action) => {
-            state.filtered = [...state.value].filter(product => matchStrings(product.title, action.payload))
+            state.filtered = [...state.all].filter(product => {
+                return matchStrings(product.title, action.payload) || action.payload === ''
+            })
         },
         setProductsByCategories: (state, action) => {
-            state.filtered = [...state.filtered].filter(product => matchStrings(product.category, action.payload))
+            state.filtered = [...state.all].filter(product => {
+                return action.payload.includes(product.category.categoryCode) || !action.payload.length
+            })
         },
     },
     extraReducers (builder) {
@@ -27,7 +34,7 @@ export const productsStore = createSlice({
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = STATUS_SUCCEEDED
-                state.value  = action.payload.reduce((acc, currObj) => {
+                state.all  = action.payload.reduce((acc, currObj) => {
                     acc.push({
                         ...currObj,
                         category: {
@@ -46,6 +53,6 @@ export const productsStore = createSlice({
     }
 })
 
-export const { setProductsBySearcher, setProductsByCategories } = productsStore.actions
+export const { setProductsFiltered, setProductsBySearcher, setProductsByCategories } = productsStore.actions
 
 export default productsStore.reducer

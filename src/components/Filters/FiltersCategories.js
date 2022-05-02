@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react'
 import { setCategories, setResetCheckedValues } from '../../store/filtersStore'
 
 const FiltersCategories = () => {
-    const dispatch = useDispatch()
-    const productsFiltered   = useSelector(state => state.products.filtered)
+    const dispatch   = useDispatch()
+    const products   = useSelector(state => state.products.all)
     const categories = useSelector(state => state.filters.categories)
 
     useEffect(() => {
-        dispatch(setCategories([...productsFiltered]))
-    }, [productsFiltered])
+        dispatch(setCategories([...products]))
+    }, [products])
 
     const clickResetCheckedValue = () => dispatch(setResetCheckedValues(true))
 
@@ -24,7 +24,7 @@ const FiltersCategories = () => {
             </ul>
             <button className="px-4 py-2 mb-8 underline hover:text-secondary-base transition"
                     onClick={ clickResetCheckedValue }>
-                Reset All
+                Reset Categories
             </button>
         </li>
     )

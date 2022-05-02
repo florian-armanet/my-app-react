@@ -2,7 +2,7 @@ import {
     setResetCheckedValues,
     addCategoriesSelected,
     removeCategoriesSelected,
-    resetCategoriesSelected
+    setCategoriesSelected
 } from '../../store/filtersStore'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,7 +30,7 @@ const FiltersCategoriesItem = ({ category }) => {
     useEffect(() => {
         if (getResetCheckedValues) {
             setCurrentCheckedValue(false)
-            dispatch(resetCategoriesSelected())
+            dispatch(setCategoriesSelected([]))
         }
     }, [getResetCheckedValues])
 

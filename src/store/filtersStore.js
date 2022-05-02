@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import filters from '../components/Filters'
 
 export const filtersStore = createSlice({
     name: 'filters',
@@ -18,6 +17,9 @@ export const filtersStore = createSlice({
                         ))
                 )
         },
+        setCategoriesSelected: (state, action) => {
+            state.categoriesSelected = action.payload
+        },
         addCategoriesSelected: (state, action) => {
             const categoriesSelectedClone = [...state.categoriesSelected]
 
@@ -28,10 +30,6 @@ export const filtersStore = createSlice({
             const categoriesSelectedClone = [...state.categoriesSelected]
 
             categoriesSelectedClone.splice(categoriesSelectedClone.indexOf(action.payload), 1)
-            state.categoriesSelected = categoriesSelectedClone
-        },
-        resetCategoriesSelected: (state, action) => {
-            const categoriesSelectedClone = []
             state.categoriesSelected = categoriesSelectedClone
         },
         setResetCheckedValues: (state, action) => {
@@ -47,5 +45,5 @@ export const {
                  addCategoriesSelected,
                  removeCategoriesSelected,
                  setResetCheckedValues,
-                 resetCategoriesSelected
+                 setCategoriesSelected
              } = filtersStore.actions
