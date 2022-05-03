@@ -28,7 +28,7 @@ const ProductItem = ({ product }) => {
                 <p className="absolute top-0 left-0 bg-tertiary-base text-secondary-dark font-bold px-2 py-1">
                     { product.category.categoryLabel }
                 </p>
-                <p className="text-primary-base font-bold mb-4">{ product.title }</p>
+                <p className="text-primary-base font-bold mb-4 line-clamp-2">{ product.title }</p>
                 <p className="flex-flow-centerY">
                     { generateStarRate(roundHalfRate) }
                     <span className="ml-1">({ product.rating.count } avis)</span>

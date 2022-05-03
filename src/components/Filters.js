@@ -1,18 +1,7 @@
 import FiltersCategories from './Filters/FiltersCategories'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { setProductsByCategories } from '../store/productsStore'
+import SortRatings from './Filters/SortRatings'
 
 const Filters = () => {
-    // const dispatch              = useDispatch()
-    // const getCategoriesSelected = useSelector(state => state.filters.categoriesSelected)
-    // const productsFiltered      = useSelector(state => state.products.filtered)
-
-    const applyFilters = (event) => {
-        // console.log(getCategoriesSelected)
-        // console.log(productsFiltered)
-        // dispatch(setProductsByCategories(getCategoriesSelected))
-    }
-
     return (
         <div className="flex flex-col mr-8">
             <p className="text-primary-base font-bold mb-4">Filtres</p>
@@ -22,16 +11,13 @@ const Filters = () => {
                     <li>
                         <p className="px-4 py-2 bg-tertiary-light/30">Price</p>
                     </li>
-                    <li>
-                        <p className="px-4 py-2 bg-tertiary-light/30">Rating</p>
-                    </li>
+                    <SortRatings/>
                 </ul>
                 <div className="flex flex-wrap justify-between px-4 py-4">
                     <button className="underline">
                         Reset All
                     </button>
-                    <button className="bg-primary-base hover:bg-primary-hover transition text-white px-3 py-2 rounded"
-                            onClick={ applyFilters }>
+                    <button className="bg-primary-base hover:bg-primary-hover transition text-white px-3 py-2 rounded">
                         Apply filters
                     </button>
                 </div>

@@ -27,10 +27,10 @@ const Products = () => {
         if (productsStatusRequest === STATUS_SUCCEEDED) {
             setContent('')
             dispatch(setProductsFiltered(
-                [...products].filter(product => {
+                [...products]
+                    .filter(product => {
                         return getCategoriesSelected.includes(product.category.categoryCode) || !getCategoriesSelected.length
-                    }
-                )
+                    })
             ))
             return
         }
@@ -48,7 +48,8 @@ const Products = () => {
         <div className="flex-1">
             { content }
             <ul className="flex flex-wrap -mx-2">
-                { productsFiltered.map(product => <ProductItem product={ product } key={ product.id }/>) }
+                { productsFiltered
+                    .map(product => <ProductItem product={ product } key={ product.id }/>) }
             </ul>
         </div>
     )
