@@ -32,6 +32,7 @@ const Products = () => {
                         return getCategoriesSelected.includes(product.category.categoryCode) || !getCategoriesSelected.length
                     })
             ))
+            console.log('product');
             return
         }
 

@@ -13,28 +13,28 @@ export const productsStore = createSlice({
         error: null,
     },
     reducers: {
-        setProductsFiltered: (state, action) => {
-            state.filtered = action.payload
+        setProductsFiltered: (state, { payload }) => {
+            state.filtered = payload
         },
-        setProductsBySearcher: (state, action) => {
+        setProductsBySearcher: (state, { payload }) => {
             state.filtered = [...state.all].filter(product => {
-                return matchStrings(product.title, action.payload) || action.payload === ''
+                return matchStrings(product.title, payload) || payload === ''
             })
         },
-        setProductsByCategories: (state, action) => {
+        setProductsByCategories: (state, { payload }) => {
             state.filtered = [...state.all].filter(product => {
-                return action.payload.includes(product.category.categoryCode) || !action.payload.length
+                return payload.includes(product.category.categoryCode) || !payload.length
             })
         },
     },
     extraReducers (builder) {
         builder
-            .addCase(fetchProducts.pending, (state, action) => {
+            .addCase(fetchProducts.pending, (state, { payload }) => {
                 state.status = STATUS_LOADING
             })
-            .addCase(fetchProducts.fulfilled, (state, action) => {
+            .addCase(fetchProducts.fulfilled, (state, { payload }) => {
                 state.status = STATUS_SUCCEEDED
-                state.all  = action.payload.reduce((acc, currObj) => {
+                state.all  = payload.reduce((acc, currObj) => {
                     acc.push({
                         ...currObj,
                         category: {
@@ -47,9 +47,9 @@ export const productsStore = createSlice({
                     return acc
                 }, [])
             })
-            .addCase(fetchProducts.rejected, (state, action) => {
+            .addCase(fetchProducts.rejected, (state, { error }) => {
                 state.status = STATUS_FAILED
-                state.error  = action.error.message
+                state.error  = error.message
             })
     }
 })

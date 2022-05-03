@@ -22,7 +22,7 @@ const Sorting = ({ sortByProperty }) => {
                     .sort((a, b) => a.id - b.id)
             ))
         }
-    }, [resetCheckedValues, resetAllCheckedValues])
+    }, [resetCheckedValues, resetAllCheckedValues, dispatch])
 
     const clickResetCheckedValue = () => setResetCheckedValues(true)
 

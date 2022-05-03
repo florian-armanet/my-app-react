@@ -35,7 +35,7 @@ const FiltersCategoriesItem = ({ category }) => {
             dispatch(setCategoriesSelected([]))
             dispatch(setResetAllCheckedValues(false))
         }
-    }, [getResetCheckedValues, resetAllCheckedValues])
+    }, [getResetCheckedValues, resetAllCheckedValues, dispatch])
 
     return (
         <li className="flex flex-wrap items-center mb-1">

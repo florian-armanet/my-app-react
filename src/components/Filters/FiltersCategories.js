@@ -10,7 +10,7 @@ const FiltersCategories = () => {
 
     useEffect(() => {
         dispatch(fetchCategories([...products]))
-    }, [products])
+    }, [products, dispatch])
 
     const clickResetCheckedValue = () => dispatch(setResetCheckedValues(true))
 
