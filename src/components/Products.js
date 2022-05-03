@@ -11,7 +11,7 @@ const Products = () => {
     const productsFiltered      = useSelector(state => state.products.filtered)
     const productsStatusRequest = useSelector(state => state.products.status)
     const [content, setContent] = useState('En attente d\'une requête...')
-    const getCategoriesSelected = useSelector(state => state.filters.categoriesSelected)
+    const getCategoriesSelected = useSelector(state => state.filtersCategories.categoriesSelected)
 
     useEffect(() => {
         if (!productsStatusRequest) {
@@ -36,7 +36,7 @@ const Products = () => {
         }
 
         if (productsStatusRequest === STATUS_FAILED) {
-            setContent('Echec de la requête')
+            setContent(<p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>)
             return
         }
 

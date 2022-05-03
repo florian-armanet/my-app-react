@@ -6,7 +6,7 @@ import { fetchCategories, setResetCheckedValues } from '../../store/filtersCateg
 const FiltersCategories = () => {
     const dispatch   = useDispatch()
     const products   = useSelector(state => state.products.all)
-    const categories = useSelector(state => state.filters.categories)
+    const categories = useSelector(state => state.filtersCategories.categories)
 
     useEffect(() => {
         dispatch(fetchCategories([...products]))

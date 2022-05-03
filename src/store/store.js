@@ -8,7 +8,7 @@ export default configureStore({
     reducer: {
         products: productsReducer,
         searcher: searcherReducer,
-        filters: filtersCategoriesReducer,
+        filtersCategories: filtersCategoriesReducer,
         ratings: ratingsReducer,
     }
 })

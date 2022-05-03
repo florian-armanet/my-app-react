@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const filtersCategoriesStore = createSlice({
-    name: 'filters',
+    name: 'filtersCategories',
     initialState: {
         categories: [],
         categoriesSelected: [],
