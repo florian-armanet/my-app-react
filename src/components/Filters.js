@@ -1,10 +1,12 @@
 import FiltersCategories from './Filters/FiltersCategories'
-import SortRatings from './Filters/SortRatings'
+import Sorting from './Filters/Sorting'
+import { setResetAllCheckedValues } from '../store/filtersStore'
+import { useDispatch } from 'react-redux'
 
 const Filters = () => {
-    const resetAllFilters = (event) => {
+    const dispatch         = useDispatch()
 
-    }
+    const resetAllFilters = (event) => dispatch(setResetAllCheckedValues(true))
 
     return (
         <div className="flex flex-col mr-8">
@@ -12,10 +14,8 @@ const Filters = () => {
             <div className="bg-white border border-primary-light/50 rounded w-xs">
                 <ul className="border-b border-primary-light/50">
                     <FiltersCategories/>
-                    <li>
-                        <p className="px-4 py-2 bg-tertiary-light/30">Price</p>
-                    </li>
-                    <SortRatings/>
+                    <Sorting sortByProperty={ { name: 'Price', code: 'price', propertySorted: 'price' } }/>
+                    <Sorting sortByProperty={ { name: 'Rating', code: 'rating', propertySorted: 'rate' } }/>
                 </ul>
                 <div className="flex flex-wrap justify-between px-4 py-4">
                     <button className="underline" onClick={ resetAllFilters }>

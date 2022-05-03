@@ -40,7 +40,8 @@ export const productsStore = createSlice({
                         category: {
                             categoryLabel: uppercaseFirstLetter(currObj.category),
                             categoryCode: currObj.category.replace(' ', '_').replace('\'', '')
-                        }
+                        },
+                        rate: currObj.rating.rate,
                     })
 
                     return acc

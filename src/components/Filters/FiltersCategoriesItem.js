@@ -6,13 +6,15 @@ import {
 } from '../../store/filtersCategoriesStore'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { setResetAllCheckedValues } from '../../store/filtersStore'
 
 const FiltersCategoriesItem = ({ category }) => {
     const [currentCheckedValue, setCurrentCheckedValue] = useState(false)
 
-    const dispatch = useDispatch()
+    const dispatch              = useDispatch()
     const getResetCheckedValues = useSelector(state => state.filtersCategories.resetCheckedValues)
     const getCategoriesSelected = useSelector(state => state.filtersCategories.categoriesSelected)
+    const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
 
     const handleChange = (event) => {
         dispatch(setResetCheckedValues(false))
@@ -28,11 +30,12 @@ const FiltersCategoriesItem = ({ category }) => {
     }
 
     useEffect(() => {
-        if (getResetCheckedValues) {
+        if (getResetCheckedValues || resetAllCheckedValues) {
             setCurrentCheckedValue(false)
             dispatch(setCategoriesSelected([]))
+            dispatch(setResetAllCheckedValues(false))
         }
-    }, [getResetCheckedValues])
+    }, [getResetCheckedValues, resetAllCheckedValues])
 
     return (
         <li className="flex flex-wrap items-center mb-1">

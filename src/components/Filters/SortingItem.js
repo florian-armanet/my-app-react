@@ -2,49 +2,52 @@ import { SORT_ASC, SORT_DESC } from '../../utils/constants'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProductsFiltered } from '../../store/productsStore'
-import { setResetCheckedValues } from '../../store/ratingsStore'
+import { setResetAllCheckedValues } from '../../store/filtersStore'
 
-const SortRatingsItem = ({ typeSorting, label }) => {
+const SortingItem = ({ typeSorting, label, resetCheckedValues, setResetCheckedValues, sortByProperty }) => {
     const dispatch              = useDispatch()
     const productsFiltered      = useSelector(state => state.products.filtered)
-    const getResetCheckedValues = useSelector(state => state.ratings.resetCheckedValues)
     const inputNode             = React.createRef()
+    const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
 
     const handleChange = (event) => {
-        dispatch(setResetCheckedValues(false))
+        setResetCheckedValues(false)
+        dispatch(setResetAllCheckedValues(false))
 
         if (typeSorting === SORT_DESC) {
             dispatch(setProductsFiltered(
                 [...productsFiltered]
-                    .sort((a, b) => b.rating.rate - a.rating.rate)
+                    .sort((a, b) => b[sortByProperty.propertySorted] - a[sortByProperty.propertySorted])
             ))
         }
 
         if (typeSorting === SORT_ASC) {
             dispatch(setProductsFiltered(
                 [...productsFiltered]
-                    .sort((a, b) => a.rating.rate - b.rating.rate)
+                    .sort((a, b) => a[sortByProperty.propertySorted] - b[sortByProperty.propertySorted])
             ))
         }
     }
 
     useEffect(() => {
-        if (getResetCheckedValues) {
+        if (resetCheckedValues || resetAllCheckedValues) {
             inputNode.current.checked = false
+            dispatch(setResetAllCheckedValues(false))
         }
-    }, [getResetCheckedValues])
+    }, [resetCheckedValues, resetAllCheckedValues])
 
     return (
         <li className="flex-flow-centerY mb-1">
             <input type="radio"
-                   name="sortRating"
-                   id={ typeSorting }
+                   name="sorting"
+                   id={ sortByProperty.code + '_' + typeSorting }
                    className="appearance-none w-4 h-4 rounded-full border-2 border-primary-base transition checked:bg-primary-base"
                    ref={ inputNode }
                    onChange={ handleChange }/>
-            <label htmlFor={ typeSorting } className="cursor-pointer font-bold ml-2">{ label }</label>
+            <label htmlFor={ sortByProperty.code + '_' + typeSorting }
+                   className="cursor-pointer font-bold ml-2">{ label }</label>
         </li>
     )
 }
 
-export default SortRatingsItem
+export default SortingItem
