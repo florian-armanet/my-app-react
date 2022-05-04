@@ -9,7 +9,6 @@ const SortingItem = ({ typeSorting, label, resetCheckedValues, setResetCheckedVa
     const productsFiltered      = useSelector(state => state.products.filtered)
     const inputNode             = React.createRef()
     const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
-    // const getCategoriesSelected = useSelector(state => state.filtersCategories.categoriesSelected)
 
     const handleChange = (event) => {
         setResetCheckedValues(false)
@@ -36,24 +35,6 @@ const SortingItem = ({ typeSorting, label, resetCheckedValues, setResetCheckedVa
             dispatch(setResetAllCheckedValues(false))
         }
     }, [resetCheckedValues, resetAllCheckedValues])
-
-    // useEffect(() => {
-    //     if (typeSorting === SORT_DESC) {
-    //         console.log('in 1');
-    //         dispatch(setProductsFiltered(
-    //             [...productsFiltered]
-    //                 .sort((a, b) => b[sortByProperty.propertySorted] - a[sortByProperty.propertySorted])
-    //         ))
-    //     }
-    //
-    //     if (typeSorting === SORT_ASC) {
-    //         console.log('in 2');
-    //         dispatch(setProductsFiltered(
-    //             [...productsFiltered]
-    //                 .sort((a, b) => a[sortByProperty.propertySorted] - b[sortByProperty.propertySorted])
-    //         ))
-    //     }
-    // }, [getCategoriesSelected, dispatch])
 
     return (
         <li className="flex-flow-centerY mb-1">

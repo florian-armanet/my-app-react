@@ -20,8 +20,8 @@ const ProductItem = ({ product }) => {
     }
 
     return (
-        <li className="relative flex flex-col w-64 mx-2 mb-12 bg-white rounded-sm shadow hover:shadow-lg transition">
-            <div className="h-72 p-2">
+        <li className="relative flex flex-col w-56 mx-2 mb-12 bg-white rounded-sm shadow hover:shadow-lg transition">
+            <div className="h-56 p-2">
                 <img src={ product.image } alt={ product.title } className="h-full w-full object-contain mb-2"/>
             </div>
             <div className="p-4">
