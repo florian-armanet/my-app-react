@@ -44,15 +44,23 @@ const ListProducts = () => {
 
     }, [productsStatusRequest, products, getCategoriesSelected, dispatch])
 
+    if (productsFiltered.length) {
+        return (
+            <div className="flex-1">
+                <ul className="flex flex-wrap -mx-2">
+                    { productsFiltered
+                        .map(product => <ProductMiniature product={ product } key={ product.id }/>) }
+                </ul>
+            </div>
+        )
+    }
+
     return (
-        <div className="flex-1">
+        <>
             { content }
-            <ul className="flex flex-wrap -mx-2">
-                { productsFiltered
-                    .map(product => <ProductMiniature product={ product } key={ product.id }/>) }
-            </ul>
-        </div>
+        </>
     )
+
 }
 
 export default ListProducts

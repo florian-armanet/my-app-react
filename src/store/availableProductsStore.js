@@ -30,6 +30,4 @@ export const availableProductsStore = createSlice({
     }
 })
 
-export const { setStatus } = availableProductsStore.actions
-
 export default availableProductsStore.reducer
