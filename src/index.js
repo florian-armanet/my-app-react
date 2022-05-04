@@ -4,21 +4,23 @@ import './index.css'
 import App from './App'
 import Home from './pages/Home'
 import Error from './pages/Error'
-import ListProducts from './pages/ListProducts'
+import Products from './pages/Products'
 import reportWebVitals from './reportWebVitals'
 import store from './store/store'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Product from './components/Product'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <Provider store={ store }>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<App/>}>
-                    <Route path="" element={<Home/>}/>
-                    <Route path="products" element={<ListProducts/>}/>
-                    <Route path="*" element={<Error/>}/>
+                <Route path="/" element={ <App/> }>
+                    <Route path="" element={ <Home/> }/>
+                    <Route path="products" element={ <Products/> }/>
+                    <Route path="/products/:id" element={ <Product/> }/>
+                    <Route path="*" element={ <Error/> }/>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -1,9 +1,9 @@
 import '../App.scss'
-import Products from '../components/Products'
+import ListProducts from '../components/ListProducts'
 import Searcher from '../components/Searcher'
 import Filters from '../components/Filters'
 
-function ListProducts () {
+function Products () {
     return (
         <>
             <div className="flex flex-wrap justify-center mb-10">
@@ -11,10 +11,10 @@ function ListProducts () {
             </div>
             <div className="flex flex-wrap items-start">
                 <Filters/>
-                <Products/>
+                <ListProducts/>
             </div>
         </>
     )
 }
 
-export default ListProducts
+export default Products

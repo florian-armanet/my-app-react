@@ -2,10 +2,10 @@ import fetchProducts from '../api/products'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
-import ProductItem from './ProductItem'
+import ProductMiniature from './ListProducts/ProductMiniature'
 import { setProductsFiltered } from '../store/productsStore'
 
-const Products = () => {
+const ListProducts = () => {
     const dispatch              = useDispatch()
     const products              = useSelector(state => state.products.all)
     const productsFiltered      = useSelector(state => state.products.filtered)
@@ -32,7 +32,6 @@ const Products = () => {
                         return getCategoriesSelected.includes(product.category.categoryCode) || !getCategoriesSelected.length
                     })
             ))
-            console.log('product');
             return
         }
 
@@ -50,10 +49,10 @@ const Products = () => {
             { content }
             <ul className="flex flex-wrap -mx-2">
                 { productsFiltered
-                    .map(product => <ProductItem product={ product } key={ product.id }/>) }
+                    .map(product => <ProductMiniature product={ product } key={ product.id }/>) }
             </ul>
         </div>
     )
 }
 
-export default Products
+export default ListProducts

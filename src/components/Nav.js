@@ -5,7 +5,9 @@ const Nav = () => {
         <div className="o-container">
             <nav className="flex-flow-center py-12">
                 <NavLink to="/" className="font-bold mx-4 has-underline text-xl">Home</NavLink>
-                <NavLink to="/products" className="font-bold mx-4 has-underline text-xl">Produits</NavLink>
+                <NavLink to="/products" className={ 'font-bold mx-4 has-underline text-xl' }>
+                    Produits
+                </NavLink>
             </nav>
             <Outlet/>
         </div>
