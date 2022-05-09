@@ -1,0 +1,65 @@
+/*
+ * [ components / button ]
+ */
+
+// -----------------------------------------------------------------------------
+
+@layer components {
+    // 1. Default class
+    // ====================================
+    .Button {
+        vertical-align: top;
+        @apply inline-block py-3 px-4 rounded text-center cursor-pointer transition-fast outline-0 leading-none bg-none;
+        user-select: none;
+        white-space: initial;
+        text-decoration: none !important;
+    }
+
+    .Button i {
+        vertical-align: middle;
+    }
+}
+
+// 2. Style variants
+// ====================================
+$button-style-variants: (
+                ('primary', theme('colors.primary.base'), white, theme('colors.primary.hover'), theme('colors.primary.hover'), transparent),
+                ('secondary', theme('colors.secondary.base'), white, theme('colors.secondary.hover'), theme('colors.secondary.hover'), transparent),
+);
+
+@each $modifier, $background, $color, $hover, $focus, $shadow in $button-style-variants {
+    .Button.Button--#{$modifier} {
+        background-color: $background !important;
+        color: $color !important;
+        box-shadow: 0 0 10px 0 $shadow;
+        transition: all .2s ease-in-out;
+        @apply relative overflow-hidden;
+
+        &:hover {
+            background-color: $hover !important;
+            color: $color !important;
+
+            @if $shadow {
+                box-shadow: 0 0 12px 0 $shadow;
+            }
+        }
+
+        &:focus {
+            color: $color;
+            background-color: $focus;
+        }
+
+        &.Button--gradient {
+            background: linear-gradient(90deg, $background 0%, $focus 100%);
+        }
+    }
+}
+
+.Button-loading {
+    @apply relative;
+
+    &:after {
+        @apply absolute inset-0 bg-gray-700 z-2 flex-flow-center text-white;
+        content: attr(data-label-loading);
+    }
+}

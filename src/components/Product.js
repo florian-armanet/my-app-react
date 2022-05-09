@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import fetchProduct from '../api/product'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
@@ -8,34 +8,42 @@ import { roundHalf } from '../utils/mathRound'
 import formatNumberToString from '../utils/formatNumberToString'
 
 const Product = () => {
-    const dispatch                            = useDispatch()
-    const params                              = useParams()
-    const paramId                             = Number(params.id)
-    const productsStatusRequest               = useSelector(state => state.availableProducts.status)
-    const productsFetched                     = useSelector(state => state.availableProducts.productFetched)
-    const [currentProduct, setCurrentProduct] = useState({})
-    const [content, setContent]               = useState(<p>En attente d\'une requête...</p>)
+    const dispatch                                            = useDispatch()
+    const params                                              = useParams()
+    const paramId                                             = Number(params.id)
+    const productsStatusRequest                               = useSelector(state => state.availableProducts.status)
+    const productsFetched                                     = useSelector(state => state.availableProducts.productFetched)
+    const [currentProduct, setCurrentProduct]                 = useState({})
+    const [productQty, setProductQty]                         = useState(1)
+    const [contentFetchingProcess, setContentFetchingProcess] = useState(<p>En attente d\'une requête...</p>)
 
+    /**
+     *
+     */
     useEffect(() => {
         if (productsStatusRequest === STATUS_LOADING) {
-            setContent(<div className="Loader mx-auto my-20"></div>)
+            setContentFetchingProcess(<div className="Loader mx-auto my-20"></div>)
             return
         }
 
         if (productsStatusRequest === STATUS_SUCCEEDED) {
-            setContent(<></>)
+            setContentFetchingProcess(<></>)
             return
         }
 
         if (productsStatusRequest === STATUS_FAILED) {
-            setContent(<p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>)
+            setContentFetchingProcess(<p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la
+                requête !</p>)
             return
         }
 
-        setContent(<></>)
+        setContentFetchingProcess(<></>)
 
     }, [productsStatusRequest, dispatch])
 
+    /**
+     *
+     */
     useEffect(() => {
         if (!productsFetched.some(productFetched => productFetched.id === paramId)) {
             dispatch(fetchProduct(params.id))
@@ -45,9 +53,23 @@ const Product = () => {
         setCurrentProduct({ ...[...productsFetched].find(obj => obj.id === paramId) })
     }, [productsFetched, dispatch])
 
+    /**
+     *
+     * @param event
+     */
+    const changeQty = (event) => {
+        setProductQty(event.target.value)
+    }
+
     if (Object.keys(currentProduct).length) {
         return (
             <div className="o-grid">
+                <div className="o-col-12">
+                    <NavLink to="/products" className="Button Button--primary mb-8">
+                        <i className="Icon-arrow-left mr-2"></i>
+                        <span>Retour aux produits</span>
+                    </NavLink>
+                </div>
                 <div className="o-col-6">
                     <div className="relative">
                         <p className="z-1 absolute top-0 left-0 mb-4 bg-tertiary-base text-secondary-dark font-bold px-2 py-1">
@@ -67,10 +89,11 @@ const Product = () => {
                     <div className="flex flex-wrap">
                         <input type="number"
                                min="1"
-                               value="1"
-                               className="text-center appearance-none outline-none border-2 border-primary-base w-12 py-2 text-center border-gray-200 rounded"/>
+                               value={ productQty }
+                               onChange={ changeQty }
+                               className="text-center appearance-none font-bold outline-none border-2 border-primary-light w-14 py-2 text-center rounded"/>
                         <button
-                            className="bg-primary-base hover:bg-primary-hover transition text-white px-3 py-2 rounded ml-2">
+                            className="bg-primary-base hover:bg-primary-hover transition text-white px-4 py-2 rounded ml-2">
                             Add to cart
                         </button>
                     </div>
@@ -81,7 +104,7 @@ const Product = () => {
 
     return (
         <>
-            { content }
+            { contentFetchingProcess }
         </>
     )
 }
