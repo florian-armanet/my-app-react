@@ -3,7 +3,7 @@ import ListProducts from '../components/ListProducts'
 import Searcher from '../components/Searcher'
 import Filters from '../components/Filters'
 
-function Products () {
+const Products = () => {
     return (
         <>
             <div className="flex flex-wrap justify-center mb-10">

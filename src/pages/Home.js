@@ -1,6 +1,8 @@
-function Home () {
+import ListCategories from '../components/ListCategories'
+
+const Home = () => {
     return (
-        <p className="text-center py-20 font-bold text-4xl">HOMEPAGE</p>
+        <ListCategories/>
     )
 }
 
