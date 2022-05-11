@@ -6,7 +6,7 @@ import { roundHalf } from '../../utils/mathRound'
 const ProductMiniature = ({ product }) => {
     return (
         <li className="relative flex flex-col w-56 mx-2 mb-12 bg-white rounded-sm shadow hover:shadow-lg transition">
-            <NavLink to={ `/products/${product.id}` } className="group">
+            <NavLink to={ `/products/${ product.id }` } className="group">
                 <div className="h-56 p-2 overflow-hidden">
                     <img src={ product.image }
                          alt={ product.title }

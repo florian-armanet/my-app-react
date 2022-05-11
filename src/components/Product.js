@@ -32,8 +32,9 @@ const Product = () => {
         }
 
         if (productsStatusRequest === STATUS_FAILED) {
-            setContentFetchingProcess(<p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la
-                requête !</p>)
+            setContentFetchingProcess(
+                <p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>
+            )
             return
         }
 

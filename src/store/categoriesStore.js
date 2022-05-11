@@ -20,6 +20,7 @@ export const categoriesStore = createSlice({
                 state.status = STATUS_SUCCEEDED
                 state.all    = payload.reduce((acc, category) => {
                     const objCategory = {
+                        categoryLabelOrigin: category,
                         categoryLabel: uppercaseFirstLetter(category),
                         categoryCode: category.replace(' ', '_').replace('\'', '')
                     }

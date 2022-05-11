@@ -10,6 +10,7 @@ import store from './store/store'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Product from './components/Product'
+import Category from './components/Category'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -20,6 +21,7 @@ root.render(
                     <Route path="" element={ <Home/> }/>
                     <Route path="products" element={ <Products/> }/>
                     <Route path="/products/:id" element={ <Product/> }/>
+                    <Route path="/category/:categoryLabelOrigin" element={ <Category/> }/>
                     <Route path="*" element={ <Error/> }/>
                 </Route>
             </Routes>
