@@ -4,6 +4,7 @@ import fetchProducts from '../api/products'
 import fetchCategories from '../api/categories'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import CategoryMiniature from './ListCategories/CategoryMiniature'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const ListCategories = () => {
     const dispatch                                            = useDispatch()
@@ -46,11 +47,24 @@ const ListCategories = () => {
 
     if (categories.length) {
         return (
-            <ul className="o-grid">
-                { categories
-                    .map(category => <CategoryMiniature key={ category.categoryCode } category={ category }/>)
-                }
-            </ul>
+            <div>
+                <h2 className="mb-6 text-3xl text-primary-base font-bold">Nos catégories</h2>
+                <TransitionGroup component="ul" className="flex flex-wrap -mx-2">
+                    { categories
+                        .map((category) => (
+                            <CSSTransition
+                                in={ true }
+                                key={ category.categoryCode }
+                                timeout={ 500 }
+                                classNames="list"
+                                unmountOnExit
+                                appear
+                            >
+                                <CategoryMiniature key={ category.categoryCode } category={ category }/>
+                            </CSSTransition>
+                        )) }
+                </TransitionGroup>
+            </div>
         )
     }
 

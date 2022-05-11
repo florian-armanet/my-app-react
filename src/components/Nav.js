@@ -9,7 +9,8 @@ const Nav = () => {
     return (
         <div className="o-container">
             <nav className="flex-flow-center py-12">
-                <NavLink to="/" className={ classesHandler }>Home</NavLink>
+                <NavLink to="/" className="Icon-home text-2xl mx-4"></NavLink>
+                <NavLink to="/categories" className={ classesHandler }>Nos catégories</NavLink>
                 <NavLink to="/products" className={ classesHandler }>Produits</NavLink>
             </nav>
             <Outlet/>

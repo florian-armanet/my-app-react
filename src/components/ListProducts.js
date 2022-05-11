@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import ProductMiniature from './ListProducts/ProductMiniature'
 import { setProductsFiltered } from '../store/productsStore'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const ListProducts = () => {
     const dispatch              = useDispatch()
@@ -47,10 +48,21 @@ const ListProducts = () => {
     if (productsFiltered.length) {
         return (
             <div className="flex-1">
-                <ul className="flex flex-wrap -mx-2">
+                <TransitionGroup component="ul" className="flex flex-wrap -mx-2">
                     { productsFiltered
-                        .map(product => <ProductMiniature product={ product } key={ product.id }/>) }
-                </ul>
+                        .map(product => (
+                            <CSSTransition
+                                in={ true }
+                                key={ product.id }
+                                timeout={ 500 }
+                                classNames="list"
+                                unmountOnExit
+                                appear
+                            >
+                                <ProductMiniature product={ product } key={ product.id }/>
+                            </CSSTransition>
+                        )) }
+                </TransitionGroup>
             </div>
         )
     }

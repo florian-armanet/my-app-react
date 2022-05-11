@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import fetchProductsOfCategory from '../api/productsOfCategory'
 import ProductMiniature from './ListProducts/ProductMiniature'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const Category = () => {
     const dispatch                                                  = useDispatch()
@@ -53,11 +54,26 @@ const Category = () => {
 
     if (currentProductsOfCategory.length) {
         return (
-            <ul className="flex flex-wrap -mx-2">
-                { currentProductsOfCategory.map(product =>
-                    <ProductMiniature product={ product } key={ product.id }/>
-                ) }
-            </ul>
+            <div>
+                <NavLink to="/categories" className="Button Button--primary mb-8">
+                    <i className="Icon-arrow-left mr-2"></i>
+                    <span>Retour aux catégories</span>
+                </NavLink>
+                <TransitionGroup component="ul" className="flex flex-wrap -mx-2">
+                    { currentProductsOfCategory.map(product => (
+                        <CSSTransition
+                            in={ true }
+                            key={ product.id }
+                            timeout={ 500 }
+                            classNames="list"
+                            unmountOnExit
+                            appear
+                        >
+                            <ProductMiniature product={ product } key={ product.id }/>
+                        </CSSTransition>
+                    )) }
+                </TransitionGroup>
+            </div>
         )
     }
 

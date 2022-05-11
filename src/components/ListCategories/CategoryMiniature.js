@@ -16,8 +16,8 @@ const CategoryMiniature = ({ category }) => {
 
     if (firstProductOfCategory) {
         return (
-            <li className="o-col-3">
-                <NavLink to={ `/category/${ category.categoryLabelOrigin }` }>
+            <li className="relative w-64 mx-2 transition">
+                <NavLink to={ `/categories/${ category.categoryLabelOrigin }` }>
                     <div className="h-72 group overflow-hidden">
                         <p className="z-2 absolute absolute-center bg-primary-base text-white py-1 px-2">{ category.categoryLabel }</p>
                         <img src={ firstProductOfCategory.image }

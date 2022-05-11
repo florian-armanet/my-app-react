@@ -1,11 +1,13 @@
 import ListCategories from '../components/ListCategories'
+import { CSSTransition, Transition } from 'react-transition-group'
 
 const Home = () => {
     return (
         <>
-            <p className="text-center py-20 font-bold text-4xl">HOMEPAGE</p>
+            <CSSTransition in={true} classNames="example" timeout={300} unmountOnExit appear>
+                <p className="text-center py-20 font-bold text-4xl">HOMEPAGE</p>
+            </CSSTransition>
             <section>
-                <h2 className="mb-6 text-3xl text-primary-base font-bold">Nos catégories</h2>
                 <ListCategories/>
             </section>
         </>
