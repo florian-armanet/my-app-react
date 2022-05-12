@@ -47,9 +47,9 @@ const ListCategories = () => {
 
     if (categories.length) {
         return (
-            <div>
+            <section>
                 <h2 className="mb-6 text-3xl text-primary-base font-bold">Nos catégories</h2>
-                <TransitionGroup component="ul" className="flex flex-wrap -mx-2">
+                <TransitionGroup component="ul" className="o-grid">
                     { categories
                         .map((category) => (
                             <CSSTransition
@@ -64,7 +64,7 @@ const ListCategories = () => {
                             </CSSTransition>
                         )) }
                 </TransitionGroup>
-            </div>
+            </section>
         )
     }
 

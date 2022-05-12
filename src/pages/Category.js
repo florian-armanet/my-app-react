@@ -3,7 +3,7 @@ import { NavLink, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import fetchProductsOfCategory from '../api/productsOfCategory'
-import ProductMiniature from './ListProducts/ProductMiniature'
+import ProductMiniature from '../components/ListProducts/ProductMiniature'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const Category = () => {

@@ -6,3 +6,6 @@ export const SORT_DESC = 'sortDesc'
 export const SORT_ASC  = 'sortAsc'
 
 export const MAX_RATE = 5
+
+export const PATH_PRODUCTS = '/products'
+export const PATH_CATEGORIES = '/categories'

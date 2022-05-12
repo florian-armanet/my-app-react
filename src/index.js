@@ -9,9 +9,10 @@ import reportWebVitals from './reportWebVitals'
 import store from './store/store'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Product from './components/Product'
-import Category from './components/Category'
+import Product from './pages/Product'
+import Category from './pages/Category'
 import Categories from './pages/Categories'
+import { PATH_CATEGORIES, PATH_PRODUCTS } from './utils/constants'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -20,10 +21,10 @@ root.render(
             <Routes>
                 <Route path="/" element={ <App/> }>
                     <Route path="" element={ <Home/> }/>
-                    <Route path="products" element={ <Products/> }/>
-                    <Route path="/products/:id" element={ <Product/> }/>
-                    <Route path="/categories" element={ <Categories/> }/>
-                    <Route path="/categories/:categoryLabelOrigin" element={ <Category/> }/>
+                    <Route path={ PATH_PRODUCTS } element={ <Products/> }/>
+                    <Route path={ `${ PATH_PRODUCTS }/:id` } element={ <Product/> }/>
+                    <Route path={ PATH_CATEGORIES } element={ <Categories/> }/>
+                    <Route path={ `${ PATH_CATEGORIES }/:categoryLabelOrigin` } element={ <Category/> }/>
                     <Route path="*" element={ <Error/> }/>
                 </Route>
             </Routes>
