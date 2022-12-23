@@ -21,7 +21,14 @@ const ListProducts = () => {
         }
 
         if (productsStatusRequest === STATUS_LOADING) {
-            setContent(<div className="Loader mx-auto my-20"></div>)
+            const nbBlocksOfLoader = new Array(16).fill().map((_, index) => index)
+            setContent(
+                <ul className="flex flex-wrap">
+                    { nbBlocksOfLoader.map(nb => <li className="mx-2 mb-12 w-56" key={ nb }>
+                        <div className="Loader-block h-72 mb-4"></div>
+                    </li>) }
+                </ul>
+            )
             return
         }
 
@@ -68,9 +75,9 @@ const ListProducts = () => {
     }
 
     return (
-        <>
+        <div className="flex-1">
             { content }
-        </>
+        </div>
     )
 
 }

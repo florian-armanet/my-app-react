@@ -4,6 +4,19 @@
 
 // -----------------------------------------------------------------------------
 
+body,
+html {
+    min-width: 320px;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    overflow: hidden;
+}
+
 .App {
     background-color: #eeeeee;
     @apply text-base text-primary-base;

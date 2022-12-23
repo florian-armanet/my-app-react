@@ -6,6 +6,7 @@ import searcherReducer from './searcherStore'
 import filtersCategoriesReducer from './filtersCategoriesStore'
 import filtersReducer from './filtersStore'
 import productsOfCategoryReducer from './productsOfCategoryStore'
+import cartReducer from './cartStore'
 
 export default configureStore({
     reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
         searcher: searcherReducer,
         filters: filtersReducer,
         filtersCategories: filtersCategoriesReducer,
+        cart: cartReducer,
     }
 })

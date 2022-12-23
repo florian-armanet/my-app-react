@@ -17,10 +17,10 @@ const Searcher = () => {
     }, [getSearcher, dispatch])
 
     return (
-        <div className="flex-flow-centerY bg-white box-shadow-inset-3 py-2 px-8">
+        <div className="flex-flow-centerY bg-white rounded bg-primary-light/20 py-2 px-8 hover:bg-primary-light/30 transition-fast">
             <input type="text"
                    placeholder="Rechercher un produit..."
-                   className="text-primary-hover font-bold placeholder:text-primary-base outline-none"
+                   className="text-primary-hover font-bold placeholder:text-primary-base bg-transparent outline-none"
                    onChange={ handleChange }/>
             <i className="Icon-search text-lg"></i>
         </div>

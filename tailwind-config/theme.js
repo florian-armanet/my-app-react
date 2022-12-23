@@ -65,6 +65,7 @@ module.exports = {
             container: '1192px',
             md: '768px',
             sm: '575px',
+            450: '450px',
             xs: '320px',
             full: '100%',
         }),

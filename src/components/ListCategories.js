@@ -25,7 +25,14 @@ const ListCategories = () => {
         }
 
         if (categoriesStatusRequest === STATUS_LOADING && productsStatusRequest === STATUS_LOADING) {
-            setContentFetchingProcess(<div className="Loader mx-auto my-20"></div>)
+            const nbBlocksOfLoader = new Array(4).fill().map((_, index) => index)
+            setContentFetchingProcess(
+                <ul className="o-grid">
+                    { nbBlocksOfLoader.map(nb => <li className="o-col-3" key={ nb }>
+                        <div className="Loader-block h-72 mb-4"></div>
+                    </li>) }
+                </ul>
+            )
             return
         }
 

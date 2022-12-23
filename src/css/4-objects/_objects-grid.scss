@@ -52,10 +52,19 @@
 }
 
 @layer components {
-    .o-full {
-        width: 100vw;
-        margin-right: calc(-50vw + 50%);
-        margin-left: calc(-50vw + 50%);
+    @screen lg {
+        .o-full {
+            width: 100vw;
+            margin-right: calc(-50vw + 50%);
+            margin-left: calc(-50vw + 50%);
+        }
+    }
+    @screen lg-down {
+        .o-full {
+            width: 100vw;
+            margin-right: calc(-50vw + 50%);
+            margin-left: calc(-50vw + 50%);
+        }
     }
 }
 
