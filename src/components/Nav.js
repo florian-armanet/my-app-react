@@ -22,7 +22,7 @@ const Nav = () => {
                             </NavLink>
 
                             <nav className="flex-flow-center">
-                                <NavLink to={ PATH_CATEGORIES } className={ classesHandler }>Nos catégories</NavLink>
+                                <NavLink to={ PATH_CATEGORIES } className={ classesHandler }>Catégories</NavLink>
                                 <NavLink to={ PATH_PRODUCTS } className={ classesHandler }>Produits</NavLink>
                             </nav>
 

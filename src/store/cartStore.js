@@ -3,19 +3,19 @@ import { createSlice } from '@reduxjs/toolkit'
 export const cartStore = createSlice({
     name: 'cart',
     initialState: {
-        productIds: [],
+        productsIdQty: [],
         modalOpened: false,
     },
     reducers: {
-        addProductIds: (state, { payload: idProduct }) => {
-            state.productIds = [...state.productIds].push(idProduct)
+        addProductIds: (state, { payload }) => {
+            state.productsIdQty.push(payload)
         },
-        removeProductId: (state, { payload: productId }) => {
-            const indexOfProductIdRemoved = [...state.productIds].indexOf([...state.productIds].find(pId => pId === productId))
-            state.productIds.splice(indexOfProductIdRemoved, 1)
+        removeProductId: (state, { payload: { productId, quantity } }) => {
+            const indexOfProductIdRemoved = [...state.productsIdQty].indexOf([...state.productsIdQty].find(p => p.id === productId))
+            state.productsIdQty.splice(indexOfProductIdRemoved, 1)
         },
-        setCartModalOpened: (state, { payload }) => {
-            state.modalOpened = payload
+        setCartModalOpened: (state, { payload: bool }) => {
+            state.modalOpened = bool
         }
     },
 })

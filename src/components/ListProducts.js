@@ -23,8 +23,8 @@ const ListProducts = () => {
         if (productsStatusRequest === STATUS_LOADING) {
             const nbBlocksOfLoader = new Array(16).fill().map((_, index) => index)
             setContent(
-                <ul className="flex flex-wrap">
-                    { nbBlocksOfLoader.map(nb => <li className="mx-2 mb-12 w-56" key={ nb }>
+                <ul className="-mx-2 flex flex-wrap">
+                    { nbBlocksOfLoader.map(nb => <li className="mx-2 mb-12 w-64" key={ nb }>
                         <div className="Loader-block h-72 mb-4"></div>
                     </li>) }
                 </ul>
