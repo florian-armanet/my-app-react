@@ -9,6 +9,7 @@ export const productsStore = createSlice({
     initialState: {
         all: [],
         filtered: [],
+        inCart: [],
         status: '',
         error: null,
     },
@@ -26,6 +27,16 @@ export const productsStore = createSlice({
                 return payload.includes(product.category.categoryCode) || !payload.length
             })
         },
+        addProductInCart: (state, { payload }) => {
+            state.inCart.push(payload)
+        },
+        removeProductInCart: (state, { payload : id }) => {
+            const indexOfProductIdRemoved = [...state.inCart].indexOf([...state.inCart].find(p => p.id === id))
+            state.inCart.splice(indexOfProductIdRemoved, 1)
+        },
+        setProductQuantity: (state, { payload : { id, quantity } }) => {
+            state.inCart.find(product => product.id === id).quantity = quantity
+        },
     },
     extraReducers (builder) {
         builder
@@ -34,7 +45,7 @@ export const productsStore = createSlice({
             })
             .addCase(fetchProducts.fulfilled, (state, { payload }) => {
                 state.status = STATUS_SUCCEEDED
-                state.all  = payload.reduce((acc, currObj) => {
+                state.all    = payload.reduce((acc, currObj) => {
                     acc.push({
                         ...currObj,
                         category: {
@@ -54,6 +65,13 @@ export const productsStore = createSlice({
     }
 })
 
-export const { setProductsFiltered, setProductsBySearcher, setProductsByCategories } = productsStore.actions
+export const {
+                 setProductsFiltered,
+                 setProductsBySearcher,
+                 setProductsByCategories,
+                 addProductInCart,
+                 removeProductInCart,
+                 setProductQuantity,
+             } = productsStore.actions
 
 export default productsStore.reducer

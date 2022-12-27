@@ -5,9 +5,9 @@ import CartModalContent from './CartModal/CartModalContent'
 import CartModalContentEmpty from './CartModal/CartModalContentEmpty'
 
 export const CartModal = () => {
-    const dispatch      = useDispatch()
-    const modalOpened   = useSelector(state => state.cart.modalOpened)
-    const productsIdQty = useSelector(state => state.cart.productsIdQty)
+    const dispatch       = useDispatch()
+    const modalOpened    = useSelector(state => state.cart.modalOpened)
+    const productsInCart = useSelector(state => state.products.inCart)
 
     /**
      *
@@ -17,7 +17,7 @@ export const CartModal = () => {
     }
 
     const renderCartModalContent = () => {
-        if (productsIdQty.length) {
+        if (productsInCart.length) {
             return <CartModalContent/>
         }
 
@@ -27,7 +27,8 @@ export const CartModal = () => {
     return (
         <>
             <CSSTransition in={ modalOpened } classNames="Animation-translateX" timeout={ 300 } unmountOnExit appear>
-                <div className="z-max fixed top-0 right-0 bottom-0 max-w-450 w-full flex flex-col bg-white shadow text-black flex flex-col">
+                <div
+                    className="z-max fixed top-0 right-0 bottom-0 max-w-450 w-full flex flex-col bg-white shadow text-black flex flex-col">
                     <div className="relative p-4 bg-primary-base/25 text-primary-base">
                         <i onClick={ closeModal }
                            className="Icon-close-light absolute left-4 text-xl absolute-y-center cursor-pointer"></i>

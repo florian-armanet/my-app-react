@@ -1,0 +1,39 @@
+/*
+ * [ components / scrollbar ]
+ */
+
+// -----------------------------------------------------------------------------
+
+@layer components {
+    .Scrollbar {
+        scrollbar-color: theme('colors.primary.base') #F5F5F5;
+    }
+
+    .Scrollbar::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #F5F5F5;
+    }
+
+    .Scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 4px;
+        background-color: #F5F5F5;
+    }
+
+    .Scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        background-color: theme('colors.primary.base');
+    }
+
+    .Scrollbar--light::-webkit-scrollbar-track {
+        border-radius: 8px;
+    }
+
+    .Scrollbar--light::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .Scrollbar--light::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+    }
+}

@@ -14,6 +14,8 @@ import Category from './pages/Category'
 import Categories from './pages/Categories'
 import Cart from './pages/Cart'
 
+document.body.classList.add('Scrollbar')
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <Provider store={ store }>

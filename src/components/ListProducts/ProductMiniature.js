@@ -3,22 +3,40 @@ import { NavLink } from 'react-router-dom'
 import { generateStarRate } from '../../utils/generateStarRate'
 import { roundHalf } from '../../utils/mathRound'
 import { PATH_PRODUCTS } from '../../utils/constants'
-import { useDispatch } from 'react-redux'
-import { addProductIds } from '../../store/cartStore'
+import { useDispatch, useSelector } from 'react-redux'
+import { addProductInCart } from '../../store/productsStore'
+import { useState, useEffect } from 'react'
 
 const ProductMiniature = ({ product }) => {
-    const dispatch = useDispatch()
+    const dispatch                                = useDispatch()
+    const productsInCart = useSelector(state => state.products.inCart)
 
     /**
      *
      */
     const addToCart = () => {
         const payload = {
-            productId: product.id,
+            ...product,
             quantity: 1
         }
-        dispatch(addProductIds({...payload}))
+        dispatch(addProductInCart({ ...payload }))
     }
+
+    const renderIconAddToCartEnabled = <i onClick={ addToCart }
+                                   className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded"></i>
+    const renderIconAddToCartDisabled = <i className="Icon-basket text-xl text-white bg-green-500 w-10 h-10 flex-flow-center rounded"></i>
+
+    const [contentAddToCart, setContentAddToCart] = useState(renderIconAddToCartEnabled)
+
+    useEffect(() => {
+        if (productsInCart.some(productIdQty => productIdQty.id === product.id)) {
+            // setContentAddToCart(<input type="number" className="outline-0 ring-2 ring-inset ring-primary-base rounded w-12"/>)
+            setContentAddToCart(renderIconAddToCartDisabled)
+            return
+        }
+
+        setContentAddToCart(renderIconAddToCartEnabled)
+    }, [productsInCart, dispatch])
 
     return (
         <li className="relative flex flex-col w-64 mx-2 mb-12 bg-white rounded-sm shadow hover:shadow-lg transition">
@@ -33,19 +51,20 @@ const ProductMiniature = ({ product }) => {
                         { product.category.categoryLabel }
                     </p>
                     <NavLink to={ `${ PATH_PRODUCTS + '/' + product.id }` }
-                             className="text-primary-base font-bold mb-4 line-clamp-2">
+                             className="text-primary-base font-bold mb-1 line-clamp-2">
                         { product.title }
                     </NavLink>
-                    <div className="flex-flow-between">
+
+                    <p className="flex-flow-centerY mb-4">
+                        { generateStarRate(roundHalf(product.rating.rate)) }
+                        <span className="ml-1 leading-none">({ product.rating.count } avis)</span>
+                    </p>
+
+                    <div className="flex-flow-between items-center">
                         <div>
-                            <p className="flex-flow-centerY">
-                                { generateStarRate(roundHalf(product.rating.rate)) }
-                                <span className="ml-1">({ product.rating.count } avis)</span>
-                            </p>
                             <p className="font-bold text-secondary-base">{ formatNumberToString(product.price) } €</p>
                         </div>
-                        <i onClick={ addToCart }
-                           className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded"></i>
+                        { contentAddToCart }
                     </div>
                 </div>
             </div>
