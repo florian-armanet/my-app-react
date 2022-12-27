@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { generateStarRate } from '../utils/generateStarRate'
 import { roundHalf } from '../utils/mathRound'
 import formatNumberToString from '../utils/formatNumberToString'
+import { addProductInCart, setProductQuantity } from '../store/productsStore'
 
 const Product = () => {
     const dispatch                                            = useDispatch()
@@ -13,6 +14,7 @@ const Product = () => {
     const paramId                                             = Number(params.id)
     const productsStatusRequest                               = useSelector(state => state.availableProducts.status)
     const productsFetched                                     = useSelector(state => state.availableProducts.productFetched)
+    const productsInCart                                      = useSelector(state => state.products.inCart)
     const [currentProduct, setCurrentProduct]                 = useState({})
     const [productQty, setProductQty]                         = useState(1)
     const [contentFetchingProcess, setContentFetchingProcess] = useState(<p>En attente d\'une requête...</p>)
@@ -62,9 +64,32 @@ const Product = () => {
         setProductQty(event.target.value)
     }
 
+    /**
+     *
+     */
+    const addToCart = () => {
+        const productInCart = productsInCart.find(productInCart => productInCart.id === currentProduct.id)
+
+        if (productInCart) {
+            const payload = {
+                id: currentProduct.id,
+                quantity: productInCart.quantity + Number(productQty)
+            }
+
+            dispatch(setProductQuantity({...payload}))
+            return
+        }
+
+        const payload = {
+            ...currentProduct,
+            quantity: Number(productQty)
+        }
+        dispatch(addProductInCart({ ...payload }))
+    }
+
     if (Object.keys(currentProduct).length) {
         return (
-            <div className="o-grid">
+            <div className="o-grid pb-12">
                 <div className="o-col-12">
                     <NavLink to="/products" className="Button Button--primary mb-8">
                         <i className="Icon-arrow-left mr-2"></i>
@@ -92,10 +117,10 @@ const Product = () => {
                                min="1"
                                value={ productQty }
                                onChange={ changeQty }
-                               className="text-center appearance-none font-bold outline-none border-2 border-primary-light w-14 py-2 text-center rounded"/>
-                        <button
-                            className="bg-primary-base hover:bg-primary-hover transition text-white px-4 py-2 rounded ml-2">
-                            Add to cart
+                               className="text-center text-primary-base appearance-none font-bold outline-none border-2 border-primary-light w-14 py-2 rounded"/>
+                        <button onClick={ addToCart }
+                                className="bg-primary-base hover:bg-primary-hover transition text-white px-4 py-2 rounded ml-2">
+                            Ajouter au panier
                         </button>
                     </div>
                 </div>

@@ -25,13 +25,12 @@ const ProductMiniature = ({ product }) => {
     const renderIconAddToCartEnabled  = <i onClick={ addToCart }
                                            className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded"></i>
     const renderIconAddToCartDisabled = <i
-        className="Icon-basket text-xl text-white bg-green-500 w-10 h-10 flex-flow-center rounded"></i>
+        className="Icon-basket text-xl text-white bg-gray-200 w-10 h-10 flex-flow-center rounded"></i>
 
     const [contentAddToCart, setContentAddToCart] = useState(renderIconAddToCartEnabled)
 
     useEffect(() => {
-        if (productsInCart.some(productIdQty => productIdQty.id === product.id)) {
-            // setContentAddToCart(<input type="number" className="outline-0 ring-2 ring-inset ring-primary-base rounded w-12"/>)
+        if (productsInCart.some(productInCart => productInCart.id === product.id)) {
             setContentAddToCart(renderIconAddToCartDisabled)
             return
         }
@@ -47,8 +46,9 @@ const ProductMiniature = ({ product }) => {
                          alt={ product.title }
                          className="h-full w-full object-contain mb-2 group-hover:scale-105 group-hover:rotate-2 transition"/>
                 </NavLink>
+                
                 <div className="flex-1 p-4 flex flex-col justify-between">
-                    <p className="absolute top-0 left-0 bg-tertiary-base text-secondary-dark font-bold px-2 py-1">
+                    <p className="absolute top-0 left-0 bg-secondary-base text-primary-base font-bold px-2 py-1">
                         { product.category.categoryLabel }
                     </p>
                     <NavLink to={ `${ PATH_PRODUCTS + '/' + product.id }` }
@@ -63,7 +63,7 @@ const ProductMiniature = ({ product }) => {
 
                     <div className="flex-flow-between items-center">
                         <div>
-                            <p className="font-bold text-secondary-base">{ formatNumberToString(product.price) } €</p>
+                            <p className="font-bold text-primary-base">{ formatNumberToString(product.price) } €</p>
                         </div>
                         { contentAddToCart }
                     </div>

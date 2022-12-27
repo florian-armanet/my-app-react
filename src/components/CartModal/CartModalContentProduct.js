@@ -19,7 +19,12 @@ export const CartModalContentProduct = ({ product }) => {
      * @param event
      */
     const handleChange = (event) => {
+        const payload = {
+            id: product.id,
+            quantity: Number(event.target.value)
+        }
 
+        dispatch(setProductQuantity({...payload}))
     }
 
     /**

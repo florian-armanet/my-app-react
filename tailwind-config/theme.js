@@ -24,21 +24,21 @@ module.exports = {
 
             dark: '#2e2e2e',
 
-            primary: {
+            tertiary: {
                 light: '#ff968c',
                 base: '#FC766AFF',
                 hover: '#e85d51',
                 dark: '#cc4135',
             },
 
-            secondary: {
+            primary: {
                 light: '#9d5654',
                 base: '#783937FF',
                 hover: '#5b2523',
                 dark: '#421513',
             },
 
-            tertiary: {
+            secondary: {
                 light: '#f8c0a2',
                 base: '#F1AC88FF',
                 hover: '#e79e78',
