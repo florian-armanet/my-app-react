@@ -22,7 +22,7 @@ const Searcher = () => {
                    placeholder="Rechercher un produit..."
                    className="text-primary-hover font-bold placeholder:text-primary-base bg-transparent outline-none"
                    onChange={ handleChange }/>
-            <i className="Icon-search text-lg"></i>
+            <i className="Icon-search text-lg text-primary-base"></i>
         </div>
     )
 }

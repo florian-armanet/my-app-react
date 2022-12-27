@@ -10,6 +10,8 @@ export const productsStore = createSlice({
         all: [],
         filtered: [],
         inCart: [],
+        quantityInCart: 0,
+        totalPrice: 0,
         status: '',
         error: null,
     },
@@ -36,6 +38,12 @@ export const productsStore = createSlice({
         },
         setProductQuantity: (state, { payload : { id, quantity } }) => {
             state.inCart.find(product => product.id === id).quantity = quantity
+        },
+        setQuantityInCart: (state, { payload : quantity }) => {
+            state.quantityInCart = quantity
+        },
+        setTotalPrice: (state, { payload : price }) => {
+            state.totalPrice = price
         },
     },
     extraReducers (builder) {
@@ -72,6 +80,8 @@ export const {
                  addProductInCart,
                  removeProductInCart,
                  setProductQuantity,
+                 setQuantityInCart,
+                 setTotalPrice,
              } = productsStore.actions
 
 export default productsStore.reducer

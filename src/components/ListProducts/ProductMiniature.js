@@ -8,7 +8,7 @@ import { addProductInCart } from '../../store/productsStore'
 import { useState, useEffect } from 'react'
 
 const ProductMiniature = ({ product }) => {
-    const dispatch                                = useDispatch()
+    const dispatch       = useDispatch()
     const productsInCart = useSelector(state => state.products.inCart)
 
     /**
@@ -22,9 +22,10 @@ const ProductMiniature = ({ product }) => {
         dispatch(addProductInCart({ ...payload }))
     }
 
-    const renderIconAddToCartEnabled = <i onClick={ addToCart }
-                                   className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded"></i>
-    const renderIconAddToCartDisabled = <i className="Icon-basket text-xl text-white bg-green-500 w-10 h-10 flex-flow-center rounded"></i>
+    const renderIconAddToCartEnabled  = <i onClick={ addToCart }
+                                           className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded"></i>
+    const renderIconAddToCartDisabled = <i
+        className="Icon-basket text-xl text-white bg-green-500 w-10 h-10 flex-flow-center rounded"></i>
 
     const [contentAddToCart, setContentAddToCart] = useState(renderIconAddToCartEnabled)
 
@@ -51,7 +52,7 @@ const ProductMiniature = ({ product }) => {
                         { product.category.categoryLabel }
                     </p>
                     <NavLink to={ `${ PATH_PRODUCTS + '/' + product.id }` }
-                             className="text-primary-base font-bold mb-1 line-clamp-2">
+                             className="text-primary-base font-bold mb-1 line-clamp-1">
                         { product.title }
                     </NavLink>
 

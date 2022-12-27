@@ -45,7 +45,7 @@ const SortingItem = ({ typeSorting, label, resetCheckedValues, setResetCheckedVa
                    ref={ inputNode }
                    onChange={ handleChange }/>
             <label htmlFor={ sortByProperty.code + '_' + typeSorting }
-                   className="cursor-pointer font-bold ml-2">{ label }</label>
+                   className="cursor-pointer ml-2">{ label }</label>
         </li>
     )
 }

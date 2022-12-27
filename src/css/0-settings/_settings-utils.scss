@@ -71,6 +71,11 @@
         backdrop-filter: blur(5px);
     }
 
+    .remove-scrollbar {
+        overflow: hidden;
+        height: 100vh;
+    }
+
     .flex-flow-endX {
         display: flex;
         flex-wrap: wrap;

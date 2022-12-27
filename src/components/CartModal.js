@@ -28,8 +28,8 @@ export const CartModal = () => {
         <>
             <CSSTransition in={ modalOpened } classNames="Animation-translateX" timeout={ 300 } unmountOnExit appear>
                 <div
-                    className="z-max fixed top-0 right-0 bottom-0 max-w-450 w-full flex flex-col bg-white shadow text-black flex flex-col">
-                    <div className="relative p-4 bg-primary-base/25 text-primary-base">
+                    className="z-max fixed top-0 right-0 bottom-0 max-w-450 w-full flex flex-col bg-white shadow flex flex-col">
+                    <div className="relative p-4 bg-primary-base/10 text-primary-base">
                         <i onClick={ closeModal }
                            className="Icon-close-light absolute left-4 text-xl absolute-y-center cursor-pointer"></i>
                         <p className="text-xl text-center">Mon panier</p>

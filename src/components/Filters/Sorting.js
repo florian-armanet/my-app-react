@@ -28,7 +28,7 @@ const Sorting = ({ sortByProperty }) => {
 
     return (
         <li>
-            <p className="px-4 py-2 bg-tertiary-light/30">{ sortByProperty.name }</p>
+            <p className="px-4 py-2 bg-tertiary-light/30 text-primary-base">{ sortByProperty.name }</p>
             <ul className="flex flex-col items-start px-4 pt-4 mb-4">
                 { Object.entries(inputRatings)
                     .map(([typeSorting, label]) => {

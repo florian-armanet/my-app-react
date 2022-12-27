@@ -15,11 +15,12 @@ html {
 
 body {
     overflow: hidden;
+    @apply text-gray-500;
 }
 
 .App {
     background-color: #eeeeee;
-    @apply text-base text-primary-base;
+    @apply text-base text-gray-600;
     min-height: 100vh;
 }
 

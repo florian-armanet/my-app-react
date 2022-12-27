@@ -73,6 +73,9 @@ module.exports = {
         minHeight: {
             'half': '50vh'
         },
+        maxHeight: {
+            '600px': '600px'
+        },
         spacing: {
             '14': '3.5rem',
         },
