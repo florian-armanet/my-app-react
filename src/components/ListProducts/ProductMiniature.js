@@ -5,6 +5,7 @@ import { roundHalf } from '../../utils/mathRound'
 import { PATH_PRODUCTS } from '../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProductInCart } from '../../store/productsStore'
+import { setCartModalOpened } from '../../store/cartStore'
 import { useState, useEffect } from 'react'
 
 const ProductMiniature = ({ product }) => {
@@ -20,6 +21,7 @@ const ProductMiniature = ({ product }) => {
             quantity: 1
         }
         dispatch(addProductInCart({ ...payload }))
+        dispatch(setCartModalOpened(true))
     }
 
     const renderIconAddToCartEnabled  = <i onClick={ addToCart }
@@ -46,7 +48,7 @@ const ProductMiniature = ({ product }) => {
                          alt={ product.title }
                          className="h-full w-full object-contain mb-2 group-hover:scale-105 group-hover:rotate-2 transition"/>
                 </NavLink>
-                
+
                 <div className="flex-1 p-4 flex flex-col justify-between">
                     <p className="absolute top-0 left-0 bg-secondary-base text-primary-base font-bold px-2 py-1">
                         { product.category.categoryLabel }
@@ -56,7 +58,7 @@ const ProductMiniature = ({ product }) => {
                         { product.title }
                     </NavLink>
 
-                    <p className="flex-flow-centerY mb-4">
+                    <p className="flex-flow-centerY mb-4 text-secondary-base">
                         { generateStarRate(roundHalf(product.rating.rate)) }
                         <span className="ml-1 leading-none">({ product.rating.count } avis)</span>
                     </p>

@@ -1,7 +1,7 @@
 import { NavLink, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import fetchProduct from '../api/product'
-import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
+import { PATH_PRODUCTS, STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { generateStarRate } from '../utils/generateStarRate'
 import { roundHalf } from '../utils/mathRound'
@@ -76,7 +76,7 @@ const Product = () => {
                 quantity: productInCart.quantity + Number(productQty)
             }
 
-            dispatch(setProductQuantity({...payload}))
+            dispatch(setProductQuantity({ ...payload }))
             return
         }
 
@@ -91,7 +91,7 @@ const Product = () => {
         return (
             <div className="o-grid pb-12">
                 <div className="o-col-12">
-                    <NavLink to="/products" className="Button Button--primary mb-8">
+                    <NavLink to={ PATH_PRODUCTS } className="Button Button--primary mb-8">
                         <i className="Icon-arrow-left mr-2"></i>
                         <span>Retour aux produits</span>
                     </NavLink>

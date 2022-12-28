@@ -18,6 +18,10 @@
     .Button i {
         vertical-align: middle;
     }
+
+    .Button-portfolio {
+        @apply rounded-3xl text-white font-bold bg-gradient-to-r from-primary-base to-primary-dark shadow-lg shadow-primary-base/50 text-xl py-3 px-6 transition-fast hover:shadow-md hover:shadow-sm;
+    }
 }
 
 // 2. Style variants
