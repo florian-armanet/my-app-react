@@ -98,7 +98,7 @@ const Product = () => {
                 </div>
                 <div className="o-col-6">
                     <div className="relative">
-                        <p className="z-1 absolute top-0 left-0 mb-4 bg-tertiary-base text-secondary-dark font-bold px-2 py-1">
+                        <p className="z-1 absolute top-0 left-0 mb-4  bg-secondary-base text-primary-base font-bold px-2 py-1">
                             { currentProduct.category }
                         </p>
                         <img src={ currentProduct.image } alt={ currentProduct.title }/>

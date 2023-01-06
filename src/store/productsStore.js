@@ -29,6 +29,9 @@ export const productsStore = createSlice({
                 return payload.includes(product.category.categoryCode) || !payload.length
             })
         },
+        setProductInCart: (state, { payload }) => {
+            state.inCart = payload
+        },
         addProductInCart: (state, { payload }) => {
             state.inCart.push(payload)
         },
@@ -77,6 +80,7 @@ export const {
                  setProductsFiltered,
                  setProductsBySearcher,
                  setProductsByCategories,
+                 setProductInCart,
                  addProductInCart,
                  removeProductInCart,
                  setProductQuantity,

@@ -10,3 +10,5 @@ export const MAX_RATE = 5
 export const PATH_PRODUCTS = '/products'
 export const PATH_CATEGORIES = '/categories'
 export const PATH_CART = '/cart'
+
+export const PRODUCTS_IN_CART = 'products_in_cart'

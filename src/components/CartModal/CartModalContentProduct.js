@@ -1,6 +1,4 @@
-import { NavLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import formatNumberToString from '../../utils/formatNumberToString'
 import { removeProductInCart, setProductQuantity } from '../../store/productsStore'
 

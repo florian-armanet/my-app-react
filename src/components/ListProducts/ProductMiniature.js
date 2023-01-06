@@ -2,7 +2,7 @@ import formatNumberToString from '../../utils/formatNumberToString'
 import { NavLink } from 'react-router-dom'
 import { generateStarRate } from '../../utils/generateStarRate'
 import { roundHalf } from '../../utils/mathRound'
-import { PATH_PRODUCTS } from '../../utils/constants'
+import { PATH_PRODUCTS, PRODUCTS_IN_CART } from '../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProductInCart } from '../../store/productsStore'
 import { setCartModalOpened } from '../../store/cartStore'
@@ -34,10 +34,12 @@ const ProductMiniature = ({ product }) => {
     useEffect(() => {
         if (productsInCart.some(productInCart => productInCart.id === product.id)) {
             setContentAddToCart(renderIconAddToCartDisabled)
+            localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCart))
             return
         }
 
         setContentAddToCart(renderIconAddToCartEnabled)
+        localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCart))
     }, [productsInCart, dispatch])
 
     return (
