@@ -1,11 +1,20 @@
 import { NavLink } from 'react-router-dom'
 import { PATH_CART } from '../../utils/constants'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CartModalContentProduct from './CartModalContentProduct'
 import CartModalContentTotals from './CartModalContentTotals'
+import { setCartModalOpened } from '../../store/cartStore'
 
 export const CartModalContent = () => {
+    const dispatch       = useDispatch()
     const productsInCart = useSelector(state => state.products.inCart)
+
+    /**
+     *
+     */
+    const closeModal = () => {
+        dispatch(setCartModalOpened(false))
+    }
 
     return (
         <div className="flex-1">
@@ -18,7 +27,7 @@ export const CartModalContent = () => {
                 <div className="px-4 py-6 bg-primary-base/10">
                     <CartModalContentTotals/>
 
-                    <NavLink to={ `${ PATH_CART }` } className="Button Button--primary block">
+                    <NavLink to={ `${ PATH_CART }` } onClick={ closeModal } className="Button Button--primary block">
                         Mon panier
                     </NavLink>
                 </div>

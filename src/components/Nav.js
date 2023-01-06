@@ -18,12 +18,15 @@ const Nav = () => {
             <CartModal/>
 
             <div className="o-container flex flex-col h-full flex-1">
-                <div className={ (isHomepage ? '' : 'mb-8 ') + 'o-full bg-primary-light/30 text-primary-base' }>
+                <div className={ ( isHomepage ? '' : 'mb-8 ' ) + 'o-full bg-primary-lighter text-primary-base' }>
                     <div className="o-container">
                         <div className="flex-flow-between items-center py-4">
-                            <NavLink to="/" className="p-2 border-2 border-primary-base rounded font-bold">
-                                My app React
-                            </NavLink>
+                            <div className="flex flex-col items-center">
+                                <NavLink to="/" className="p-2 border-2 border-primary-base rounded font-bold">
+                                    My app React
+                                </NavLink>
+                                <span className="text-xs mt-1 leading-none">By Florian Armanet</span>
+                            </div>
 
                             <nav className="flex-flow-center">
                                 <NavLink to={ PATH_PRODUCTS } className={ classesHandler }>Produits</NavLink>

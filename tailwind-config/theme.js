@@ -32,6 +32,7 @@ module.exports = {
             },
 
             primary: {
+                lighter: '#D5C0C0',
                 light: '#9d5654',
                 base: '#783937FF',
                 hover: '#5b2523',
