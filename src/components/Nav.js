@@ -1,23 +1,20 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
-import { PATH_CATEGORIES, PATH_PRODUCTS } from '../utils/constants'
 import CartModal from './CartModal'
 import NavCart from './Nav/NavCart'
+import NavMain from './Nav/NavMain'
+import MenuModal from './MenuModal/MenuModal'
 
 const Nav = () => {
     const location = useLocation()
 
     const isHomepage = location.pathname === '/'
 
-    const classesHandler = ({ isActive }) =>
-        isActive
-            ? 'font-bold mx-4 has-underline text-xl has-underline--primary has-underline--invert'
-            : 'font-bold mx-4 has-underline has-underline--primary text-xl'
-
     return (
         <>
             <CartModal/>
+            <MenuModal/>
 
-            <div className="o-container flex flex-col h-full flex-1">
+            <div className="o-container flex flex-col min-h-screen">
                 <div className={ ( isHomepage ? '' : 'mb-8 ' ) + 'o-full bg-primary-lighter text-primary-base' }>
                     <div className="o-container">
                         <div className="flex-flow-between items-center py-4">
@@ -28,12 +25,10 @@ const Nav = () => {
                                 <span className="text-xs mt-1 leading-none">By Florian Armanet</span>
                             </div>
 
-                            <nav className="flex-flow-center">
-                                <NavLink to={ PATH_PRODUCTS } className={ classesHandler }>Produits</NavLink>
-                                <NavLink to={ PATH_CATEGORIES } className={ classesHandler }>Catégories</NavLink>
-                            </nav>
-
-                            <NavCart/>
+                            <div className="flex-flow-centerY">
+                                <NavMain/>
+                                <NavCart/>
+                            </div>
                         </div>
                     </div>
                 </div>

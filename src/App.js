@@ -19,7 +19,7 @@ function App () {
     }, [dispatch])
 
     return (
-        <div className="App flex flex-col">
+        <div className="App">
             <Nav/>
         </div>
     )

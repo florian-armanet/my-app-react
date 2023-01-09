@@ -7,6 +7,7 @@ import filtersCategoriesReducer from './filtersCategoriesStore'
 import filtersReducer from './filtersStore'
 import productsOfCategoryReducer from './productsOfCategoryStore'
 import cartReducer from './cartStore'
+import menuReducer from './menuStore'
 
 export default configureStore({
     reducer: {
@@ -18,5 +19,6 @@ export default configureStore({
         filters: filtersReducer,
         filtersCategories: filtersCategoriesReducer,
         cart: cartReducer,
+        menu: menuReducer,
     }
 })

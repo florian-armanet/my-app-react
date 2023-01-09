@@ -28,7 +28,7 @@ const ListCategories = () => {
             const nbBlocksOfLoader = new Array(4).fill().map((_, index) => index)
             setContentFetchingProcess(
                 <ul className="o-grid">
-                    { nbBlocksOfLoader.map(nb => <li className="o-col-3" key={ nb }>
+                    { nbBlocksOfLoader.map(nb => <li className="o-col-12 md:o-col-3 md-down:mb-4" key={ nb }>
                         <div className="Loader-block h-72 mb-4"></div>
                     </li>) }
                 </ul>

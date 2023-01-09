@@ -9,9 +9,9 @@ const Filters = () => {
     const resetAllFilters = (event) => dispatch(setResetAllCheckedValues(true))
 
     return (
-        <div className="flex flex-col mr-8">
+        <div className="flex flex-col sm-down:w-full sm:mr-8 max-w-xs w-full mb-8">
             <p className="text-primary-base font-bold mb-4">Filtres</p>
-            <div className="bg-white border border-primary-light/50 rounded w-xs">
+            <div className="bg-white border border-primary-light/50 rounded">
                 <ul className="border-b border-primary-light/50">
                     <FiltersCategories/>
                     <Sorting sortByProperty={ { name: 'Price', code: 'price', propertySorted: 'price' } }/>

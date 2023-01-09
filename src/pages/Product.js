@@ -7,6 +7,7 @@ import { generateStarRate } from '../utils/generateStarRate'
 import { roundHalf } from '../utils/mathRound'
 import formatNumberToString from '../utils/formatNumberToString'
 import { addProductInCart, setProductQuantity } from '../store/productsStore'
+import { setCartModalOpened } from '../store/cartStore'
 
 const Product = () => {
     const dispatch                                            = useDispatch()
@@ -77,6 +78,7 @@ const Product = () => {
             }
 
             dispatch(setProductQuantity({ ...payload }))
+            dispatch(setCartModalOpened(true))
             return
         }
 
@@ -85,6 +87,7 @@ const Product = () => {
             quantity: Number(productQty)
         }
         dispatch(addProductInCart({ ...payload }))
+        dispatch(setCartModalOpened(true))
     }
 
     if (Object.keys(currentProduct).length) {
