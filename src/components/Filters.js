@@ -1,31 +1,36 @@
-import FiltersCategories from './Filters/FiltersCategories'
-import Sorting from './Filters/Sorting'
-import { setResetAllCheckedValues } from '../store/filtersStore'
+import { setFiltersOpened } from '../store/filtersStore'
 import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { isTablet } from '../utils/viewport'
+import FiltersContent from './Filters/FiltersContent'
 
 const Filters = () => {
-    const dispatch         = useDispatch()
+    const dispatch                                        = useDispatch()
+    const [renderFiltersContent, setRenderFiltersContent] = useState(null)
 
-    const resetAllFilters = (event) => dispatch(setResetAllCheckedValues(true))
+    /**
+     *
+     */
+    const onClick = () => {
+        dispatch(setFiltersOpened(true))
+    }
+
+    useEffect(() => {
+        if (!isTablet()) {
+            setRenderFiltersContent(<FiltersContent/>)
+        }
+    }, [])
 
     return (
-        <div className="flex flex-col sm-down:w-full sm:mr-8 max-w-xs w-full mb-8">
-            <p className="text-primary-base font-bold mb-4">Filtres</p>
-            <div className="bg-white border border-primary-light/50 rounded">
-                <ul className="border-b border-primary-light/50">
-                    <FiltersCategories/>
-                    <Sorting sortByProperty={ { name: 'Price', code: 'price', propertySorted: 'price' } }/>
-                    <Sorting sortByProperty={ { name: 'Rating', code: 'rating', propertySorted: 'rate' } }/>
-                </ul>
-                <div className="flex flex-wrap justify-between px-4 py-4">
-                    <button className="underline" onClick={ resetAllFilters }>
-                        Reset All
-                    </button>
-                    <button className="bg-primary-base hover:bg-primary-hover transition text-white px-3 py-2 rounded">
-                        Apply filters
-                    </button>
-                </div>
+        <div className="flex flex-col lg:mr-8 max-w-xs w-full mb-4 lg:mb-8">
+            <div onClick={ onClick }
+                 className="flex-flow-between text-primary-base font-bold mb-4 p-2 border border-primary-base rounded lg:hidden cursor-pointer">
+                <p>Filtres</p>
+                <i className="Icon-angle-bottom text-xl"></i>
             </div>
+            <p className="font-bold mb-4 lg-down:hidden">Filtres</p>
+
+            { renderFiltersContent }
         </div>
     )
 }

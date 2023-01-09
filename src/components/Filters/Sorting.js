@@ -24,7 +24,9 @@ const Sorting = ({ sortByProperty }) => {
         }
     }, [resetCheckedValues, resetAllCheckedValues, dispatch])
 
-    const clickResetCheckedValue = () => setResetCheckedValues(true)
+    const clickResetCheckedValue = () => {
+        setResetCheckedValues(true)
+    }
 
     return (
         <li>

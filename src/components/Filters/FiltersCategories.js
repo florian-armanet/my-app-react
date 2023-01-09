@@ -12,7 +12,12 @@ const FiltersCategories = () => {
         dispatch(fetchCategories([...products]))
     }, [products, dispatch])
 
-    const clickResetCheckedValue = () => dispatch(setResetCheckedValues(true))
+    /**
+     *
+     */
+    const clickResetCheckedValue = () => {
+        dispatch(setResetCheckedValues(true))
+    }
 
     return (
         <li>

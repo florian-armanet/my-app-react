@@ -54,7 +54,7 @@ const ListProducts = () => {
 
     if (productsFiltered.length) {
         return (
-            <div className="flex-1">
+            <div className="lg:flex-1">
                 <TransitionGroup component="ul" className="flex-flow-center -mx-2">
                     { productsFiltered
                         .map(product => (

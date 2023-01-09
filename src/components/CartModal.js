@@ -3,6 +3,7 @@ import { setCartModalOpened } from '../store/cartStore'
 import { CSSTransition } from 'react-transition-group'
 import CartModalContent from './CartModal/CartModalContent'
 import CartModalContentEmpty from './CartModal/CartModalContentEmpty'
+import { useEffect } from 'react'
 
 export const CartModal = () => {
     const dispatch       = useDispatch()
@@ -24,11 +25,20 @@ export const CartModal = () => {
         return <CartModalContentEmpty/>
     }
 
+    useEffect(() => {
+        if (modalOpened) {
+            document.body.classList.add('remove-scrollbar')
+            return
+        }
+
+        document.body.classList.remove('remove-scrollbar')
+    }, [modalOpened, dispatch])
+
     return (
         <>
             <CSSTransition in={ modalOpened } classNames="Animation-translateX" timeout={ 300 } unmountOnExit appear>
                 <div
-                    className="z-max fixed top-0 right-0 bottom-0 max-w-450 w-full flex flex-col bg-white shadow flex flex-col">
+                    className="z-max fixed top-0 right-0 bottom-0 max-w-450 w-full flex flex-col bg-white shadow flex flex-col overflow-auto">
                     <div className="relative p-4 bg-primary-base/10 text-primary-base">
                         <i onClick={ closeModal }
                            className="Icon-close-light absolute left-4 text-xl absolute-y-center cursor-pointer"></i>

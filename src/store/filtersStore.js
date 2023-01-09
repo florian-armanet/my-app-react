@@ -3,9 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export const filtersStore = createSlice({
     name: 'filters',
     initialState: {
-        resetAllCheckedValues: false
+        resetAllCheckedValues: false,
+        filtersOpened: false,
     },
     reducers: {
+        setFiltersOpened: (state, { payload: bool }) => {
+            state.filtersOpened = bool
+        },
         setResetAllCheckedValues: (state, { payload }) => {
             state.resetAllCheckedValues = payload
         }
@@ -14,4 +18,4 @@ export const filtersStore = createSlice({
 
 export default filtersStore.reducer
 
-export const { setResetAllCheckedValues } = filtersStore.actions
+export const { setResetAllCheckedValues, setFiltersOpened } = filtersStore.actions

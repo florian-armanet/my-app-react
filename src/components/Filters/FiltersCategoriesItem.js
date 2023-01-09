@@ -16,6 +16,10 @@ const FiltersCategoriesItem = ({ category }) => {
     const getCategoriesSelected = useSelector(state => state.filtersCategories.categoriesSelected)
     const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
 
+    /**
+     *
+     * @param event
+     */
     const handleChange = (event) => {
         dispatch(setResetCheckedValues(false))
         setCurrentCheckedValue(!currentCheckedValue)
