@@ -3,11 +3,34 @@ import CartModal from './CartModal'
 import NavCart from './Nav/NavCart'
 import NavMain from './Nav/NavMain'
 import MenuModal from './MenuModal/MenuModal'
+import { isTablet } from '../utils/viewport'
+import { useEffect, useState } from 'react'
 
 const Nav = () => {
-    const location = useLocation()
+    const location                  = useLocation()
+    const [renderNav, setRenderNav] = useState('')
 
     const isHomepage = location.pathname === '/'
+
+    useEffect(() => {
+        if (isTablet()) {
+            setRenderNav(
+                <div className="flex-flow-centerY">
+                    <NavMain/>
+                    <NavCart/>
+                </div>
+            )
+
+            return
+        }
+
+        setRenderNav(
+            <>
+                <NavMain/>
+                <NavCart/>
+            </>
+        )
+    })
 
     return (
         <>
@@ -25,10 +48,7 @@ const Nav = () => {
                                 <span className="text-xs mt-1 leading-none">By Florian Armanet</span>
                             </div>
 
-                            <div className="flex-flow-centerY">
-                                <NavMain/>
-                                <NavCart/>
-                            </div>
+                            { renderNav }
                         </div>
                     </div>
                 </div>

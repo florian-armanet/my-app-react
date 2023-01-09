@@ -40,8 +40,8 @@ export const NavCart = () => {
     }, [productsInCart, dispatch])
 
     return (
-        <div className="relative">
-            <i onClick={ openModal } className="Icon-basket text-3xl font-bold cursor-pointer"></i>
+        <div onClick={ openModal } className="relative cursor-pointer">
+            <i className="Icon-basket text-3xl font-bold"></i>
             <span
                 className="absolute -top-3 lg:-top-1 lg-down:left-3 lg:-right-3 text-xs rounded-full w-5 h-5 flex-flow-center bg-primary-base text-white">
                 { quantityInCart }
