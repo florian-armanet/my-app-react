@@ -17,7 +17,7 @@ const CategoryMiniature = ({ category }) => {
 
     if (firstProductOfCategory) {
         return (
-            <li className="o-col-3 transition">
+            <li className="o-col-12 md:o-col-3 md-down:mb-4 transition">
                 <NavLink to={ `${ PATH_CATEGORIES + '/' + category.categoryLabelOrigin }` }>
                     <div className="h-72 group overflow-hidden">
                         <p className="z-2 absolute absolute-center bg-primary-base text-white py-1 px-2">{ category.categoryLabel }</p>

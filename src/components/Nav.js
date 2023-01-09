@@ -30,7 +30,7 @@ const Nav = () => {
                 <NavCart/>
             </>
         )
-    })
+    }, [])
 
     return (
         <>
