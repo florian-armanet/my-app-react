@@ -6,14 +6,25 @@ import MenuModal from './MenuModal/MenuModal'
 import { isTablet } from '../utils/viewport'
 import { useEffect, useState } from 'react'
 import FiltersModal from './Filters/FiltersModal'
+import { PATH_CART, PATH_PRODUCTS } from '../utils/constants'
+import { useSelector } from 'react-redux'
+import LoadingProducts from './LoadingData/LoadingProducts'
 
 const Nav = () => {
-    const location                  = useLocation()
-    const [renderNav, setRenderNav] = useState('')
+    const location                              = useLocation()
+    const [renderNav, setRenderNav]             = useState('')
+    const [loadingProducts, setLoadingProducts] = useState('')
+    const products                              = useSelector(state => state.products.all)
 
     const isHomepage = location.pathname === '/'
+    const isCart     = location.pathname === PATH_CART
+    const isProducts = location.pathname === PATH_PRODUCTS
 
     useEffect(() => {
+        if (( isCart || isProducts ) && !products.length) {
+            setLoadingProducts(<LoadingProducts/>)
+        }
+
         if (isTablet()) {
             setRenderNav(
                 <div className="flex-flow-centerY">
@@ -31,10 +42,11 @@ const Nav = () => {
                 <NavCart/>
             </>
         )
-    }, [])
+    }, [location])
 
     return (
         <>
+            { loadingProducts }
             <CartModal/>
             <MenuModal/>
             <FiltersModal/>

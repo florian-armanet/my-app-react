@@ -36,7 +36,7 @@ const Home = () => {
                         <div className="bg-white rounded p-6 flex flex-col items-center">
                             <i className="Icon-store text-3xl mb-2"></i>
                             <p className="text-center">
-                                Ce site récupère uniquement des données fake avec l'API
+                                <span className="mr-1">Ce site récupère uniquement des données fake avec l'API</span>
                                 <a href="https://fakestoreapi.com/" target="_blank"
                                 className="has-underline has-underline--invert">
                                     Fake Store API

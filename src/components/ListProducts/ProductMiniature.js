@@ -2,7 +2,7 @@ import formatNumberToString from '../../utils/formatNumberToString'
 import { NavLink } from 'react-router-dom'
 import { generateStarRate } from '../../utils/generateStarRate'
 import { roundHalf } from '../../utils/mathRound'
-import { PATH_PRODUCTS, PRODUCTS_IN_CART } from '../../utils/constants'
+import { PATH_CART, PATH_PRODUCTS, PRODUCTS_IN_CART } from '../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProductInCart } from '../../store/productsStore'
 import { setCartModalOpened } from '../../store/cartStore'
@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react'
 const ProductMiniature = ({ product }) => {
     const dispatch       = useDispatch()
     const productsInCart = useSelector(state => state.products.inCart)
+    const isCart         = location.pathname === PATH_CART
 
     /**
      *
@@ -20,8 +21,12 @@ const ProductMiniature = ({ product }) => {
             ...product,
             quantity: 1
         }
+
+        if (!isCart) {
+            dispatch(setCartModalOpened(true))
+        }
+
         dispatch(addProductInCart({ ...payload }))
-        dispatch(setCartModalOpened(true))
     }
 
     const renderIconAddToCartEnabled  = <i onClick={ addToCart }

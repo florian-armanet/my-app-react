@@ -5,6 +5,7 @@ import fetchCategories from '../api/categories'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import CategoryMiniature from './ListCategories/CategoryMiniature'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import LoaderBlock from './Loader/LoaderBlock'
 
 const ListCategories = () => {
     const dispatch                                            = useDispatch()
@@ -26,13 +27,7 @@ const ListCategories = () => {
 
         if (categoriesStatusRequest === STATUS_LOADING && productsStatusRequest === STATUS_LOADING) {
             const nbBlocksOfLoader = new Array(4).fill().map((_, index) => index)
-            setContentFetchingProcess(
-                <ul className="o-grid">
-                    { nbBlocksOfLoader.map(nb => <li className="o-col-12 md:o-col-3 md-down:mb-4" key={ nb }>
-                        <div className="Loader-block h-72 mb-4"></div>
-                    </li>) }
-                </ul>
-            )
+            setContentFetchingProcess(<LoaderBlock nbBlocks={ 4 }/>)
             return
         }
 

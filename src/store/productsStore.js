@@ -13,6 +13,7 @@ export const productsStore = createSlice({
         quantityInCart: 0,
         totalPrice: 0,
         status: '',
+        contentLoading: '',
         error: null,
     },
     reducers: {
