@@ -28,7 +28,7 @@ const Filters = () => {
                 <p>Filtres</p>
                 <i className="Icon-angle-bottom text-xl"></i>
             </div>
-            <p className="font-bold mb-4 lg-down:hidden">Filtres</p>
+            <p className="font-bold mb-4 lg-down:hidden text-primary-base">Filtres</p>
 
             { renderFiltersContent }
         </div>

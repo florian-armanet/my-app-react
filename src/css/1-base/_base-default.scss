@@ -19,8 +19,7 @@ body {
 }
 
 .App {
-    background-color: #eeeeee;
-    @apply text-base text-gray-600;
+    @apply text-base bg-gray-50 text-gray-600;
     min-height: 100vh;
 }
 
