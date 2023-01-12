@@ -21,22 +21,30 @@ const FiltersContent = () => {
     }
 
     return (
-        <div className="bg-white border border-primary-light/50 rounded">
-            <ul className="border-b border-primary-light/50">
-                <FiltersCategories/>
-                <Sorting sortByProperty={ { name: 'Price', code: 'price', propertySorted: 'price' } }/>
-                <Sorting sortByProperty={ { name: 'Rating', code: 'rating', propertySorted: 'rate' } }/>
-            </ul>
-            <div className="flex flex-wrap justify-between px-4 py-4">
-                <button className="underline" onClick={ resetAllFilters }>
-                    Reset All
-                </button>
-                <button onClick={ closeFilters }
-                        className="bg-primary-base hover:bg-primary-hover transition text-white px-3 py-2 rounded">
-                    Apply filters
-                </button>
+        <>
+            <div className="bg-white border border-primary-light/50 rounded mb-8">
+                {/*<div className="border-b border-primary-light/50">*/}
+                    <FiltersCategories/>
+                {/*</div>*/}
+                {/*<div className="flex flex-wrap justify-between px-4 py-4">*/}
+                {/*    <button className="underline" onClick={ resetAllFilters }>*/}
+                {/*        Reset All*/}
+                {/*    </button>*/}
+                {/*    <button onClick={ closeFilters }*/}
+                {/*            className="bg-primary-base hover:bg-primary-hover transition text-white px-3 py-2 rounded">*/}
+                {/*        Apply filters*/}
+                {/*    </button>*/}
+                {/*</div>*/}
             </div>
-        </div>
+
+            <p className="font-bold mb-4 lg-down:hidden text-primary-base">Trier par</p>
+
+            <div className="bg-white border border-primary-light/50 rounded">
+                <Sorting sortingCode="price"/>
+                <Sorting sortingCode="rate"/>
+            </div>
+        </>
+
     )
 }
 

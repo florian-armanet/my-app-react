@@ -23,7 +23,6 @@ const Searcher = () => {
      * @type {(function(...[*]): void)|*}
      */
     const handleChange = debounce((event) => {
-        console.log('in')
         dispatch(setSearcher(event.target.value))
     }, 1000)
 

@@ -20,18 +20,18 @@ const FiltersCategories = () => {
     }
 
     return (
-        <li>
+        <>
             <p className="px-4 py-2 bg-primary-lighter text-primary-base">Categories</p>
             <ul className="px-4 pt-4 mb-4">
                 { categories.map((category, index) =>
                     <FiltersCategoriesItem category={ category } key={ index }/>)
                 }
             </ul>
-            <button className="px-4 py-2 mb-8 underline hover:text-secondary-base transition"
+            <button className="px-4 py-2 mb-4 underline hover:text-secondary-base transition"
                     onClick={ clickResetCheckedValue }>
-                Reset Categories
+                Réinitialiser
             </button>
-        </li>
+        </>
     )
 }
 
