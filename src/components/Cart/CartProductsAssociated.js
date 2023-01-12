@@ -14,14 +14,25 @@ const CartProductsAssociated = () => {
 
     useEffect(() => {
         if (!productsInCart.length) {
-            setProductsOfCurrentCategory([...products].slice(2, 6))
+            const oneProductByCategory = [...products].reduce((acc, curr, index, arr) => {
+                if (acc.some(pdt => curr.category.categoryCode === pdt.category.categoryCode)) {
+                    return acc
+                }
+
+                acc.push(curr)
+                return acc
+            }, [])
+
+            setProductsOfCurrentCategory(oneProductByCategory)
             return
         }
 
         setCurrentCategory(productsInCart[0].category.categoryCode)
 
         setProductsOfCurrentCategory(
-            [...products].filter(product => product.category.categoryCode === currentCategory).slice(0, 4)
+            [...products].filter(product => product.category.categoryCode === currentCategory)
+                .filter(product => !productsInCart.some(productInCart => product.id === productInCart.id))
+                .slice(0, 4)
         )
     }, [products, productsInCart, currentCategory])
 
@@ -35,7 +46,7 @@ const CartProductsAssociated = () => {
 
     return (
         <>
-            <p className="text-center text-xl mb-6">Vous aimerez aussi</p>
+            <p className="text-center text-xl mb-6">Vous pourriez aimer</p>
 
             <TransitionGroup component="ul" className="flex-flow-center -mx-2">
                 { productsOfCurrentCategory.map(product => (

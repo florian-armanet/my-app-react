@@ -5,6 +5,7 @@ import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/consta
 import fetchProductsOfCategory from '../api/productsOfCategory'
 import ProductMiniature from '../components/ListProducts/ProductMiniature'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import LoaderBlock from '../components/Loader/LoaderBlock'
 
 const Category = () => {
     const dispatch                                                  = useDispatch()
@@ -20,7 +21,7 @@ const Category = () => {
      */
     useEffect(() => {
         if (productsOfCategoryStatusRequest === STATUS_LOADING) {
-            setContentFetchingProcess(<div className="Loader mx-auto my-20"></div>)
+            setContentFetchingProcess(<LoaderBlock nbBlocks={ 8 }/>)
             return
         }
 
