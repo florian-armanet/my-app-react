@@ -52,11 +52,11 @@ const Nav = () => {
             <FiltersModal/>
 
             <div className="o-container flex flex-col min-h-screen">
-                <div className={ ( isHomepage ? '' : 'mb-8 ' ) + 'o-full bg-primary-lighter text-primary-base' }>
+                <div className={ ( isHomepage ? '' : 'mb-8 ' ) + 'o-full bg-primary-base text-white' }>
                     <div className="o-container">
                         <div className="flex-flow-between items-center py-4">
                             <div className="flex flex-col items-center">
-                                <NavLink to="/" className="p-2 border-2 border-primary-base rounded font-bold">
+                                <NavLink to="/" className="p-2 border-2 border-white rounded font-bold">
                                     My app React
                                 </NavLink>
                                 <span className="text-xs mt-1 leading-none">By Florian Armanet</span>

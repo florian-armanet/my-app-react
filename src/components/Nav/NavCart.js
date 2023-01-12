@@ -43,7 +43,7 @@ export const NavCart = () => {
         <div onClick={ openModal } className="relative cursor-pointer">
             <i className="Icon-basket text-3xl font-bold"></i>
             <span
-                className="absolute -top-3 lg:-top-1 lg-down:left-3 lg:-right-3 text-xs rounded-full w-5 h-5 flex-flow-center bg-primary-base text-white">
+                className="absolute -top-3 lg:-top-1 lg-down:left-3 lg:-right-3 text-xs rounded-full w-5 h-5 flex-flow-center bg-white text-primary-base">
                 { quantityInCart }
             </span>
         </div>

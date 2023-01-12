@@ -17,8 +17,14 @@ const Sorting = ({ sortingCode }) => {
         'sortAsc': 'Sort asc',
     }
 
+    /**
+     *
+     */
+    const clickResetCheckedValue = () => {
+        setResetCheckedValues(true)
+    }
+
     useEffect(() => {
-        console.log('UseEffect Sorting')
         if (resetCheckedValues || resetAllCheckedValues) {
             dispatch(setProductsFiltered(
                 [...productsFiltered]
@@ -26,10 +32,6 @@ const Sorting = ({ sortingCode }) => {
             ))
         }
     }, [resetCheckedValues, resetAllCheckedValues, dispatch])
-
-    const clickResetCheckedValue = () => {
-        setResetCheckedValues(true)
-    }
 
     return (
         <>
