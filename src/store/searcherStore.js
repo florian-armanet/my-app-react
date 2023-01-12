@@ -4,14 +4,18 @@ export const searcherStore = createSlice({
     name: 'searcher',
     initialState: {
         searchValue: '',
+        inputValue: '',
     },
     reducers: {
-        setSearcher: (state, action) => {
-            state.searchValue = action.payload
+        setSearcher: (state, { payload }) => {
+            state.searchValue = payload
+        },
+        setInputValue: (state, { payload }) => {
+            state.inputValue = payload
         },
     },
 })
 
 export default searcherStore.reducer
 
-export const { setSearcher } = searcherStore.actions
+export const { setSearcher, setInputValue } = searcherStore.actions
