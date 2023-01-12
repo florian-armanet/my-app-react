@@ -5,14 +5,13 @@ import { setProductsFiltered } from '../../store/productsStore'
 import { setResetAllCheckedValues } from '../../store/filtersStore'
 import { setCurrentSorting } from '../../store/sortingStore'
 
-const SortingItem = ({ currentSorting, typeSorting, label, resetCheckedValues, setResetCheckedValues }) => {
+const SortingItem = ({ currentSorting, typeSorting, label }) => {
     const dispatch              = useDispatch()
     const productsFiltered      = useSelector(state => state.products.filtered)
     const inputNode             = React.createRef()
     const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
 
     const handleChange = (event) => {
-        setResetCheckedValues(false)
         dispatch(setResetAllCheckedValues(false))
         dispatch(setCurrentSorting({
             typeSorting,
@@ -35,11 +34,11 @@ const SortingItem = ({ currentSorting, typeSorting, label, resetCheckedValues, s
     }
 
     useEffect(() => {
-        if (resetCheckedValues || resetAllCheckedValues) {
+        if (resetAllCheckedValues) {
             inputNode.current.checked = false
             dispatch(setResetAllCheckedValues(false))
         }
-    }, [resetCheckedValues, resetAllCheckedValues])
+    }, [resetAllCheckedValues])
 
     return (
         <li className="flex-flow-centerY mb-1">
@@ -50,7 +49,7 @@ const SortingItem = ({ currentSorting, typeSorting, label, resetCheckedValues, s
                    ref={ inputNode }
                    onChange={ handleChange }/>
             <label htmlFor={ currentSorting.code + '_' + typeSorting }
-                   className="cursor-pointer ml-2">{ label }</label>
+                   className="cursor-pointer ml-2">{ currentSorting.name + ' ' + label }</label>
         </li>
     )
 }

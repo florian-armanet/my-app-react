@@ -4,8 +4,8 @@ export const sortingStore = createSlice({
     name: 'filters',
     initialState: {
         sortings: [
-            { name: 'Price', code: 'price', propertySorted: 'price' },
-            { name: 'Rating', code: 'rate', propertySorted: 'rate' },
+            { name: 'Prix', code: 'price', propertySorted: 'price' },
+            { name: 'Avis', code: 'rate', propertySorted: 'rate' },
         ],
         currentSorting: {}
     },

@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setResetAllCheckedValues } from '../../store/filtersStore'
+import { setInputValue, setSearcher } from '../../store/searcherStore'
 
 const FiltersCategoriesItem = ({ category }) => {
     const [currentCheckedValue, setCurrentCheckedValue] = useState(false)
@@ -21,6 +22,8 @@ const FiltersCategoriesItem = ({ category }) => {
      * @param event
      */
     const handleChange = (event) => {
+        dispatch(setInputValue(''))
+        dispatch(setSearcher(''))
         dispatch(setResetCheckedValues(false))
         setCurrentCheckedValue(!currentCheckedValue)
 

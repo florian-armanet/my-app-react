@@ -3,6 +3,7 @@ import { setSearcher, setInputValue } from '../store/searcherStore'
 import debounce from '../utils/debounce'
 import { setProductsBySearcher } from '../store/productsStore'
 import { useEffect, useState } from 'react'
+import { setResetCheckedValues } from '../store/filtersCategoriesStore'
 
 const Searcher = () => {
     const dispatch                              = useDispatch()
@@ -16,6 +17,7 @@ const Searcher = () => {
      */
     const handleBeforeChange = (event) => {
         dispatch(setInputValue(event.target.value))
+        dispatch(setResetCheckedValues(true))
     }
 
     /**
