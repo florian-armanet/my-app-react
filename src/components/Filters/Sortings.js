@@ -1,25 +1,17 @@
 import Sorting from './Sorting'
-import { setCurrentSorting } from '../../store/sortingStore'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { setResetAllCheckedValues } from '../../store/filtersStore'
+import { setCurrentSorting, setResetCheckedValuesOfSortings } from '../../store/sortingStore'
+import { useDispatch } from 'react-redux'
 
 const Sortings = () => {
     const dispatch       = useDispatch()
-    const currentSorting = useSelector(state => state.sorting.currentSorting)
 
     /**
      *
      */
     const onResetSorting = () => {
-        console.log('in')
         dispatch(setCurrentSorting({}))
-        dispatch(setResetAllCheckedValues(true))
+        dispatch(setResetCheckedValuesOfSortings(true))
     }
-
-    useEffect(() => {
-        console.log(currentSorting)
-    }, [currentSorting])
 
     return (
         <>

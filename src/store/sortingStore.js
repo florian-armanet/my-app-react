@@ -7,15 +7,19 @@ export const sortingStore = createSlice({
             { name: 'Prix', code: 'price', propertySorted: 'price' },
             { name: 'Avis', code: 'rate', propertySorted: 'rate' },
         ],
-        currentSorting: {}
+        currentSorting: {},
+        resetCheckedValuesOfSortings: false,
     },
     reducers: {
         setCurrentSorting: (state, { payload: sorting }) => {
             state.currentSorting = sorting
+        },
+        setResetCheckedValuesOfSortings: (state, { payload }) => {
+            state.resetCheckedValuesOfSortings = payload
         },
     },
 })
 
 export default sortingStore.reducer
 
-export const { setCurrentSorting } = sortingStore.actions
+export const { setCurrentSorting, setResetCheckedValuesOfSortings } = sortingStore.actions

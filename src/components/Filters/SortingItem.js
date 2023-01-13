@@ -2,17 +2,20 @@ import { SORT_ASC, SORT_DESC } from '../../utils/constants'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProductsFiltered } from '../../store/productsStore'
-import { setResetAllCheckedValues } from '../../store/filtersStore'
-import { setCurrentSorting } from '../../store/sortingStore'
+import { setCurrentSorting, setResetCheckedValuesOfSortings } from '../../store/sortingStore'
 
 const SortingItem = ({ currentSorting, typeSorting, label }) => {
-    const dispatch              = useDispatch()
-    const productsFiltered      = useSelector(state => state.products.filtered)
-    const inputNode             = React.createRef()
-    const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
+    const dispatch                                      = useDispatch()
+    const productsFiltered                              = useSelector(state => state.products.filtered)
+    const resetCheckedValuesOfSortings                  = useSelector(state => state.sorting.resetCheckedValuesOfSortings)
+    const resetAllCheckedValues                         = useSelector(state => state.filters.resetAllCheckedValues)
+    const inputNode                                     = React.createRef()
 
+    /**
+     *
+     * @param event
+     */
     const handleChange = (event) => {
-        dispatch(setResetAllCheckedValues(false))
         dispatch(setCurrentSorting({
             typeSorting,
             ...currentSorting
@@ -34,11 +37,12 @@ const SortingItem = ({ currentSorting, typeSorting, label }) => {
     }
 
     useEffect(() => {
-        if (resetAllCheckedValues) {
+        if (resetCheckedValuesOfSortings || resetAllCheckedValues) {
             inputNode.current.checked = false
-            dispatch(setResetAllCheckedValues(false))
+            dispatch(setCurrentSorting({}))
+            dispatch(setResetCheckedValuesOfSortings(false))
         }
-    }, [resetAllCheckedValues])
+    }, [resetCheckedValuesOfSortings, resetAllCheckedValues, dispatch])
 
     return (
         <li className="flex-flow-centerY mb-1">

@@ -18,8 +18,8 @@ const NavMain = () => {
      */
     const classesHandler = ({ isActive }) =>
         isActive
-            ? 'font-bold mx-4 has-underline text-xl has-underline--white has-underline--invert'
-            : 'font-bold mx-4 has-underline has-underline--white text-xl'
+            ? 'mx-4 text-xl py-2 px-4 rounded-full bg-white text-primary-base'
+            : 'mx-4 text-xl py-2 px-4 rounded-full hover:bg-primary-lighter hover:text-primary-base transition-fast'
 
     if (isTablet()) {
         return (
