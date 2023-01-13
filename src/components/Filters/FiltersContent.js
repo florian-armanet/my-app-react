@@ -5,8 +5,8 @@ import Sortings from './Sortings'
 import { useEffect } from 'react'
 
 const FiltersContent = () => {
-    const dispatch = useDispatch()
-    const resetAllCheckedValues       = useSelector(state => state.filters.resetAllCheckedValues)
+    const dispatch              = useDispatch()
+    const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
 
     /**
      *
@@ -33,9 +33,7 @@ const FiltersContent = () => {
     return (
         <>
             <div className="bg-white border border-primary-light/50 rounded mb-8">
-                {/*<div className="border-b border-primary-light/50">*/}
-                    <FiltersCategories/>
-                {/*</div>*/}
+                <FiltersCategories/>
             </div>
 
             <Sortings/>
