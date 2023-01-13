@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addProductInCart } from '../../store/productsStore'
 import { setCartModalOpened } from '../../store/cartStore'
 import { useState, useEffect } from 'react'
+import Quantity from '../Quantity'
 
 const ProductMiniature = ({ product }) => {
     const dispatch       = useDispatch()
@@ -29,16 +30,15 @@ const ProductMiniature = ({ product }) => {
         dispatch(addProductInCart({ ...payload }))
     }
 
-    const renderIconAddToCartEnabled  = <i onClick={ addToCart }
-                                           className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded"></i>
-    const renderIconAddToCartDisabled = <i
-        className="Icon-basket text-xl text-white bg-gray-200 w-10 h-10 flex-flow-center rounded"></i>
+    const renderIconAddToCartEnabled = <i onClick={ addToCart }
+                                          className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded"></i>
 
     const [contentAddToCart, setContentAddToCart] = useState(renderIconAddToCartEnabled)
 
     useEffect(() => {
-        if (productsInCart.some(productInCart => productInCart.id === product.id)) {
-            setContentAddToCart(renderIconAddToCartDisabled)
+        const productInCart = productsInCart.find(productInCart => productInCart.id === product.id)
+        if (productInCart) {
+            setContentAddToCart(<Quantity product={ productInCart }/>)
             localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCart))
             return
         }
