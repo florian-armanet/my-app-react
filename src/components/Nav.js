@@ -6,7 +6,7 @@ import MenuModal from './MenuModal/MenuModal'
 import { isTablet } from '../utils/viewport'
 import { useEffect, useState } from 'react'
 import FiltersModal from './Filters/FiltersModal'
-import { PATH_CART, PATH_CATEGORIES, PATH_PRODUCTS } from '../utils/constants'
+import { PATH_CART, PATH_CATEGORIES, PATH_HOME, PATH_PRODUCTS } from '../utils/constants'
 import { useSelector } from 'react-redux'
 import LoadingProducts from './LoadingData/LoadingProducts'
 import LoadingCategories from './LoadingData/LoadingCategories'
@@ -29,7 +29,7 @@ const Nav = () => {
             setLoadingProducts(<LoadingProducts/>)
         }
         if (routeCategories && !categories.length) {
-            setLoadingProducts(<LoadingCategories/>)
+            setLoadingCategories(<LoadingCategories/>)
         }
 
         if (isTablet()) {
@@ -64,7 +64,7 @@ const Nav = () => {
                     <div className="o-container">
                         <div className="flex-flow-between items-center py-4">
                             <div className="flex flex-col items-center">
-                                <NavLink to="/" className="p-2 border-2 border-white rounded font-bold">
+                                <NavLink to={ PATH_HOME } className="p-2 border-2 border-white rounded font-bold">
                                     My app React
                                 </NavLink>
                                 <span className="text-xs mt-1 leading-none">By Florian Armanet</span>
