@@ -6,23 +6,30 @@ import MenuModal from './MenuModal/MenuModal'
 import { isTablet } from '../utils/viewport'
 import { useEffect, useState } from 'react'
 import FiltersModal from './Filters/FiltersModal'
-import { PATH_CART, PATH_PRODUCTS } from '../utils/constants'
+import { PATH_CART, PATH_CATEGORIES, PATH_PRODUCTS } from '../utils/constants'
 import { useSelector } from 'react-redux'
 import LoadingProducts from './LoadingData/LoadingProducts'
+import LoadingCategories from './LoadingData/LoadingCategories'
 
 const Nav = () => {
-    const location                              = useLocation()
-    const [renderNav, setRenderNav]             = useState('')
-    const [loadingProducts, setLoadingProducts] = useState('')
-    const products                              = useSelector(state => state.products.all)
+    const location                                  = useLocation()
+    const [renderNav, setRenderNav]                 = useState('')
+    const [loadingProducts, setLoadingProducts]     = useState('')
+    const [loadingCategories, setLoadingCategories] = useState('')
+    const products                                  = useSelector(state => state.products.all)
+    const categories                                = useSelector(state => state.categories.all)
 
-    const isHomepage = location.pathname === '/'
-    const isCart     = location.pathname === PATH_CART
-    const isProducts = location.pathname === PATH_PRODUCTS
+    const isHomepage      = location.pathname === '/'
+    const routeCart       = location.pathname === PATH_CART
+    const routeCategories = location.pathname === PATH_CATEGORIES
+    const routeProducts   = location.pathname === PATH_PRODUCTS
 
     useEffect(() => {
-        if (( isCart || isProducts ) && !products.length) {
+        if (( routeCart || routeProducts ) && !products.length) {
             setLoadingProducts(<LoadingProducts/>)
+        }
+        if (routeCategories && !categories.length) {
+            setLoadingProducts(<LoadingCategories/>)
         }
 
         if (isTablet()) {
@@ -47,6 +54,7 @@ const Nav = () => {
     return (
         <>
             { loadingProducts }
+            { loadingCategories }
             <CartModal/>
             <MenuModal/>
             <FiltersModal/>

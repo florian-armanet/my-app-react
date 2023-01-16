@@ -1,53 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import fetchProducts from '../api/products'
-import fetchCategories from '../api/categories'
-import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
+import { useSelector } from 'react-redux'
+import { STATUS_LOADING } from '../utils/constants'
 import CategoryMiniature from './ListCategories/CategoryMiniature'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import LoaderBlock from './Loader/LoaderBlock'
 
 const ListCategories = () => {
-    const dispatch                                            = useDispatch()
-    const categories                                          = useSelector(state => state.categories.all)
-    const categoriesStatusRequest                             = useSelector(state => state.categories.status)
-    const productsStatusRequest                               = useSelector(state => state.products.status)
-    const [contentFetchingProcess, setContentFetchingProcess] = useState(<p>En attente d'une requête...</p>)
+    const categories              = useSelector(state => state.categories.all)
+    const products                = useSelector(state => state.products.all)
+    const categoriesStatusRequest = useSelector(state => state.categories.status)
+    const productsStatusRequest   = useSelector(state => state.products.status)
 
-    useEffect(() => {
-        if (!categoriesStatusRequest) {
-            dispatch(fetchCategories())
-            return
-        }
-
-        if (!productsStatusRequest) {
-            dispatch(fetchProducts())
-            return
-        }
-
-        if (categoriesStatusRequest === STATUS_LOADING && productsStatusRequest === STATUS_LOADING) {
-            const nbBlocksOfLoader = new Array(4).fill().map((_, index) => index)
-            setContentFetchingProcess(<LoaderBlock nbBlocks={ 4 }/>)
-            return
-        }
-
-        if (categoriesStatusRequest === STATUS_SUCCEEDED && productsStatusRequest === STATUS_SUCCEEDED) {
-            setContentFetchingProcess(<></>)
-            return
-        }
-
-        if (categoriesStatusRequest === STATUS_FAILED || productsStatusRequest === STATUS_FAILED) {
-            setContentFetchingProcess(
-                <p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>
-            )
-            return
-        }
-
-        setContentFetchingProcess(<></>)
-
-    }, [categoriesStatusRequest, productsStatusRequest, dispatch])
-
-    if (categories.length) {
+    if (categories.length && products.length) {
         return (
             <section>
                 <h2 className="mb-6 text-3xl text-primary-base font-bold">Nos catégories</h2>
@@ -70,10 +33,16 @@ const ListCategories = () => {
         )
     }
 
+    if (!categoriesStatusRequest || categoriesStatusRequest === STATUS_LOADING || !productsStatusRequest || productsStatusRequest === STATUS_LOADING) {
+        return (
+            <section>
+                <LoaderBlock nbBlocks={ 4 }/>
+            </section>
+        )
+    }
+
     return (
-        <>
-            { contentFetchingProcess }
-        </>
+        <p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>
     )
 }
 

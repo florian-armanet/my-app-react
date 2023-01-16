@@ -31,7 +31,7 @@ const ProductMiniature = ({ product }) => {
     }
 
     const renderIconAddToCartEnabled = <i onClick={ addToCart }
-                                          className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded"></i>
+                                          className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded transition-fast hover:bg-primary-hover"></i>
 
     const [contentAddToCart, setContentAddToCart] = useState(renderIconAddToCartEnabled)
 

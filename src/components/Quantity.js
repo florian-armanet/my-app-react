@@ -14,7 +14,7 @@ const Quantity = ({ product }) => {
             quantity: Number(event.target.value)
         }
 
-        dispatch(setProductQuantity({...payload}))
+        dispatch(setProductQuantity({ ...payload }))
     }
 
     /**
@@ -28,7 +28,7 @@ const Quantity = ({ product }) => {
             quantity: product.quantity - 1
         }
 
-        dispatch(setProductQuantity({...payload}))
+        dispatch(setProductQuantity({ ...payload }))
     }
 
     /**
@@ -40,20 +40,20 @@ const Quantity = ({ product }) => {
             quantity: product.quantity + 1
         }
 
-        dispatch(setProductQuantity({...payload}))
+        dispatch(setProductQuantity({ ...payload }))
     }
 
     return (
-        <div className="flex-flow-centerY bg-primary-base/25 text-primary-base mr-4 rounded-lg">
-                        <span onClick={ decrementQuantity }
-                              className="w-8 flex-flow-center cursor-pointer text-2xl transition-fast">-</span>
+        <div className="flex-flow-centerY bg-primary-base/25 text-primary-base mr-4 rounded-lg overflow-hidden">
+            <div onClick={ decrementQuantity }
+                 className="w-8 flex-flow-center cursor-pointer text-2xl hover:bg-primary-light hover:text-white">-</div>
             <input type="number"
                    value={ product.quantity }
                    onChange={ handleChange }
                    min="1"
                    className="js-input-number bg-transparent text-center font-bold text-lg w-10 h-8 focus:outline-0"/>
-            <span onClick={ incrementQuantity }
-                  className="w-8 flex-flow-center cursor-pointer text-2xl transition-fast">+</span>
+            <div onClick={ incrementQuantity }
+                 className="w-8 flex-flow-center cursor-pointer text-2xl hover:bg-primary-light hover:text-white">+</div>
         </div>
     )
 }

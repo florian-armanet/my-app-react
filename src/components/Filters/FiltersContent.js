@@ -43,7 +43,7 @@ const FiltersContent = () => {
                     Tout réinitialiser
                 </button>
                 <button onClick={ closeFilters }
-                        className="bg-primary-base hover:bg-primary-hover transition text-white px-3 py-2 rounded">
+                        className="lg:hidden bg-primary-base hover:bg-primary-hover transition text-white px-3 py-2 rounded">
                     Appliquer
                 </button>
             </div>
