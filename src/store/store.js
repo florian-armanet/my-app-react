@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import productsReducer from './productsStore'
 import categoriesReducer from './categoriesStore'
-import availableProductsReducer from './availableProductsStore'
+import productsFetchedReducer from './productsFetchedStore'
 import searcherReducer from './searcherStore'
 import filtersCategoriesReducer from './filtersCategoriesStore'
 import filtersReducer from './filtersStore'
@@ -14,7 +14,7 @@ export default configureStore({
     reducer: {
         products: productsReducer,
         categories: categoriesReducer,
-        availableProducts: availableProductsReducer,
+        productsFetched: productsFetchedReducer,
         productsOfCategory: productsOfCategoryReducer,
         searcher: searcherReducer,
         filters: filtersReducer,

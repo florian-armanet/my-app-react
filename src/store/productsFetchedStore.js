@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import fetchProduct from '../api/product'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 
-export const availableProductsStore = createSlice({
-    name: 'availableProducts',
+export const productsFetchedStore = createSlice({
+    name: 'productsFetched',
     initialState: {
-        productFetched: [],
+        productsFetched: [],
         status: '',
         error: null,
     },
@@ -19,9 +19,9 @@ export const availableProductsStore = createSlice({
             })
             .addCase(fetchProduct.fulfilled, (state, { payload }) => {
                 state.status = STATUS_SUCCEEDED
-                const clone = [...state.productFetched];
+                const clone = [...state.productsFetched];
                 clone.push(payload)
-                state.productFetched = clone
+                state.productsFetched = clone
             })
             .addCase(fetchProduct.rejected, (state, { error }) => {
                 state.status = STATUS_FAILED
@@ -30,4 +30,4 @@ export const availableProductsStore = createSlice({
     }
 })
 
-export default availableProductsStore.reducer
+export default productsFetchedStore.reducer
