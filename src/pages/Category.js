@@ -1,19 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { NavLink, useLocation, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import fetchProductsOfCategory from '../api/productsOfCategory'
 import ProductMiniature from '../components/ListProducts/ProductMiniature'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import LoaderBlock from '../components/Loader/LoaderBlock'
+import { setCurrentProductsOfCategory } from '../store/productsOfCategoryStore'
 
 const Category = () => {
+    const location                                                  = useLocation()
     const dispatch                                                  = useDispatch()
     const params                                                    = useParams()
     const paramCategoryLabelOrigin                                  = params.categoryLabelOrigin
     const productsOfCategoryStatusRequest                           = useSelector(state => state.productsOfCategory.status)
-    const productsOfCategoryFetched                                 = useSelector(state => state.productsOfCategory.categoriesFetched)
-    const [currentProductsOfCategory, setCurrentProductsOfCategory] = useState([])
+    const productsOfCategoryFetched                                 = useSelector(state => state.productsOfCategory.productsOfCategoryFetched)
+    const currentProductsOfCategory                                 = useSelector(state => state.productsOfCategory.currentProductsOfCategory)
     const [contentFetchingProcess, setContentFetchingProcess]       = useState(<p>En attente d\'une requête...</p>)
 
     /**
@@ -21,6 +23,7 @@ const Category = () => {
      */
     useEffect(() => {
         if (productsOfCategoryStatusRequest === STATUS_LOADING) {
+            dispatch(setCurrentProductsOfCategory([]))
             setContentFetchingProcess(<LoaderBlock nbBlocks={ 8 }/>)
             return
         }
@@ -50,8 +53,8 @@ const Category = () => {
             return
         }
 
-        setCurrentProductsOfCategory([...productsOfCategoryFetched].filter(product => product.category.categoryLabelOrigin === paramCategoryLabelOrigin))
-    }, [productsOfCategoryFetched, dispatch])
+        dispatch(setCurrentProductsOfCategory([...productsOfCategoryFetched].filter(product => product.category.categoryLabelOrigin === paramCategoryLabelOrigin)))
+    }, [productsOfCategoryFetched, location, dispatch])
 
     if (currentProductsOfCategory.length) {
         return (

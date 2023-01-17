@@ -27,7 +27,7 @@
 }
 
 
-// 2. Animation-translateX
+// 2.0 Animation-translateX
 // --------------------------------------------------
 .Animation-translateX-enter, .Animation-translateX-appear {
     transform:translateX(100%);
@@ -42,6 +42,24 @@
 .Animation-translateX-exit-active {
     transform:translateX(100%);
     transition: transform 300ms;
+}
+
+
+// 2.1 Animation-translateX-speed
+// --------------------------------------------------
+.Animation-translateX-speed-enter, .Animation-translateX-speed-appear {
+    transform:translateX(100%);
+}
+.Animation-translateX-speed-enter-active, .Animation-translateX-speed-appear-active {
+    transform:translateX(0);
+    transition: transform 150ms;
+}
+.Animation-translateX-speed-exit {
+    transform:translateX(0);
+}
+.Animation-translateX-speed-exit-active {
+    transform:translateX(100%);
+    transition: transform 150ms;
 }
 
 

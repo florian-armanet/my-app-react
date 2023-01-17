@@ -6,12 +6,15 @@ import uppercaseFirstLetter from '../utils/uppercaseFirstLetter'
 export const productsOfCategoryStore = createSlice({
     name: 'productsOfCategory',
     initialState: {
-        categoriesFetched: [],
+        productsOfCategoryFetched: [],
+        currentProductsOfCategory: [],
         status: '',
         error: null,
     },
     reducers: {
-
+        setCurrentProductsOfCategory: (state, { payload }) => {
+            state.currentProductsOfCategory = payload
+        }
     },
     extraReducers (builder) {
         builder
@@ -20,7 +23,7 @@ export const productsOfCategoryStore = createSlice({
             })
             .addCase(fetchProductsOfCategory.fulfilled, (state, { payload }) => {
                 state.status = STATUS_SUCCEEDED
-                const clone = [...state.categoriesFetched];
+                const clone  = [...state.productsOfCategoryFetched]
                 clone.push(...[...payload].reduce((acc, currObj) => {
                     acc.push({
                         ...currObj,
@@ -34,7 +37,7 @@ export const productsOfCategoryStore = createSlice({
 
                     return acc
                 }, []))
-                state.categoriesFetched = clone
+                state.productsOfCategoryFetched = clone
             })
             .addCase(fetchProductsOfCategory.rejected, (state, { error }) => {
                 state.status = STATUS_FAILED
@@ -42,5 +45,7 @@ export const productsOfCategoryStore = createSlice({
             })
     }
 })
+
+export const { setCurrentProductsOfCategory } = productsOfCategoryStore.actions
 
 export default productsOfCategoryStore.reducer

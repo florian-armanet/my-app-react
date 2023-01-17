@@ -3,6 +3,7 @@ import { setFiltersOpened, setResetAllCheckedValues } from '../../store/filtersS
 import { useDispatch, useSelector } from 'react-redux'
 import Sortings from './Sortings'
 import { useEffect } from 'react'
+import Searcher from '../Searcher'
 
 const FiltersContent = () => {
     const dispatch              = useDispatch()
@@ -34,6 +35,10 @@ const FiltersContent = () => {
         <>
             <div className="bg-white border border-primary-light/50 rounded mb-8">
                 <FiltersCategories/>
+            </div>
+
+            <div className="mb-8">
+                <Searcher/>
             </div>
 
             <Sortings/>

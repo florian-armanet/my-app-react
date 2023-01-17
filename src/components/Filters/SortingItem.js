@@ -1,21 +1,25 @@
 import { SORT_ASC, SORT_DESC } from '../../utils/constants'
-import React, { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProductsFiltered } from '../../store/productsStore'
 import { setCurrentSorting, setResetCheckedValuesOfSortings } from '../../store/sortingStore'
+import { setInputValue, setSearcher } from '../../store/searcherStore'
 
 const SortingItem = ({ currentSorting, typeSorting, label }) => {
     const dispatch                                      = useDispatch()
     const productsFiltered                              = useSelector(state => state.products.filtered)
     const resetCheckedValuesOfSortings                  = useSelector(state => state.sorting.resetCheckedValuesOfSortings)
     const resetAllCheckedValues                         = useSelector(state => state.filters.resetAllCheckedValues)
-    const inputNode                                     = React.createRef()
+    const inputNode                                     = useRef()
 
     /**
      *
      * @param event
      */
     const handleChange = (event) => {
+        dispatch(setInputValue(''))
+        dispatch(setSearcher(''))
+
         dispatch(setCurrentSorting({
             typeSorting,
             ...currentSorting

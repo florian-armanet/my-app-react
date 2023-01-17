@@ -13,3 +13,5 @@ export const PATH_CATEGORIES = '/categories'
 export const PATH_CART       = '/cart'
 
 export const PRODUCTS_IN_CART = 'products_in_cart'
+
+export const EVENT_OPEN_SEARCH_MODAL = 'event_open_search_modal'

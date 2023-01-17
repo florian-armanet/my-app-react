@@ -21,7 +21,7 @@ const FiltersCategories = () => {
 
     return (
         <>
-            <p className="px-4 py-2 bg-primary-lighter text-primary-base">Categories</p>
+            <p className="px-4 py-2 bg-primary-lighter text-primary-light font-bold">Categories</p>
             <ul className="px-4 pt-4 mb-4">
                 { categories.map((category, index) =>
                     <FiltersCategoriesItem category={ category } key={ index }/>)

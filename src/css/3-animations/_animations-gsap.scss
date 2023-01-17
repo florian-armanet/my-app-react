@@ -1,0 +1,13 @@
+/*
+ * [ animations / Animation-translateX-opacity ]
+ */
+
+// -----------------------------------------------------------------------------
+
+
+// 1. Search item
+// --------------------------------------------------
+.Gsap-search-item {
+    @apply opacity-0 origin-top-left;
+    transform: rotateX(-90deg);
+}

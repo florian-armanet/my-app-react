@@ -9,6 +9,7 @@ import productsOfCategoryReducer from './productsOfCategoryStore'
 import cartReducer from './cartStore'
 import menuReducer from './menuStore'
 import sortingReducer from './sortingStore'
+import searchReducer from './searchStore'
 
 export default configureStore({
     reducer: {
@@ -22,5 +23,6 @@ export default configureStore({
         cart: cartReducer,
         menu: menuReducer,
         sorting: sortingReducer,
+        search: searchReducer,
     }
 })

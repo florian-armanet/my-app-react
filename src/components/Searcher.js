@@ -56,16 +56,16 @@ const Searcher = () => {
         <div
             className="flex-flow-centerY justify-between bg-white rounded bg-primary-light/20 py-2 px-8 hover:bg-primary-lighter transition-fast max-w-xs w-full">
             <input type="text"
-                   placeholder="Rechercher un produit..."
+                   placeholder="Filtrer par nom..."
                    value={ inputValue }
-                   className="text-primary-hover font-bold placeholder:text-primary-base bg-transparent outline-none flex-1 max-w-[200px]"
+                   className="text-primary-hover font-bold placeholder:text-primary-light/75 bg-transparent outline-none flex-1 max-w-[200px]"
                    onChange={ e => {
                        handleBeforeChange(e)
                        handleChange(e)
                    } }/>
             <div className="flex-flow-centerY">
                 { renderCloseIcon }
-                <i className="Icon-search text-lg text-primary-base"></i>
+                <i className="Icon-filter text-lg text-primary-base"></i>
             </div>
         </div>
     )
