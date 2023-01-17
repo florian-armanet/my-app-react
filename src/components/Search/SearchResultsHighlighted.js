@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { PATH_CATEGORIES } from '../../utils/constants'
 
-const SearchModalResults = () => {
+const SearchResultsHighlighted = () => {
     const categories  = useSelector(state => state.categories.all)
     const ulRef       = useRef()
     const modalOpened = useSelector(state => state.search.modalOpened)
@@ -43,4 +43,4 @@ const SearchModalResults = () => {
     )
 }
 
-export default SearchModalResults
+export default SearchResultsHighlighted

@@ -8,7 +8,7 @@ import { setResetCheckedValuesOfSortings } from '../store/sortingStore'
 
 const Searcher = () => {
     const dispatch                              = useDispatch()
-    const getSearchValue                        = useSelector(state => state.searcher.searchValue)
+    const searcherValue                         = useSelector(state => state.searcher.searchValue)
     const inputValue                            = useSelector(state => state.searcher.inputValue)
     const [renderCloseIcon, setRenderCloseIcon] = useState('')
 
@@ -39,18 +39,18 @@ const Searcher = () => {
     }
 
     useEffect(() => {
-        if (!getSearchValue) {
+        if (!searcherValue) {
             setRenderCloseIcon('')
-            dispatch(setProductsBySearcher(getSearchValue))
+            dispatch(setProductsBySearcher(searcherValue))
 
             return
         }
 
         setRenderCloseIcon(<i onClick={ onResetSearch }
                               className="Icon-close-light mr-2 text-primary-base cursor-pointer"></i>)
-        dispatch(setProductsBySearcher(getSearchValue))
+        dispatch(setProductsBySearcher(searcherValue))
 
-    }, [getSearchValue])
+    }, [searcherValue])
 
     return (
         <div

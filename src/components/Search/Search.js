@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { setSearchModalOpened } from '../../store/searchStore'
 import Logo from '../Logo'
-import SearchModalResults from './SearchModalResults'
+import SearchResults from './SearchResults'
+import SearchInput from './SearchInput'
+import { useEffect } from 'react'
 
-const SearchModal = () => {
+const Search = () => {
     const dispatch    = useDispatch()
     const modalOpened = useSelector(state => state.search.modalOpened)
 
@@ -15,25 +17,26 @@ const SearchModal = () => {
         dispatch(setSearchModalOpened(false))
     }
 
+    useEffect(() => {
+        if (modalOpened) {
+            document.body.classList.add('remove-scrollbar')
+            return
+        }
+
+        document.body.classList.remove('remove-scrollbar')
+    }, [modalOpened, dispatch])
+
     return (
         <>
             <CSSTransition in={ modalOpened } classNames="Animation-translateX-speed" timeout={ 300 } unmountOnExit appear>
                 <div
-                    className="z-6 fixed top-0 left-0 right-0 bg-white pt-4 lg:pt-8 sm-down:bottom-0 sm-down:overflow-y-auto shadow-lg shadow-gray-200/40">
+                    className="z-6 fixed top-0 left-0 right-0 bg-white pt-4 lg:pt-8 sm-down:bottom-0 sm:max-h-screen overflow-y-auto overflow-x-hidden shadow-lg shadow-gray-200/40 Scrollbar Scrollbar--light">
                     <div className="flex-flow-between items-center px-4 lg:px-8 pb-4 lg:pb-8">
                         <div className="text-primary-base text-sm">
                             <Logo color="primary-base"/>
                         </div>
 
-                        <div
-                            className="flex-flow-centerY justify-between bg-white rounded bg-primary-light/20 py-2 px-8 hover:bg-primary-lighter transition-fast max-w-xs w-full mr-16">
-                            <input type="text"
-                                   placeholder="Rechercher un produit..."
-                                   className="text-primary-hover font-bold placeholder:text-primary-base bg-transparent outline-none flex-1 max-w-[200px]"/>
-                            <div className="flex-flow-centerY">
-                                <i className="Icon-search text-lg text-primary-base"></i>
-                            </div>
-                        </div>
+                        <SearchInput/>
 
                         <div onClick={ closeModal }
                              className="w-8 h-8 rounded-full flex-flow-center bg-primary-lighter hover:bg-gray-50 transition-fast cursor-pointer">
@@ -41,7 +44,7 @@ const SearchModal = () => {
                         </div>
                     </div>
 
-                    <SearchModalResults/>
+                    <SearchResults/>
                 </div>
             </CSSTransition>
 
@@ -53,4 +56,4 @@ const SearchModal = () => {
     )
 }
 
-export default SearchModal
+export default Search

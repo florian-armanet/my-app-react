@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import LoadingProducts from './LoadingData/LoadingProducts'
 import LoadingCategories from './LoadingData/LoadingCategories'
 import NavSearch from './Nav/NavSearch'
-import SearchModal from './Search/SearchModal'
+import Search from './Search/Search'
 import Logo from './Logo'
 import { setSearchModalOpened } from '../store/searchStore'
 
@@ -66,7 +66,7 @@ const Nav = () => {
             <CartModal/>
             <MenuModal/>
             <FiltersModal/>
-            <SearchModal/>
+            <Search/>
 
             <div className="o-container flex flex-col min-h-screen">
                 <div className={ ( routeHomepage ? '' : 'mb-8 ' ) + 'o-full bg-primary-base text-white' }>

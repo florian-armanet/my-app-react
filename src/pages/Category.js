@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
+import { PATH_CATEGORIES, STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import fetchProductsOfCategory from '../api/productsOfCategory'
 import ProductMiniature from '../components/ListProducts/ProductMiniature'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
@@ -9,14 +9,16 @@ import LoaderBlock from '../components/Loader/LoaderBlock'
 import { setCurrentProductsOfCategory } from '../store/productsOfCategoryStore'
 
 const Category = () => {
-    const location                                                  = useLocation()
-    const dispatch                                                  = useDispatch()
-    const params                                                    = useParams()
-    const paramCategoryLabelOrigin                                  = params.categoryLabelOrigin
-    const productsOfCategoryStatusRequest                           = useSelector(state => state.productsOfCategory.status)
-    const productsOfCategoryFetched                                 = useSelector(state => state.productsOfCategory.productsOfCategoryFetched)
-    const currentProductsOfCategory                                 = useSelector(state => state.productsOfCategory.currentProductsOfCategory)
-    const [contentFetchingProcess, setContentFetchingProcess]       = useState(<p>En attente d\'une requête...</p>)
+    const location                                            = useLocation()
+    const dispatch                                            = useDispatch()
+    const params                                              = useParams()
+    const paramCategoryLabelOrigin                            = params.categoryLabelOrigin
+    const categories                                          = useSelector(state => state.categories.all)
+    const currentCategory                                     = [...categories].find(cat => cat.categoryLabelOrigin === paramCategoryLabelOrigin)
+    const productsOfCategoryStatusRequest                     = useSelector(state => state.productsOfCategory.status)
+    const productsOfCategoryFetched                           = useSelector(state => state.productsOfCategory.productsOfCategoryFetched)
+    const currentProductsOfCategory                           = useSelector(state => state.productsOfCategory.currentProductsOfCategory)
+    const [contentFetchingProcess, setContentFetchingProcess] = useState(<p>En attente d\'une requête...</p>)
 
     /**
      *
@@ -59,11 +61,12 @@ const Category = () => {
     if (currentProductsOfCategory.length) {
         return (
             <div>
-                <NavLink to="/categories" className="Button Button--primary mb-8">
-                    <i className="Icon-arrow-left mr-2"></i>
-                    <span>Retour aux catégories</span>
-                </NavLink>
-                <TransitionGroup component="ul" className="flex flex-wrap -mx-2">
+                <h1 className="text-center text-primary-light font-bold text-2xl lg:text-3xl mb-4 lg:mb-10">{ currentCategory.categoryLabel }</h1>
+                {/*<NavLink to={ PATH_CATEGORIES } className="Button Button--primary mb-8">*/}
+                {/*    <i className="Icon-arrow-left mr-2"></i>*/}
+                {/*    <span>Retour aux catégories</span>*/}
+                {/*</NavLink>*/}
+                <TransitionGroup component="ul" className="flex flex-wrap justify-center lg:justify-start -mx-2">
                     { currentProductsOfCategory.map(product => (
                         <CSSTransition
                             in={ true }

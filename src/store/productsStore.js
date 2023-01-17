@@ -8,6 +8,7 @@ export const productsStore = createSlice({
     name: 'products',
     initialState: {
         all: [],
+        productsOfSearch: [],
         filtered: [],
         inCart: [],
         quantityInCart: 0,
@@ -19,6 +20,11 @@ export const productsStore = createSlice({
     reducers: {
         setProductsFiltered: (state, { payload }) => {
             state.filtered = payload
+        },
+        setProductsOfSearch: (state, { payload }) => {
+            state.productsOfSearch = [...state.all].filter(product => {
+                return matchStrings(product.title, payload) || payload === ''
+            })
         },
         setProductsBySearcher: (state, { payload }) => {
             state.filtered = [...state.all].filter(product => {
@@ -79,6 +85,7 @@ export const productsStore = createSlice({
 
 export const {
                  setProductsFiltered,
+                 setProductsOfSearch,
                  setProductsBySearcher,
                  setProductsByCategories,
                  setProductInCart,
