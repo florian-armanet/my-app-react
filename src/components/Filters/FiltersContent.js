@@ -8,6 +8,8 @@ import Searcher from '../Searcher'
 const FiltersContent = () => {
     const dispatch              = useDispatch()
     const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
+    const products              = useSelector(state => state.products.all)
+    const categories            = useSelector(state => state.categories.all)
 
     /**
      *
@@ -30,6 +32,15 @@ const FiltersContent = () => {
             dispatch(setResetAllCheckedValues(false))
         }
     }, [resetAllCheckedValues, dispatch])
+
+    if (!products.length) {
+        return (
+            <>
+                <div className="Loader-block max-x-xs w-full h-72 mb-8"></div>
+                <div className="Loader-block max-x-xs w-full h-72"></div>
+            </>
+        )
+    }
 
     return (
         <>

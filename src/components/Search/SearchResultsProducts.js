@@ -13,7 +13,7 @@ const SearchResultsProducts = () => {
                 <span>({ productsOfSearch.length })</span>
             </p>
 
-            <ul className="flex flex-wrap mb-4 -mx-2">
+            <ul className="flex flex-wrap justify-center lg:justify-start -mx-2">
                 { productsOfSearch.map(product => <ProductMiniature product={ product } key={ product.id }/>)}
             </ul>
 
