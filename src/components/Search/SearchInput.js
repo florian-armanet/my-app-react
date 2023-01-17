@@ -48,7 +48,7 @@ const SearchInput = () => {
 
     return (
         <div
-            className="flex-flow-centerY justify-between bg-white rounded bg-primary-light/20 py-2 px-8 hover:bg-primary-lighter transition-fast max-w-xs w-full mr-16">
+            className="lg-down:order-3 flex-flow-centerY justify-between bg-white rounded bg-primary-light/20 py-2 px-4 lg:px-8 hover:bg-primary-lighter transition-fast lg:max-w-xs w-full lg:mr-16 lg-down:mt-4">
             <input type="text"
                    placeholder="Rechercher un produit..."
                    value={ searchInputValue }

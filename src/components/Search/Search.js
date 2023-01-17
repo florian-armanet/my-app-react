@@ -39,7 +39,7 @@ const Search = () => {
                         <SearchInput/>
 
                         <div onClick={ closeModal }
-                             className="w-8 h-8 rounded-full flex-flow-center bg-primary-lighter hover:bg-gray-50 transition-fast cursor-pointer">
+                             className="lg-down:order-2 w-8 h-8 rounded-full flex-flow-center bg-primary-lighter hover:bg-gray-50 transition-fast cursor-pointer">
                             <i className="Icon-close-light text-lg text-primary-base font-bold"></i>
                         </div>
                     </div>
