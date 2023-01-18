@@ -8,16 +8,18 @@ const SearchResultsProducts = () => {
 
     return (
         <div className="o-col-12 lg:o-col-9 flex flex-col mb-4 text-primary-500">
-            <p className="mb-2 pb-1 font-bold border-b">
+            <p className="mb-4 pb-1 font-bold border-b">
                 <span>Produits </span>
                 <span>({ productsOfSearch.length })</span>
             </p>
 
             <ul className="flex flex-wrap justify-center lg:justify-start -mx-2">
-                { productsOfSearch.map(product => <ProductMiniature product={ product } key={ product.id }/>)}
+                { productsOfSearch.map(product => <ProductMiniature product={ product } key={ product.id }/>) }
             </ul>
 
-            <NavLink to={ PATH_PRODUCTS } className="Button Button--primary">Voir tous les produits</NavLink>
+            <div className="flex flex-wrap">
+                <NavLink to={ PATH_PRODUCTS } className="Button Button--primary">Voir tous les produits</NavLink>
+            </div>
         </div>
     )
 }

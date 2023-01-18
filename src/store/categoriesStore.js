@@ -2,15 +2,23 @@ import { createSlice } from '@reduxjs/toolkit'
 import fetchCategories from '../api/categories'
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import uppercaseFirstLetter from '../utils/uppercaseFirstLetter'
+import matchStrings from '../utils/matchStrings'
 
 export const categoriesStore = createSlice({
     name: 'categories',
     initialState: {
         all: [],
+        categoriesOfSearch: [],
         status: '',
         error: null,
     },
-    reducers: {},
+    reducers: {
+        setCategoriesOfSearch: (state, { payload }) => {
+            state.categoriesOfSearch = [...state.all].filter(category => {
+                return matchStrings(category.categoryLabel, payload) || payload === ''
+            })
+        },
+    },
     extraReducers (builder) {
         builder
             .addCase(fetchCategories.pending, (state, { payload }) => {
@@ -35,6 +43,8 @@ export const categoriesStore = createSlice({
             })
     }
 })
+
+export const { setCategoriesOfSearch } = categoriesStore.actions
 
 export default categoriesStore.reducer
 

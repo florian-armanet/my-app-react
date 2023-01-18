@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import debounce from '../../utils/debounce'
 import { setProductsOfSearch } from '../../store/productsStore'
+import { setCategoriesOfSearch } from '../../store/categoriesStore'
 import { setSearchInputValue, setSearchValue } from '../../store/searchStore'
 
 const SearchInput = () => {
@@ -38,12 +39,14 @@ const SearchInput = () => {
         if (!searchValue) {
             setRenderCloseIcon('')
             dispatch(setProductsOfSearch(searchValue))
+            dispatch(setCategoriesOfSearch(searchValue))
             return
         }
 
         setRenderCloseIcon(<i onClick={ onResetSearch }
                               className="Icon-close-light mr-2 text-primary-base cursor-pointer"></i>)
         dispatch(setProductsOfSearch(searchValue))
+        dispatch(setCategoriesOfSearch(searchValue))
     }, [searchValue])
 
     return (
