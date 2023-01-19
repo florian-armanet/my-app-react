@@ -1,4 +1,4 @@
-import { setCartModalOpened } from '../../store/cartStore'
+import { setCartModalOpened } from '../../../store/cartStore'
 import { useDispatch } from 'react-redux'
 
 export const CartModalContentEmpty = () => {

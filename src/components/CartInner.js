@@ -1,6 +1,6 @@
-import CartModalContentProduct from './CartModal/CartModalContentProduct'
+import CartModalContentProduct from './Modals/CartModal/CartModalContentProduct'
 import { useSelector } from 'react-redux'
-import CartModalContentTotals from './CartModal/CartModalContentTotals'
+import CartModalContentTotals from './Modals/CartModal/CartModalContentTotals'
 import CartProductsAssociated from './Cart/CartProductsAssociated'
 
 const CartInner = () => {

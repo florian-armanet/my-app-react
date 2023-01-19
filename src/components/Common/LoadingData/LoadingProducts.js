@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import fetchProducts from '../../api/products'
-import { SORT_DESC, STATUS_SUCCEEDED } from '../../utils/constants'
-import { setProductsFiltered } from '../../store/productsStore'
+import fetchProducts from '../../../api/products'
+import { SORT_DESC, STATUS_SUCCEEDED } from '../../../utils/constants'
+import { setProductsFiltered } from '../../../store/productsStore'
 import { useDispatch, useSelector } from 'react-redux'
 
 const LoadingProducts = () => {

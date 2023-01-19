@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
-import formatNumberToString from '../../utils/formatNumberToString'
-import { removeProductInCart, setProductQuantity } from '../../store/productsStore'
-import Quantity from '../Quantity'
+import formatNumberToString from '../../../utils/formatNumberToString'
+import { removeProductInCart, setProductQuantity } from '../../../store/productsStore'
+import Quantity from '../../Quantity'
 
 export const CartModalContentProduct = ({ product }) => {
     const dispatch = useDispatch()

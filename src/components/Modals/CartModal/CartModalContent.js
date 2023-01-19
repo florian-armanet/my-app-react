@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom'
-import { PATH_CART } from '../../utils/constants'
+import { PATH_CART } from '../../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import CartModalContentProduct from './CartModalContentProduct'
 import CartModalContentTotals from './CartModalContentTotals'
-import { setCartModalOpened } from '../../store/cartStore'
+import { setCartModalOpened } from '../../../store/cartStore'
 
 export const CartModalContent = () => {
     const dispatch       = useDispatch()

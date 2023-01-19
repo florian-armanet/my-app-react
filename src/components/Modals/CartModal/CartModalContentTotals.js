@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import formatNumberToString from '../../utils/formatNumberToString'
+import formatNumberToString from '../../../utils/formatNumberToString'
 
 export const CartModalContent = () => {
     const quantityInCart = useSelector(state => state.products.quantityInCart)

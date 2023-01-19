@@ -1,14 +1,9 @@
 import { Outlet, useLocation } from 'react-router-dom'
-import CartModal from './CartModal'
 import NavCart from './Nav/NavCart'
 import NavMain from './Nav/NavMain'
-import MenuModal from './MenuModal/MenuModal'
 import { isTablet } from '../utils/viewport'
 import { useEffect, useState } from 'react'
-import FiltersModal from './Filters/FiltersModal'
-import { useDispatch, useSelector } from 'react-redux'
-import LoadingProducts from './LoadingData/LoadingProducts'
-import LoadingCategories from './LoadingData/LoadingCategories'
+import { useDispatch } from 'react-redux'
 import NavSearch from './Nav/NavSearch'
 import Search from './Search/Search'
 import Logo from './Logo'
@@ -18,22 +13,10 @@ const Nav = () => {
     const dispatch                                  = useDispatch()
     const location                                  = useLocation()
     const [renderNav, setRenderNav]                 = useState('')
-    const [loadingProducts, setLoadingProducts]     = useState('')
-    const [loadingCategories, setLoadingCategories] = useState('')
-    const products                                  = useSelector(state => state.products.all)
-    const categories                                = useSelector(state => state.categories.all)
 
     const routeHomepage = location.pathname === '/'
 
     useEffect(() => {
-        if (!products.length) {
-            setLoadingProducts(<LoadingProducts/>)
-        }
-
-        if (!categories.length) {
-            setLoadingCategories(<LoadingCategories/>)
-        }
-
         dispatch(setSearchModalOpened(false))
 
         if (isTablet()) {
@@ -57,15 +40,10 @@ const Nav = () => {
                 </div>
             </>
         )
-    }, [location])
+    }, [])
 
     return (
         <>
-            { loadingProducts }
-            { loadingCategories }
-            <CartModal/>
-            <MenuModal/>
-            <FiltersModal/>
             <Search/>
 
             <div className="o-container flex flex-col min-h-screen">

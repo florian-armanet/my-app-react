@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import fetchCategories from '../../api/categories'
+import fetchCategories from '../../../api/categories'
 
 const LoadingCategories = () => {
     const dispatch                = useDispatch()

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { setCartModalOpened } from '../store/cartStore'
 import { CSSTransition } from 'react-transition-group'
-import CartModalContent from './CartModal/CartModalContent'
-import CartModalContentEmpty from './CartModal/CartModalContentEmpty'
+import CartModalContent from './Modals/CartModal/CartModalContent'
+import CartModalContentEmpty from './Modals/CartModal/CartModalContentEmpty'
 import { useEffect } from 'react'
 
 export const CartModal = () => {

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setFiltersOpened } from '../../store/filtersStore'
-import FiltersContent from './FiltersContent'
+import { setFiltersOpened } from '../../../store/filtersStore'
+import FiltersContent from '../../Filters/FiltersContent'
 import { CSSTransition } from 'react-transition-group'
 import { useEffect } from 'react'
 

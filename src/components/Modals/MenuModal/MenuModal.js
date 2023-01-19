@@ -1,8 +1,8 @@
 import { CSSTransition } from 'react-transition-group'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { PATH_CATEGORIES, PATH_PRODUCTS } from '../../utils/constants'
-import { setMenuOpened } from '../../store/menuStore'
+import { PATH_CATEGORIES, PATH_PRODUCTS } from '../../../utils/constants'
+import { setMenuOpened } from '../../../store/menuStore'
 import { useEffect } from 'react'
 
 const MenuModal = () => {
