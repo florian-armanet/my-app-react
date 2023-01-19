@@ -13,6 +13,7 @@ const CartProductsAssociated = () => {
     const productsStatusRequest                                     = useSelector(state => state.products.status)
 
     useEffect(() => {
+        console.log(productsInCart);
         if (!productsInCart.length) {
             const oneProductByCategory = [...products].reduce((acc, curr, index, arr) => {
                 if (acc.some(pdt => curr.category.categoryCode === pdt.category.categoryCode)) {

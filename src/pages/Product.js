@@ -1,7 +1,7 @@
 import { NavLink, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import fetchProduct from '../api/product'
-import { PATH_PRODUCTS, STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
+import { PATH_PRODUCTS, PRODUCTS_IN_CART, STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { generateStarRate } from '../utils/generateStarRate'
 import { roundHalf } from '../utils/mathRound'
@@ -16,46 +16,10 @@ const Product = () => {
     const productsStatusRequest                               = useSelector(state => state.productsFetched.status)
     const productsFetched                                     = useSelector(state => state.productsFetched.productsFetched)
     const productsInCart                                      = useSelector(state => state.products.inCart)
+    const products                                            = useSelector(state => state.products.all)
     const [currentProduct, setCurrentProduct]                 = useState({})
     const [productQty, setProductQty]                         = useState(1)
     const [contentFetchingProcess, setContentFetchingProcess] = useState(<p>En attente d\'une requête...</p>)
-
-    /**
-     *
-     */
-    useEffect(() => {
-        if (productsStatusRequest === STATUS_LOADING) {
-            setContentFetchingProcess(<div className="Loader mx-auto my-20"></div>)
-            return
-        }
-
-        if (productsStatusRequest === STATUS_SUCCEEDED) {
-            setContentFetchingProcess(<></>)
-            return
-        }
-
-        if (productsStatusRequest === STATUS_FAILED) {
-            setContentFetchingProcess(
-                <p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>
-            )
-            return
-        }
-
-        setContentFetchingProcess(<></>)
-
-    }, [productsStatusRequest, dispatch])
-
-    /**
-     *
-     */
-    useEffect(() => {
-        if (!productsFetched.some(productFetched => productFetched.id === paramId)) {
-            dispatch(fetchProduct(params.id))
-            return
-        }
-
-        setCurrentProduct({ ...[...productsFetched].find(obj => obj.id === paramId) })
-    }, [productsFetched, dispatch])
 
     /**
      *
@@ -86,9 +50,65 @@ const Product = () => {
             ...currentProduct,
             quantity: Number(productQty)
         }
+
         dispatch(addProductInCart({ ...payload }))
         dispatch(setCartModalOpened(true))
     }
+
+    /**
+     *
+     */
+    useEffect(() => {
+        if (productsStatusRequest === STATUS_LOADING && !Object.keys(currentProduct).length) {
+            setContentFetchingProcess(<div className="Loader mx-auto my-20"></div>)
+            return
+        }
+
+        if (productsStatusRequest === STATUS_SUCCEEDED) {
+            setContentFetchingProcess(<></>)
+            return
+        }
+
+        if (productsStatusRequest === STATUS_FAILED) {
+            setContentFetchingProcess(
+                <p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>
+            )
+            return
+        }
+
+        setContentFetchingProcess(<></>)
+
+    }, [productsStatusRequest, currentProduct, dispatch])
+
+    /**
+     *
+     */
+    useEffect(() => {
+        const productFetched = productsFetched.some(productFetched => productFetched.id === paramId)
+        if (productFetched) return
+
+        dispatch(fetchProduct(params.id))
+    }, [productsFetched, dispatch])
+
+    /**
+     *
+     */
+    useEffect(() => {
+        if (!products.length) return
+
+        const currentPdt = [...products].find(pdt => pdt.id === paramId)
+        setCurrentProduct(currentPdt)
+    }, [products, dispatch])
+
+    useEffect(() => {
+        const productInCart = productsInCart.find(productInCart => productInCart.id === currentProduct.id)
+        if (productInCart) {
+            localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCart))
+            return
+        }
+
+        localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCart))
+    }, [productsInCart, dispatch])
 
     if (Object.keys(currentProduct).length) {
         return (
@@ -102,7 +122,7 @@ const Product = () => {
                 <div className="o-col-6">
                     <div className="relative">
                         <p className="z-1 absolute top-0 left-0 mb-4  bg-secondary-base text-primary-base font-bold px-2 py-1">
-                            { currentProduct.category }
+                            { currentProduct.category.categoryLabel }
                         </p>
                         <img src={ currentProduct.image } alt={ currentProduct.title }/>
                     </div>
