@@ -57,15 +57,14 @@ const ProductMiniature = ({ product }) => {
                 </NavLink>
 
                 <div className="flex-1 p-4 flex flex-col justify-between">
-                    <p className="absolute top-0 left-0 bg-secondary-base text-primary-base font-bold px-2 py-1">
-                        { product.category.categoryLabel }
-                    </p>
                     <NavLink to={ `${ PATH_PRODUCTS + '/' + product.id }` }
-                             className="text-primary-base font-bold mb-1 line-clamp-1">
+                             className="font-bold line-clamp-1">
                         { product.title }
                     </NavLink>
 
-                    <p className="flex-flow-centerY mb-4 text-secondary-base">
+                    <p className="mb-1 text-sm">{ product.category.categoryLabel }</p>
+
+                    <p className="flex-flow-centerY mb-4">
                         { generateStarRate(roundHalf(product.rating.rate)) }
                         <span className="ml-1 leading-none">({ product.rating.count } avis)</span>
                     </p>

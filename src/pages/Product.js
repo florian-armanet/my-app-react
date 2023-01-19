@@ -120,15 +120,11 @@ const Product = () => {
                     </NavLink>
                 </div>
                 <div className="o-col-6">
-                    <div className="relative">
-                        <p className="z-1 absolute top-0 left-0 mb-4  bg-secondary-base text-primary-base font-bold px-2 py-1">
-                            { currentProduct.category.categoryLabel }
-                        </p>
-                        <img src={ currentProduct.image } alt={ currentProduct.title }/>
-                    </div>
+                    <img src={ currentProduct.image } alt={ currentProduct.title }/>
                 </div>
                 <div className="o-col-6">
-                    <p className="font-bold text-2xl mb-4">{ currentProduct.title }</p>
+                    <p className="font-bold text-2xl mb-1">{ currentProduct.title }</p>
+                    <p className="text-sm mb-4">{ currentProduct.category.categoryLabel }</p>
                     <p className="mb-4">{ currentProduct.description }</p>
                     <p className="flex-flow-centerY mb-4">
                         { generateStarRate(roundHalf(currentProduct.rating.rate)) }
