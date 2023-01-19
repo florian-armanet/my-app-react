@@ -21,7 +21,7 @@ const ListCategories = () => {
                                 in={ true }
                                 key={ category.categoryCode }
                                 timeout={ 500 }
-                                classNames="list"
+                                classNames="Animation-list-item"
                                 unmountOnExit
                                 appear
                             >
