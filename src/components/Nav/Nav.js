@@ -3,22 +3,17 @@ import NavCart from './NavCart'
 import NavMain from './NavMain'
 import { isTablet } from '../../utils/viewport'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import NavSearch from './NavSearch'
 import Search from '../Search/Search'
 import Logo from '../Logo'
-import { setSearchModalOpened } from '../../store/searchStore'
 
 const Nav = () => {
-    const dispatch                                  = useDispatch()
     const location                                  = useLocation()
     const [renderNav, setRenderNav]                 = useState('')
 
     const routeHomepage = location.pathname === '/'
 
     useEffect(() => {
-        dispatch(setSearchModalOpened(false))
-
         if (isTablet()) {
             setRenderNav(
                 <div className="flex-flow-centerY">

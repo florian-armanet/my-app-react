@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setSearcher, setInputValue } from '../store/searcherStore'
-import debounce from '../utils/debounce'
-import { setProductsBySearcher } from '../store/productsStore'
+import { setSearcher, setInputValue } from '../../store/searcherStore'
+import debounce from '../../utils/debounce'
+import { setProductsBySearcher } from '../../store/productsStore'
 import { useEffect, useState } from 'react'
-import { setResetCheckedValuesOfFilters } from '../store/filtersCategoriesStore'
-import { setResetCheckedValuesOfSortings } from '../store/sortingStore'
+import { setResetCheckedValuesOfFilters } from '../../store/filtersCategoriesStore'
+import { setResetCheckedValuesOfSortings } from '../../store/sortingStore'
 
 const Searcher = () => {
     const dispatch                              = useDispatch()

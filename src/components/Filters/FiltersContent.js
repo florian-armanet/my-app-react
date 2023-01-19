@@ -3,7 +3,7 @@ import { setFiltersOpened, setResetAllCheckedValues } from '../../store/filtersS
 import { useDispatch, useSelector } from 'react-redux'
 import Sortings from './Sortings'
 import { useEffect } from 'react'
-import Searcher from '../Searcher'
+import Searcher from './Searcher'
 
 const FiltersContent = () => {
     const dispatch              = useDispatch()
