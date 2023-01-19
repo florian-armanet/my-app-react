@@ -1,4 +1,4 @@
-import ListCategories from '../components/ListCategories'
+import ListCategories from '../components/ListCategories/ListCategories'
 
 const Categories = () => {
     return (

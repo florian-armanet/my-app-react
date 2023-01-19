@@ -7,7 +7,6 @@ export const NavCart = () => {
     const dispatch       = useDispatch()
     const quantityInCart = useSelector(state => state.products.quantityInCart)
     const productsInCart = useSelector(state => state.products.inCart)
-    const modalOpened    = useSelector(state => state.cart.modalOpened)
 
     /**
      *
@@ -15,15 +14,6 @@ export const NavCart = () => {
     const openModal = () => {
         dispatch(setCartModalOpened(true))
     }
-
-    useEffect(() => {
-        if (modalOpened) {
-            document.body.classList.add('remove-scrollbar')
-            return
-        }
-
-        document.body.classList.remove('remove-scrollbar')
-    }, [modalOpened])
 
     useEffect(() => {
         const quantity = [...productsInCart].reduce((acc, curr) => {

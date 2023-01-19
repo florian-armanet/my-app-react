@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux'
-import { STATUS_LOADING } from '../utils/constants'
-import CategoryMiniature from './ListCategories/CategoryMiniature'
+import { STATUS_LOADING } from '../../utils/constants'
+import CategoryMiniature from './CategoryMiniature'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import LoaderBlock from './Loader/LoaderBlock'
+import LoaderBlock from '../Loader/LoaderBlock'
 
 const ListCategories = () => {
     const categories              = useSelector(state => state.categories.all)

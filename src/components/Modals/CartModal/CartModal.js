@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setCartModalOpened } from '../store/cartStore'
+import { setCartModalOpened } from '../../../store/cartStore'
 import { CSSTransition } from 'react-transition-group'
-import CartModalContent from './Modals/CartModal/CartModalContent'
-import CartModalContentEmpty from './Modals/CartModal/CartModalContentEmpty'
-import { useEffect } from 'react'
+import CartModalContent from './CartModalContent'
+import CartModalContentEmpty from './CartModalContentEmpty'
 
 export const CartModal = () => {
     const dispatch       = useDispatch()
@@ -24,15 +23,6 @@ export const CartModal = () => {
 
         return <CartModalContentEmpty/>
     }
-
-    useEffect(() => {
-        if (modalOpened) {
-            document.body.classList.add('remove-scrollbar')
-            return
-        }
-
-        document.body.classList.remove('remove-scrollbar')
-    }, [modalOpened, dispatch])
 
     return (
         <>

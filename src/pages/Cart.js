@@ -1,4 +1,4 @@
-import CartInner from '../components/CartInner'
+import CartInner from '../components/Cart/CartInner'
 
 const Cart = () => {
     return (

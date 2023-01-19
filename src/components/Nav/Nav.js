@@ -1,13 +1,13 @@
 import { Outlet, useLocation } from 'react-router-dom'
-import NavCart from './Nav/NavCart'
-import NavMain from './Nav/NavMain'
-import { isTablet } from '../utils/viewport'
+import NavCart from './NavCart'
+import NavMain from './NavMain'
+import { isTablet } from '../../utils/viewport'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import NavSearch from './Nav/NavSearch'
-import Search from './Search/Search'
-import Logo from './Logo'
-import { setSearchModalOpened } from '../store/searchStore'
+import NavSearch from './NavSearch'
+import Search from '../Search/Search'
+import Logo from '../Logo'
+import { setSearchModalOpened } from '../../store/searchStore'
 
 const Nav = () => {
     const dispatch                                  = useDispatch()

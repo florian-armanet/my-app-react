@@ -1,7 +1,7 @@
 import '../App.scss'
-import ListProducts from '../components/ListProducts'
+import ListProducts from '../components/ListProducts/ListProducts'
 // import Searcher from '../components/Searcher'
-import Filters from '../components/Filters'
+import Filters from '../components/Filters/Filters'
 
 const Products = () => {
     return (

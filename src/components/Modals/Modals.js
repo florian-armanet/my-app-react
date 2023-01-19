@@ -1,4 +1,4 @@
-import CartModal from '../CartModal'
+import CartModal from './CartModal/CartModal'
 import MenuModal from './MenuModal/MenuModal'
 import FiltersModal from './FiltersModal/FiltersModal'
 

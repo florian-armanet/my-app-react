@@ -1,8 +1,8 @@
-import { setFiltersOpened } from '../store/filtersStore'
+import { setFiltersOpened } from '../../store/filtersStore'
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { isTablet } from '../utils/viewport'
-import FiltersContent from './Filters/FiltersContent'
+import { isTablet } from '../../utils/viewport'
+import FiltersContent from './FiltersContent'
 
 const Filters = () => {
     const dispatch                                        = useDispatch()

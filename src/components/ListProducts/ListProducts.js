@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux'
-import ProductMiniature from './ListProducts/ProductMiniature'
+import ProductMiniature from './ProductMiniature'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { STATUS_LOADING } from '../utils/constants'
-import LoaderBlock from './Loader/LoaderBlock'
+import { STATUS_LOADING } from '../../utils/constants'
+import LoaderBlock from '../Loader/LoaderBlock'
 
 const ListProducts = () => {
     const productsFiltered      = useSelector(state => state.products.filtered)
