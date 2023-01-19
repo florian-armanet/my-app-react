@@ -3,7 +3,7 @@ import { setCurrentSorting, setResetCheckedValuesOfSortings } from '../../store/
 import { useDispatch } from 'react-redux'
 
 const Sortings = () => {
-    const dispatch       = useDispatch()
+    const dispatch = useDispatch()
 
     /**
      *

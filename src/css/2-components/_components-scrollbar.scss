@@ -6,7 +6,7 @@
 
 @layer components {
     .Scrollbar {
-        scrollbar-color: theme('colors.primary.base') #F5F5F5;
+        scrollbar-color: theme('colors.primary.light') #F5F5F5;
     }
 
     .Scrollbar::-webkit-scrollbar-track {
@@ -22,7 +22,7 @@
 
     .Scrollbar::-webkit-scrollbar-thumb {
         border-radius: 6px;
-        background-color: theme('colors.primary.base');
+        background-color: theme('colors.primary.light');
     }
 
     .Scrollbar--light::-webkit-scrollbar-track {
