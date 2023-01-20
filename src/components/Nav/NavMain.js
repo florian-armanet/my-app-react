@@ -23,7 +23,7 @@ const NavMain = () => {
 
     if (isTablet()) {
         return (
-            <i onClick={ onClick } className="Icon-menu text-xl mr-4"></i>
+            <i onClick={ onClick } className="Icon-menu text-xl mr-5"></i>
         )
     }
 
