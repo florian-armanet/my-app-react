@@ -14,7 +14,7 @@ export const CartModalContentProduct = ({ product }) => {
     }
 
     return (
-        <li className="mb-2 p-4 bg-white rounded flex flex-wrap items-center">
+        <li className="mb-2 p-4 bg-gray-50/50 rounded flex flex-wrap items-center">
             <div className="w-12 mr-4">
                 <img src={ product.image }
                      alt={ product.title }

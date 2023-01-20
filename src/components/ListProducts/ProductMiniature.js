@@ -48,7 +48,7 @@ const ProductMiniature = ({ product }) => {
     }, [productsInCart, dispatch])
 
     return (
-        <li className="relative flex flex-col w-64 mx-2 mb-12 bg-white rounded-sm shadow hover:shadow-lg transition">
+        <li className="relative flex flex-col w-64 mx-2 mb-12 bg-white rounded-sm border border-gray-100 rounded-lg hover:shadow-lg transition">
             <div className="group flex flex-col h-full">
                 <NavLink to={ `${ PATH_PRODUCTS + '/' + product.id }` } className="h-56 p-2 overflow-hidden">
                     <img src={ product.image }

@@ -130,7 +130,7 @@ const Product = () => {
                         { generateStarRate(roundHalf(currentProduct.rating.rate)) }
                         <span className="ml-1">({ currentProduct.rating.count } avis)</span>
                     </p>
-                    <p className="font-bold text-secondary-base text-2xl mb-4">{ formatNumberToString(currentProduct.price) } €</p>
+                    <p className="font-bold text-primary-base text-2xl mb-4">{ formatNumberToString(currentProduct.price) } €</p>
                     <div className="flex flex-wrap">
                         <input type="number"
                                min="1"

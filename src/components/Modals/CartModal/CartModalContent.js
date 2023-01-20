@@ -17,7 +17,7 @@ export const CartModalContent = () => {
     }
 
     return (
-        <div className="flex-1 bg-gray-50">
+        <div className="flex-1">
             <div className="flex flex-col h-full justify-between">
                 <ul className="px-4 py-6 max-h-600px overflow-auto Scrollbar Scrollbar--light">
                     { productsInCart.map((product, index) =>

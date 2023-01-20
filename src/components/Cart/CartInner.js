@@ -20,7 +20,7 @@ const CartInner = () => {
                     </div>
 
                     <div className="o-col-12 lg:o-col-4">
-                        <div className="p-4 border border-gray-100 bg-white rounded">
+                        <div className="p-4 bg-gray-50/50 rounded">
                             <p className="text-center uppercase text-xl mb-8 font-bold">Résumé</p>
 
                             <CartModalContentTotals/>
