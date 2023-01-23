@@ -24,11 +24,12 @@ const Search = () => {
         }
 
         document.body.classList.remove('remove-scrollbar')
-    }, [modalOpened, dispatch])
+    }, [modalOpened])
 
     return (
         <>
-            <CSSTransition in={ modalOpened } classNames="Animation-translateX-speed" timeout={ 300 } unmountOnExit appear>
+            <CSSTransition in={ modalOpened } classNames="Animation-translateX-speed" timeout={ 300 } unmountOnExit
+                           appear>
                 <div
                     className="z-6 fixed top-0 left-0 right-0 bg-white pt-4 lg:pt-8 sm-down:bottom-0 sm:max-h-screen overflow-y-auto overflow-x-hidden shadow-lg shadow-gray-200/40 Scrollbar Scrollbar--light">
                     <div className="flex-flow-between items-center px-4 lg:px-8 pb-4 lg:pb-8">

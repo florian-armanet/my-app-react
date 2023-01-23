@@ -2,7 +2,7 @@ import { MAX_RATE } from './constants'
 
 export const generateStarRate = (rate) => {
     const starsArr = new Array(MAX_RATE).fill(null)
-    return starsArr.map((el, index) => {
+    return starsArr.map((_, index) => {
         if (index + 1 <= rate) {
             return <i className="Icon-star" key={ index }></i>
         }

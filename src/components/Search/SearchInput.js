@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import debounce from '../../utils/debounce'
 import { setProductsOfSearch } from '../../store/productsStore'
 import { setCategoriesOfSearch } from '../../store/categoriesStore'
@@ -9,7 +9,9 @@ const SearchInput = () => {
     const dispatch                              = useDispatch()
     const searchValue                           = useSelector(state => state.search.searchValue)
     const searchInputValue                      = useSelector(state => state.search.searchInputValue)
+    const modalOpened                           = useSelector(state => state.search.modalOpened)
     const [renderCloseIcon, setRenderCloseIcon] = useState('')
+    const inputRef                              = useRef()
 
     /**
      *
@@ -49,10 +51,17 @@ const SearchInput = () => {
         dispatch(setCategoriesOfSearch(searchValue))
     }, [searchValue])
 
+    useEffect(() => {
+        if (modalOpened) {
+            inputRef.current.focus()
+        }
+    }, [modalOpened])
+
     return (
         <div
             className="lg-down:order-3 flex-flow-centerY justify-between bg-white rounded bg-primary-light/20 py-2 px-4 lg:px-8 hover:bg-primary-lighter transition-fast lg:max-w-xs w-full lg:mr-16 lg-down:mt-4">
             <input type="text"
+                   ref={ inputRef }
                    placeholder="Rechercher un produit..."
                    value={ searchInputValue }
                    onChange={ e => {
