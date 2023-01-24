@@ -1,0 +1,26 @@
+/*
+ * [ components / button ]
+ */
+
+// -----------------------------------------------------------------------------
+
+@layer components {
+    .Card-product {
+        @apply relative flex flex-col mx-2 mb-4 bg-white rounded-sm border border-gray-100 rounded hover:shadow-lg transition;
+
+        max-width: 256px;
+        flex: 0 0 256px;
+
+        @screen md {
+            flex: 0 0 calc(33.33% - theme('spacing.2') * 2);
+            max-width: calc(33.33% - theme('spacing.2') * 2);
+        }
+
+        &--sm {
+            @screen md {
+                flex: 0 0 calc(25% - theme('spacing.2') * 2);
+                max-width: calc(25% - theme('spacing.2') * 2);
+            }
+        }
+    }
+}

@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { setProductsFiltered } from '../../store/productsStore'
 import SortingItem from './SortingItem'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { INPUT_RATINGS } from '../../utils/constants'
 
 const Sorting = ({ sortingCode }) => {
     const dispatch              = useDispatch()
@@ -9,11 +10,6 @@ const Sorting = ({ sortingCode }) => {
     const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
     const sortings              = useSelector(state => state.sorting.sortings)
     const currentSorting        = sortings.find(sorting => sorting.code === sortingCode)
-
-    const inputRatings = {
-        'sortDesc': 'décroissant',
-        'sortAsc': 'croissant',
-    }
 
     useEffect(() => {
         if (resetAllCheckedValues) {
@@ -26,14 +22,11 @@ const Sorting = ({ sortingCode }) => {
 
     return (
         <>
-            {/*<p className="px-4 py-2 bg-primary-lighter text-primary-base">{ currentSorting.name }</p>*/}
-            <ul className="flex flex-col items-start px-4">
-                { Object.entries(inputRatings)
-                    .map(([typeSorting, label]) => {
-                        return <SortingItem currentSorting={ currentSorting }
-                                            typeSorting={ typeSorting }
-                                            label={ label }
-                                            key={ typeSorting }/>
+            <ul className="flex flex-col">
+                { Object.entries(INPUT_RATINGS)
+                    .map(([typeSorting, label], index) => {
+                        return <SortingItem currentSorting={ { typeSorting , ...currentSorting, name: currentSorting.name + ' ' + label } }
+                                            key={ index }/>
                     })
                 }
             </ul>

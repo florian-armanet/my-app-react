@@ -1,32 +1,62 @@
+import { CSSTransition } from 'react-transition-group'
 import Sorting from './Sorting'
-import { setCurrentSorting, setResetCheckedValuesOfSortings } from '../../store/sortingStore'
-import { useDispatch } from 'react-redux'
+import { setCurrentSorting, setSortingModalOpened } from '../../store/sortingStore'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useRef } from 'react'
+import { clickOut } from '../../utils/clickOut'
 
 const Sortings = () => {
-    const dispatch = useDispatch()
+    const dispatch           = useDispatch()
+    const sortingModalOpened = useSelector(state => state.sorting.modalOpened)
+    const sortings           = useSelector(state => state.sorting.sortings)
+    const currentSorting     = useSelector(state => state.sorting.currentSorting)
+    const containerRef       = useRef()
 
     /**
      *
      */
     const onResetSorting = () => {
         dispatch(setCurrentSorting({}))
-        dispatch(setResetCheckedValuesOfSortings(true))
+        dispatch(setSortingModalOpened(false))
     }
 
+    /**
+     *
+     */
+    const handlerModal = () => {
+        dispatch(setSortingModalOpened(!sortingModalOpened))
+    }
+
+    useEffect(() => {
+        if (!sortingModalOpened || !containerRef) return
+
+        clickOut(containerRef.current, () => {
+            dispatch(setSortingModalOpened(!sortingModalOpened))
+        })
+    }, [containerRef, sortingModalOpened])
+
     return (
-        <>
-            <p className="font-bold mb-4 text-primary-base">Trier par</p>
+        <div className="w-full max-w-xs lg:max-w-56 relative z-1 lg-down:mb-4 lg-down:flex-flow-center order-1"
+             ref={ containerRef }>
+            <button onClick={ handlerModal }
+                    className="flex-flow-between items-center cursor-pointer px-4 py-2 border border-black w-full">
+                <span>{ Object.keys(currentSorting).length ? currentSorting.name : 'Trier par' }</span>
+                <i className={ `text-xl transition-fast Icon-angle-bottom ${ sortingModalOpened ? 'rotate-180' : '' }` }></i>
+            </button>
 
-            <div className="bg-white border border-primary-light/50 rounded py-4">
-                <Sorting sortingCode="price"/>
-                <Sorting sortingCode="rate"/>
+            <CSSTransition in={ sortingModalOpened } classNames="Animation-translateY-opacity" timeout={ 300 } unmountOnExit
+                           appear>
+                <div className="absolute left-0 right-0 bg-white border border-black"
+                     style={ { top: 'calc(100% - 1px)'}}>
+                    { sortings.map((sorting, index) => <Sorting sortingCode={ sorting.code } key={ index }/>) }
 
-                <button className="px-4 py-2 mt-4 underline hover:text-secondary-base transition"
-                        onClick={ onResetSorting }>
-                    Réinitialiser
-                </button>
-            </div>
-        </>
+                    <button className="px-4 py-2 mt-2 underline hover:text-secondary-base transition"
+                            onClick={ onResetSorting }>
+                        Réinitialiser
+                    </button>
+                </div>
+            </CSSTransition>
+        </div>
     )
 }
 

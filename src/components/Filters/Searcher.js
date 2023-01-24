@@ -4,7 +4,6 @@ import debounce from '../../utils/debounce'
 import { setProductsBySearcher } from '../../store/productsStore'
 import { useEffect, useState } from 'react'
 import { setResetCheckedValuesOfFilters } from '../../store/filtersCategoriesStore'
-import { setResetCheckedValuesOfSortings } from '../../store/sortingStore'
 
 const Searcher = () => {
     const dispatch                              = useDispatch()
@@ -19,7 +18,6 @@ const Searcher = () => {
     const handleBeforeChange = (event) => {
         dispatch(setInputValue(event.target.value))
         dispatch(setResetCheckedValuesOfFilters(true))
-        dispatch(setResetCheckedValuesOfSortings(true))
     }
 
     /**
@@ -50,7 +48,7 @@ const Searcher = () => {
                               className="Icon-close-light mr-2 text-primary-base cursor-pointer"></i>)
         dispatch(setProductsBySearcher(searcherValue))
 
-    }, [searcherValue])
+    }, [searcherValue, dispatch])
 
     return (
         <div

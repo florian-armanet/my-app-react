@@ -1,16 +1,16 @@
 import { SORT_ASC, SORT_DESC } from '../../utils/constants'
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProductsFiltered } from '../../store/productsStore'
-import { setCurrentSorting, setResetCheckedValuesOfSortings } from '../../store/sortingStore'
+import { setCurrentSorting, setSortingModalOpened } from '../../store/sortingStore'
 import { setInputValue, setSearcher } from '../../store/searcherStore'
 
-const SortingItem = ({ currentSorting, typeSorting, label }) => {
-    const dispatch                                      = useDispatch()
-    const productsFiltered                              = useSelector(state => state.products.filtered)
-    const resetCheckedValuesOfSortings                  = useSelector(state => state.sorting.resetCheckedValuesOfSortings)
-    const resetAllCheckedValues                         = useSelector(state => state.filters.resetAllCheckedValues)
-    const inputNode                                     = useRef()
+const SortingItem = ({ currentSorting }) => {
+    const dispatch                     = useDispatch()
+    const productsFiltered             = useSelector(state => state.products.filtered)
+    const currentSortingStore          = useSelector(state => state.sorting.currentSorting)
+    const resetAllCheckedValues        = useSelector(state => state.filters.resetAllCheckedValues)
+    const [isActive, setIsActive] = useState()
 
     /**
      *
@@ -21,43 +21,41 @@ const SortingItem = ({ currentSorting, typeSorting, label }) => {
         dispatch(setSearcher(''))
 
         dispatch(setCurrentSorting({
-            typeSorting,
             ...currentSorting
         }))
 
-        if (typeSorting === SORT_DESC) {
+        if (currentSorting.typeSorting === SORT_DESC) {
             dispatch(setProductsFiltered(
                 [...productsFiltered]
                     .sort((a, b) => b[currentSorting.propertySorted] - a[currentSorting.propertySorted])
             ))
         }
 
-        if (typeSorting === SORT_ASC) {
+        if (currentSorting.typeSorting === SORT_ASC) {
             dispatch(setProductsFiltered(
                 [...productsFiltered]
                     .sort((a, b) => a[currentSorting.propertySorted] - b[currentSorting.propertySorted])
             ))
         }
+
+        dispatch(setSortingModalOpened(false))
     }
 
     useEffect(() => {
-        if (resetCheckedValuesOfSortings || resetAllCheckedValues) {
-            inputNode.current.checked = false
+        if (resetAllCheckedValues) {
             dispatch(setCurrentSorting({}))
-            dispatch(setResetCheckedValuesOfSortings(false))
         }
-    }, [resetCheckedValuesOfSortings, resetAllCheckedValues, dispatch])
+    }, [resetAllCheckedValues, dispatch])
+
+    useEffect(() => {
+        console.log(currentSortingStore);
+        setIsActive(currentSortingStore.typeSorting === currentSorting.typeSorting && currentSortingStore.code === currentSorting.code)
+    }, [currentSortingStore])
 
     return (
-        <li className="flex-flow-centerY mb-1">
-            <input type="radio"
-                   name="sorting"
-                   id={ currentSorting.code + '_' + typeSorting }
-                   className="appearance-none w-4 h-4 rounded-full border-2 border-primary-base transition checked:bg-primary-base"
-                   ref={ inputNode }
-                   onChange={ handleChange }/>
-            <label htmlFor={ currentSorting.code + '_' + typeSorting }
-                   className="cursor-pointer ml-2">{ currentSorting.name + ' ' + label }</label>
+        <li onClick={ handleChange }
+            className={`flex-flow-centerY cursor-pointer py-1 px-4 border-b border-gray-100 hover:bg-gray-50 transition-fast ${isActive ? 'bg-gray-100' : ''}`}>
+            { currentSorting.name }
         </li>
     )
 }

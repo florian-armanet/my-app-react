@@ -103,7 +103,7 @@
 }
 
 
-// 3. Animation-list-item
+// 4. Animation-list-item
 // --------------------------------------------------
 .Animation-list-item-enter, .Animation-list-item-appear {
     transform: scale(0);
@@ -118,4 +118,26 @@
 .Animation-list-item-exit-active {
     transform: scale(0);
     transition: transform 300ms;
+}
+
+
+// 5. Animation-translateY-opacity
+// --------------------------------------------------
+.Animation-translateY-opacity-enter, .Animation-translateY-opacity-appear {
+    opacity: 0;
+    transform:translateY(15px);
+}
+.Animation-translateY-opacity-enter-active, .Animation-translateY-opacity-appear-active {
+    opacity: 1;
+    transform:translateY(0);
+    transition: opacity 150ms, transform 150ms;
+}
+.Animation-translateY-opacity-exit {
+    opacity: 1;
+    transform:translateY(0);
+}
+.Animation-translateY-opacity-exit-active {
+    opacity: 0;
+    transform:translateY(15px);
+    transition: opacity 300ms, transform 300ms;
 }

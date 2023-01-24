@@ -7,19 +7,19 @@ export const sortingStore = createSlice({
             { name: 'Prix', code: 'price', propertySorted: 'price' },
             { name: 'Avis', code: 'rate', propertySorted: 'rate' },
         ],
+        modalOpened: false,
         currentSorting: {},
-        resetCheckedValuesOfSortings: false,
     },
     reducers: {
         setCurrentSorting: (state, { payload: sorting }) => {
             state.currentSorting = sorting
         },
-        setResetCheckedValuesOfSortings: (state, { payload }) => {
-            state.resetCheckedValuesOfSortings = payload
+        setSortingModalOpened: (state, { payload }) => {
+            state.modalOpened = payload
         },
     },
 })
 
 export default sortingStore.reducer
 
-export const { setCurrentSorting, setResetCheckedValuesOfSortings } = sortingStore.actions
+export const { setCurrentSorting, setSortingModalOpened } = sortingStore.actions

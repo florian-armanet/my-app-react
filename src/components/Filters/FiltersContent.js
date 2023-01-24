@@ -52,8 +52,6 @@ const FiltersContent = () => {
                 <Searcher/>
             </div>
 
-            <Sortings/>
-
             <div className="flex flex-wrap justify-between px-4 py-4">
                 <button className="underline" onClick={ resetAllFilters }>
                     Tout réinitialiser

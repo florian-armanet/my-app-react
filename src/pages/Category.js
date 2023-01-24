@@ -62,10 +62,6 @@ const Category = () => {
         return (
             <div>
                 <h1 className="text-center text-primary-light font-bold text-2xl lg:text-3xl mb-4 lg:mb-10">{ currentCategory.categoryLabel }</h1>
-                {/*<NavLink to={ PATH_CATEGORIES } className="Button Button--primary mb-8">*/}
-                {/*    <i className="Icon-arrow-left mr-2"></i>*/}
-                {/*    <span>Retour aux catégories</span>*/}
-                {/*</NavLink>*/}
                 <TransitionGroup component="ul" className="flex flex-wrap justify-center lg:justify-start -mx-2">
                     { currentProductsOfCategory.map(product => (
                         <CSSTransition
@@ -76,7 +72,8 @@ const Category = () => {
                             unmountOnExit
                             appear
                         >
-                            <ProductMiniature product={ product } key={ product.id }/>
+                            <ProductMiniature product={ product } cardType="Card-product Card-product--sm"
+                                              key={ product.id }/>
                         </CSSTransition>
                     )) }
                 </TransitionGroup>
