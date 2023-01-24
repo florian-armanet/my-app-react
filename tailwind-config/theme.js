@@ -87,10 +87,10 @@ module.exports = {
         } ),
         fontFamily: {
             core: [
-                'ShareTechMono'
+                'JosefinSans'
             ],
             heading: [
-                'FiraSans',
+                'JosefinSans',
                 'Arial',
             ],
             icon: [
