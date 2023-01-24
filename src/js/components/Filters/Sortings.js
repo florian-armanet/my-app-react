@@ -28,9 +28,8 @@ const Sortings = () => {
     }
 
     useEffect(() => {
-        if (!sortingModalOpened || !containerRef) return
-
         clickOut(containerRef.current, () => {
+            if (!sortingModalOpened || !containerRef.current) return
             dispatch(setSortingModalOpened(!sortingModalOpened))
         })
     }, [containerRef, sortingModalOpened])

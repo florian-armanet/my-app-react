@@ -4,11 +4,14 @@ import debounce from '../../utils/debounce'
 import { setProductsBySearcher } from '../../store/productsStore'
 import { useEffect, useState } from 'react'
 import { setResetCheckedValuesOfFilters } from '../../store/filtersCategoriesStore'
+import { setCurrentSorting } from '../../store/sortingStore'
 
 const Searcher = () => {
     const dispatch                              = useDispatch()
     const searcherValue                         = useSelector(state => state.searcher.searchValue)
     const inputValue                            = useSelector(state => state.searcher.inputValue)
+    const currentSorting                        = useSelector(state => state.sorting.currentSorting)
+    const getCategoriesSelected                 = useSelector(state => state.filtersCategories.categoriesSelected)
     const [renderCloseIcon, setRenderCloseIcon] = useState('')
 
     /**
@@ -16,6 +19,10 @@ const Searcher = () => {
      * @param event
      */
     const handleBeforeChange = (event) => {
+        if (Object.keys(currentSorting).length) {
+            dispatch(setCurrentSorting({}))
+        }
+
         dispatch(setInputValue(event.target.value))
         dispatch(setResetCheckedValuesOfFilters(true))
     }
@@ -37,6 +44,11 @@ const Searcher = () => {
     }
 
     useEffect(() => {
+        if (getCategoriesSelected.length) {
+            setRenderCloseIcon('')
+            return
+        }
+
         if (!searcherValue) {
             setRenderCloseIcon('')
             dispatch(setProductsBySearcher(searcherValue))
@@ -47,7 +59,6 @@ const Searcher = () => {
         setRenderCloseIcon(<i onClick={ onResetSearch }
                               className="Icon-close-light mr-2 text-primary-base cursor-pointer"></i>)
         dispatch(setProductsBySearcher(searcherValue))
-
     }, [searcherValue, dispatch])
 
     return (
