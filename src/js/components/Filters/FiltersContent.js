@@ -1,7 +1,6 @@
 import FiltersCategories from './FiltersCategories'
 import { setFiltersOpened, setResetAllCheckedValues } from '../../store/filtersStore'
 import { useDispatch, useSelector } from 'react-redux'
-import Sortings from './Sortings'
 import { useEffect } from 'react'
 import Searcher from './Searcher'
 
@@ -9,7 +8,6 @@ const FiltersContent = () => {
     const dispatch              = useDispatch()
     const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
     const products              = useSelector(state => state.products.all)
-    const categories            = useSelector(state => state.categories.all)
 
     /**
      *

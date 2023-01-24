@@ -63,7 +63,7 @@ const Searcher = () => {
 
     return (
         <div
-            className="flex-flow-centerY justify-between bg-white rounded bg-primary-light/20 py-2 px-8 hover:bg-primary-lighter transition-fast max-w-xs w-full">
+            className="flex-flow-centerY justify-between bg-white rounded bg-primary-light/20 py-2 px-4 lg:px-8 hover:bg-primary-lighter transition-fast max-w-xs w-full">
             <input type="text"
                    placeholder="Filtrer par nom..."
                    value={ inputValue }

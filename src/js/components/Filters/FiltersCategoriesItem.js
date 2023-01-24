@@ -15,6 +15,7 @@ const FiltersCategoriesItem = ({ category }) => {
     const resetCheckedValuesOfFilters = useSelector(state => state.filtersCategories.resetCheckedValuesOfFilters)
     const getCategoriesSelected       = useSelector(state => state.filtersCategories.categoriesSelected)
     const resetAllCheckedValues       = useSelector(state => state.filters.resetAllCheckedValues)
+    const filtersOpened = useSelector(state => state.filters.filtersOpened)
 
     /**
      *
@@ -41,6 +42,12 @@ const FiltersCategoriesItem = ({ category }) => {
             dispatch(setCategoriesSelected([]))
         }
     }, [resetCheckedValuesOfFilters, resetAllCheckedValues, dispatch])
+
+    useEffect(() => {
+        if (getCategoriesSelected.length && getCategoriesSelected.includes(category.categoryCode)) {
+            setCurrentCheckedValue(true)
+        }
+    }, [filtersOpened])
 
     return (
         <li className="flex flex-wrap items-center mb-1">

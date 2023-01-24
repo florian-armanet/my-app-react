@@ -38,7 +38,7 @@ const Sortings = () => {
         <div className="w-full max-w-xs lg:max-w-56 relative z-1 lg-down:mb-4 lg-down:flex-flow-center order-1"
              ref={ containerRef }>
             <button onClick={ handlerModal }
-                    className="flex-flow-between items-center cursor-pointer px-4 py-2 border border-black w-full">
+                    className="flex-flow-between items-center cursor-pointer px-2 lg:px-4 py-2 border border-black w-full rounded">
                 <span>{ Object.keys(currentSorting).length ? currentSorting.name : 'Trier par' }</span>
                 <i className={ `text-xl transition-fast Icon-angle-bottom ${ sortingModalOpened ? 'rotate-180' : '' }` }></i>
             </button>
@@ -46,7 +46,7 @@ const Sortings = () => {
             <CSSTransition in={ sortingModalOpened } classNames="Animation-translateY-opacity" timeout={ 300 } unmountOnExit
                            appear>
                 <div className="absolute left-0 right-0 bg-white border border-black"
-                     style={ { top: 'calc(100% - 1px)'}}>
+                     style={ { top: 'calc(100% - 3px)'}}>
                     { sortings.map((sorting, index) => <Sorting sortingCode={ sorting.code } key={ index }/>) }
 
                     <button className="px-4 py-2 mt-2 underline hover:text-secondary-base transition"
