@@ -1,4 +1,4 @@
-import '../App.scss'
+import '../../App.scss'
 import ListProducts from '../components/ListProducts/ListProducts'
 import Filters from '../components/Filters/Filters'
 import Sortings from '../components/Filters/Sortings'

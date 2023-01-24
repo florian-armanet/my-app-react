@@ -5,11 +5,11 @@ import { setProductsFiltered } from '../../store/productsStore'
 import { setCurrentSorting, setSortingModalOpened } from '../../store/sortingStore'
 import { setInputValue, setSearcher } from '../../store/searcherStore'
 
-const SortingItem = ({ currentSorting }) => {
-    const dispatch                     = useDispatch()
-    const productsFiltered             = useSelector(state => state.products.filtered)
-    const currentSortingStore          = useSelector(state => state.sorting.currentSorting)
-    const resetAllCheckedValues        = useSelector(state => state.filters.resetAllCheckedValues)
+const SortingItem = ({ item }) => {
+    const dispatch                = useDispatch()
+    const productsFiltered        = useSelector(state => state.products.filtered)
+    const currentSorting          = useSelector(state => state.sorting.currentSorting)
+    const resetAllCheckedValues   = useSelector(state => state.filters.resetAllCheckedValues)
     const [isActive, setIsActive] = useState()
 
     /**
@@ -21,20 +21,20 @@ const SortingItem = ({ currentSorting }) => {
         dispatch(setSearcher(''))
 
         dispatch(setCurrentSorting({
-            ...currentSorting
+            ...item
         }))
 
-        if (currentSorting.typeSorting === SORT_DESC) {
+        if (item.typeSorting === SORT_DESC) {
             dispatch(setProductsFiltered(
                 [...productsFiltered]
-                    .sort((a, b) => b[currentSorting.propertySorted] - a[currentSorting.propertySorted])
+                    .sort((a, b) => b[item.propertySorted] - a[item.propertySorted])
             ))
         }
 
-        if (currentSorting.typeSorting === SORT_ASC) {
+        if (item.typeSorting === SORT_ASC) {
             dispatch(setProductsFiltered(
                 [...productsFiltered]
-                    .sort((a, b) => a[currentSorting.propertySorted] - b[currentSorting.propertySorted])
+                    .sort((a, b) => a[item.propertySorted] - b[item.propertySorted])
             ))
         }
 
@@ -48,14 +48,13 @@ const SortingItem = ({ currentSorting }) => {
     }, [resetAllCheckedValues, dispatch])
 
     useEffect(() => {
-        console.log(currentSortingStore);
-        setIsActive(currentSortingStore.typeSorting === currentSorting.typeSorting && currentSortingStore.code === currentSorting.code)
-    }, [currentSortingStore])
+        setIsActive(currentSorting.typeSorting === item.typeSorting && currentSorting.code === item.code)
+    }, [currentSorting])
 
     return (
         <li onClick={ handleChange }
-            className={`flex-flow-centerY cursor-pointer py-1 px-4 border-b border-gray-100 hover:bg-gray-50 transition-fast ${isActive ? 'bg-gray-100' : ''}`}>
-            { currentSorting.name }
+            className={ `flex-flow-centerY cursor-pointer py-1 px-4 border-b border-gray-100 hover:bg-gray-50 transition-fast ${ isActive ? 'bg-gray-100' : '' }` }>
+            { item.name }
         </li>
     )
 }

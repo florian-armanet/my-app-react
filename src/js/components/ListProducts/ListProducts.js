@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import ProductMiniature from './ProductMiniature'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { STATUS_LOADING } from '../../utils/constants'
+import { STATUS_FAILED, STATUS_LOADING } from '../../utils/constants'
 import LoaderBlock from '../Loader/LoaderBlock'
 
 const ListProducts = () => {
@@ -34,8 +34,14 @@ const ListProducts = () => {
         )
     }
 
+    if (productsStatusRequest === STATUS_FAILED) {
+        return (
+            <p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>
+        )
+    }
+
     return (
-        <p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>
+        <p className="p-4 bg-gray-50 text-primary-dark font-bold">Aucun résultat</p>
     )
 }
 

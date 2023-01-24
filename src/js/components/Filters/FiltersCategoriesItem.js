@@ -21,8 +21,8 @@ const FiltersCategoriesItem = ({ category }) => {
      * @param event
      */
     const handleChange = (event) => {
-        dispatch(setInputValue(''))
         dispatch(setSearcher(''))
+        dispatch(setInputValue(''))
         dispatch(setResetCheckedValuesOfFilters(false))
         setCurrentCheckedValue(!currentCheckedValue)
 

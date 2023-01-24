@@ -25,7 +25,7 @@ const Sorting = ({ sortingCode }) => {
             <ul className="flex flex-col">
                 { Object.entries(INPUT_RATINGS)
                     .map(([typeSorting, label], index) => {
-                        return <SortingItem currentSorting={ { typeSorting , ...currentSorting, name: currentSorting.name + ' ' + label } }
+                        return <SortingItem item={ { typeSorting , ...currentSorting, name: currentSorting.name + ' ' + label } }
                                             key={ index }/>
                     })
                 }
