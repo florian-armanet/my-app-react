@@ -18,7 +18,7 @@ export const CartModalContentProduct = ({ product }) => {
             <div className="w-12 mr-4">
                 <img src={ product.image }
                      alt={ product.title }
-                     className="h-12"/>
+                     className="max-h-12"/>
             </div>
             <div className="flex-1 flex flex-col">
                 <div className="flex-flow-between items-center mb-2">
