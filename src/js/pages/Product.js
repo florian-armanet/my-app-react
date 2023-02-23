@@ -98,7 +98,7 @@ const Product = () => {
 
         const currentPdt = [...products].find(pdt => pdt.id === paramId)
         setCurrentProduct(currentPdt)
-    }, [products, dispatch])
+    }, [products, dispatch, paramId])
 
     useEffect(() => {
         const productInCart = productsInCart.find(productInCart => productInCart.id === currentProduct.id)
