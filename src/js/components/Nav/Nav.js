@@ -2,40 +2,14 @@ import { Outlet, useLocation } from 'react-router-dom'
 import NavCart from './NavCart'
 import NavMain from './NavMain'
 import { isTablet } from '../../utils/viewport'
-import { useEffect, useState } from 'react'
 import NavSearch from './NavSearch'
 import Search from '../Search/Search'
 import Logo from '../Logo'
 
 const Nav = () => {
-    const location                                  = useLocation()
-    const [renderNav, setRenderNav]                 = useState('')
+    const location                  = useLocation()
 
     const routeHomepage = location.pathname === '/'
-
-    useEffect(() => {
-        if (isTablet()) {
-            setRenderNav(
-                <div className="flex-flow-centerY">
-                    <NavMain/>
-                    <NavSearch/>
-                    <NavCart/>
-                </div>
-            )
-
-            return
-        }
-
-        setRenderNav(
-            <>
-                <NavMain/>
-                <div className="flex-flow-centerY">
-                    <NavSearch/>
-                    <NavCart/>
-                </div>
-            </>
-        )
-    }, [])
 
     return (
         <>
@@ -47,7 +21,22 @@ const Nav = () => {
                         <div className="flex-flow-between items-center py-4">
                             <Logo/>
 
-                            { renderNav }
+                            { isTablet() &&
+                                <div className="flex-flow-centerY">
+                                    <NavMain/>
+                                    <NavSearch/>
+                                    <NavCart/>
+                                </div> }
+
+                            { !isTablet() &&
+                                <>
+                                    <NavMain/>
+                                    <div className="flex-flow-centerY">
+                                        <NavSearch/>
+                                        <NavCart/>
+                                    </div>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>

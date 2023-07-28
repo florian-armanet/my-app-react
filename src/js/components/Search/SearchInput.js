@@ -1,58 +1,46 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import debounce from '../../utils/debounce'
 import { setProductsOfSearch } from '../../store/productsStore'
 import { setCategoriesOfSearch } from '../../store/categoriesStore'
-import { setSearchInputValue, setSearchValue } from '../../store/searchStore'
+import { setSearchValue } from '../../store/searchStore'
 
 const SearchInput = () => {
-    const dispatch                              = useDispatch()
-    const searchValue                           = useSelector(state => state.search.searchValue)
-    const searchInputValue                      = useSelector(state => state.search.searchInputValue)
-    const modalOpened                           = useSelector(state => state.search.modalOpened)
-    const [renderCloseIcon, setRenderCloseIcon] = useState('')
-    const inputRef                              = useRef()
+    const dispatch    = useDispatch()
+    const searchValue = useSelector(state => state.search.searchValue)
+    const modalOpened = useSelector(state => state.search.modalOpened)
+    const inputRef    = useRef()
 
-    /**
-     *
-     * @param event
-     */
-    const handleBeforeChange = (event) => {
-        dispatch(setSearchInputValue(event.target.value))
+    const changeHandler = (event) => {
+        dispatch(setSearchValue(event.target.value))
+
+        if (!event.target.value) {
+            dispatch(setProductsOfSearch(event.target.value))
+            dispatch(setCategoriesOfSearch(event.target.value))
+            return
+        }
+
+        dispatch(setProductsOfSearch(event.target.value))
+        dispatch(setCategoriesOfSearch(event.target.value))
     }
 
     /**
      *
      * @type {(function(...[*]): void)|*}
      */
-    const handleChange = debounce((event) => {
-        dispatch(setSearchValue(event.target.value))
-    }, 1000)
+    const changeHandlerDebounced = useCallback(debounce(changeHandler, 1000), [searchValue])
 
     /**
      *
      */
     const onResetSearch = () => {
-        dispatch(setSearchInputValue(''))
         dispatch(setSearchValue(''))
+        inputRef.current.value = ''
     }
 
     useEffect(() => {
-        if (!searchValue) {
-            setRenderCloseIcon('')
-            dispatch(setProductsOfSearch(searchValue))
-            dispatch(setCategoriesOfSearch(searchValue))
-            return
-        }
-
-        setRenderCloseIcon(<i onClick={ onResetSearch }
-                              className="Icon-close-light mr-2 text-primary-base cursor-pointer"></i>)
-        dispatch(setProductsOfSearch(searchValue))
-        dispatch(setCategoriesOfSearch(searchValue))
-    }, [searchValue])
-
-    useEffect(() => {
         if (modalOpened) {
+            inputRef.current.value = searchValue
             inputRef.current.focus()
         }
     }, [modalOpened])
@@ -63,14 +51,11 @@ const SearchInput = () => {
             <input type="text"
                    ref={ inputRef }
                    placeholder="Rechercher un produit..."
-                   value={ searchInputValue }
-                   onChange={ e => {
-                       handleBeforeChange(e)
-                       handleChange(e)
-                   } }
+                   onChange={ changeHandlerDebounced }
                    className="text-primary-hover font-bold placeholder:text-primary-light/75 bg-transparent outline-none flex-1 max-w-[200px]"/>
             <div className="flex-flow-centerY">
-                { renderCloseIcon }
+                { searchValue && <i onClick={ onResetSearch }
+                                    className="Icon-close-light mr-2 text-primary-base cursor-pointer"></i> }
                 <i className="Icon-search text-lg text-primary-base"></i>
             </div>
         </div>

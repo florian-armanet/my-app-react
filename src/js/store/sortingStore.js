@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const sortingStore = createSlice({
-    name: 'filters',
+    name: 'sorting',
     initialState: {
         sortings: [
             { name: 'Prix', code: 'price', propertySorted: 'price' },

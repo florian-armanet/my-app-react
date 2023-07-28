@@ -1,13 +1,15 @@
 import FiltersCategories from './FiltersCategories'
-import { setFiltersOpened, setResetAllCheckedValues } from '../../store/filtersStore'
+import { setFiltersOpened } from '../../store/filtersStore'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
 import Searcher from './Searcher'
+import { setProductsFiltered } from '../../store/productsStore'
+import { setCurrentSorting } from '../../store/sortingStore'
+import { setCategoriesSelected } from '../../store/filtersCategoriesStore'
+import { setSearcher } from '../../store/searcherStore'
 
 const FiltersContent = () => {
-    const dispatch              = useDispatch()
-    const resetAllCheckedValues = useSelector(state => state.filters.resetAllCheckedValues)
-    const products              = useSelector(state => state.products.all)
+    const dispatch = useDispatch()
+    const products = useSelector(state => state.products.all)
 
     /**
      *
@@ -15,7 +17,10 @@ const FiltersContent = () => {
      * @returns {*}
      */
     const resetAllFilters = (event) => {
-        dispatch(setResetAllCheckedValues(true))
+        dispatch(setProductsFiltered([...products]))
+        dispatch(setCurrentSorting({}))
+        dispatch(setCategoriesSelected([]))
+        dispatch(setSearcher(''))
     }
 
     /**
@@ -24,12 +29,6 @@ const FiltersContent = () => {
     const closeFilters = () => {
         dispatch(setFiltersOpened(false))
     }
-
-    useEffect(() => {
-        if (resetAllCheckedValues) {
-            dispatch(setResetAllCheckedValues(false))
-        }
-    }, [resetAllCheckedValues, dispatch])
 
     if (!products.length) {
         return (

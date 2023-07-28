@@ -1,34 +1,30 @@
 import {
     addCategoriesSelected,
     removeCategoriesSelected,
-    setCategoriesSelected,
-    setResetCheckedValuesOfFilters
+    setCategoriesSelected
 } from '../../store/filtersCategoriesStore'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInputValue, setSearcher } from '../../store/searcherStore'
+import { setSearcher } from '../../store/searcherStore'
+import { SORT_ASC, SORT_DESC } from '../../utils/constants'
+import { setProductsFiltered } from '../../store/productsStore'
 
 const FiltersCategoriesItem = ({ category }) => {
     const [currentCheckedValue, setCurrentCheckedValue] = useState(false)
 
-    const dispatch                    = useDispatch()
-    const resetCheckedValuesOfFilters = useSelector(state => state.filtersCategories.resetCheckedValuesOfFilters)
-    const getCategoriesSelected       = useSelector(state => state.filtersCategories.categoriesSelected)
-    const resetAllCheckedValues       = useSelector(state => state.filters.resetAllCheckedValues)
-    const filtersOpened = useSelector(state => state.filters.filtersOpened)
-
+    const dispatch              = useDispatch()
+    const getCategoriesSelected = useSelector(state => state.filtersCategories.categoriesSelected)
     /**
      *
      * @param event
      */
-    const handleChange = (event) => {
+    const handleChange          = (event) => {
         dispatch(setSearcher(''))
-        dispatch(setInputValue(''))
-        dispatch(setResetCheckedValuesOfFilters(false))
         setCurrentCheckedValue(!currentCheckedValue)
 
         if (event.target.checked && !getCategoriesSelected.includes(category.categoryCode)) {
             dispatch(addCategoriesSelected(category.categoryCode))
+            return
         }
 
         if (!event.target.checked && getCategoriesSelected.includes(category.categoryCode)) {
@@ -37,17 +33,10 @@ const FiltersCategoriesItem = ({ category }) => {
     }
 
     useEffect(() => {
-        if (resetCheckedValuesOfFilters || resetAllCheckedValues) {
-            setCurrentCheckedValue(false)
-            dispatch(setCategoriesSelected([]))
-        }
-    }, [resetCheckedValuesOfFilters, resetAllCheckedValues, dispatch])
+        if (getCategoriesSelected.length) return
 
-    useEffect(() => {
-        if (getCategoriesSelected.length && getCategoriesSelected.includes(category.categoryCode)) {
-            setCurrentCheckedValue(true)
-        }
-    }, [filtersOpened])
+        setCurrentCheckedValue(false)
+    }, [getCategoriesSelected])
 
     return (
         <li className="flex flex-wrap items-center mb-1">

@@ -3,13 +3,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProductsFiltered } from '../../store/productsStore'
 import { setCurrentSorting, setSortingModalOpened } from '../../store/sortingStore'
-import { setInputValue, setSearcher } from '../../store/searcherStore'
 
 const SortingItem = ({ item }) => {
     const dispatch                = useDispatch()
     const productsFiltered        = useSelector(state => state.products.filtered)
     const currentSorting          = useSelector(state => state.sorting.currentSorting)
-    const resetAllCheckedValues   = useSelector(state => state.filters.resetAllCheckedValues)
     const [isActive, setIsActive] = useState()
 
     /**
@@ -17,9 +15,6 @@ const SortingItem = ({ item }) => {
      * @param event
      */
     const handleChange = (event) => {
-        dispatch(setInputValue(''))
-        dispatch(setSearcher(''))
-
         dispatch(setCurrentSorting({
             ...item
         }))
@@ -40,12 +35,6 @@ const SortingItem = ({ item }) => {
 
         dispatch(setSortingModalOpened(false))
     }
-
-    useEffect(() => {
-        if (resetAllCheckedValues) {
-            dispatch(setCurrentSorting({}))
-        }
-    }, [resetAllCheckedValues, dispatch])
 
     useEffect(() => {
         setIsActive(currentSorting.typeSorting === item.typeSorting && currentSorting.code === item.code)

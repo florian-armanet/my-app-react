@@ -1,23 +1,43 @@
 import FiltersCategoriesItem from './FiltersCategoriesItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { fetchCategories, setResetCheckedValuesOfFilters } from '../../store/filtersCategoriesStore'
+import { fetchCategories, setCategoriesSelected } from '../../store/filtersCategoriesStore'
+import { SORT_ASC, SORT_DESC } from '../../utils/constants'
+import { setProductsFiltered } from '../../store/productsStore'
 
 const FiltersCategories = () => {
-    const dispatch   = useDispatch()
-    const products   = useSelector(state => state.products.all)
-    const categories = useSelector(state => state.filtersCategories.categories)
-
-    useEffect(() => {
-        dispatch(fetchCategories([...products]))
-    }, [products, dispatch])
+    const dispatch                    = useDispatch()
+    const products                    = useSelector(state => state.products.all)
+    const categories                  = useSelector(state => state.filtersCategories.categories)
+    const getCategoriesSelected       = useSelector(state => state.filtersCategories.categoriesSelected)
+    const currentSorting              = useSelector(state => state.sorting.currentSorting)
 
     /**
      *
      */
     const clickResetCheckedValue = () => {
-        dispatch(setResetCheckedValuesOfFilters(true))
+        dispatch(setCategoriesSelected([]))
     }
+
+    useEffect(() => {
+        dispatch(fetchCategories([...products]))
+    }, [products, dispatch])
+
+    useEffect(() => {
+        const productsFiltered = [...products].filter(product => {
+            return getCategoriesSelected.includes(product.category.categoryCode) || !getCategoriesSelected.length
+        })
+
+        if (currentSorting?.typeSorting === SORT_DESC) {
+            productsFiltered.sort((a, b) => b[currentSorting.propertySorted] - a[currentSorting.propertySorted])
+        }
+
+        if (currentSorting?.typeSorting === SORT_ASC) {
+            productsFiltered.sort((a, b) => a[currentSorting.propertySorted] - b[currentSorting.propertySorted])
+        }
+
+        dispatch(setProductsFiltered(productsFiltered))
+    }, [getCategoriesSelected])
 
     return (
         <>

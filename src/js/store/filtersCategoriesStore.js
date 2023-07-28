@@ -5,7 +5,6 @@ export const filtersCategoriesStore = createSlice({
     initialState: {
         categories: [],
         categoriesSelected: [],
-        resetCheckedValuesOfFilters: false,
     },
     reducers: {
         fetchCategories: (state, { payload }) => {
@@ -31,9 +30,6 @@ export const filtersCategoriesStore = createSlice({
             categoriesSelectedClone.splice(categoriesSelectedClone.indexOf(payload), 1)
             state.categoriesSelected = categoriesSelectedClone
         },
-        setResetCheckedValuesOfFilters: (state, { payload }) => {
-            state.resetCheckedValuesOfFilters = payload
-        },
     },
 })
 
@@ -43,6 +39,5 @@ export const {
                  fetchCategories,
                  addCategoriesSelected,
                  removeCategoriesSelected,
-                 setResetCheckedValuesOfFilters,
                  setCategoriesSelected
              } = filtersCategoriesStore.actions

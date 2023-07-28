@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import fetchProducts from '../../../api/products'
-import { SORT_DESC, STATUS_SUCCEEDED } from '../../../utils/constants'
+import { STATUS_SUCCEEDED } from '../../../utils/constants'
 import { setProductsFiltered } from '../../../store/productsStore'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -8,8 +8,7 @@ const LoadingProducts = () => {
     const dispatch              = useDispatch()
     const products              = useSelector(state => state.products.all)
     const productsStatusRequest = useSelector(state => state.products.status)
-    const getCategoriesSelected = useSelector(state => state.filtersCategories.categoriesSelected)
-    const currentSorting        = useSelector(state => state.sorting.currentSorting)
+    const searcherValue         = useSelector(state => state.searcher.searchValue)
 
     useEffect(() => {
         if (!productsStatusRequest) {
@@ -17,32 +16,11 @@ const LoadingProducts = () => {
             return
         }
 
-        if (productsStatusRequest === STATUS_SUCCEEDED) {
-            const productsFiltered = [...products]
-                .filter(product => {
-                    return getCategoriesSelected.includes(product.category.categoryCode) || !getCategoriesSelected.length
-                })
-
-            if (!Object.keys(currentSorting).length) {
-                dispatch(setProductsFiltered(productsFiltered))
-
-                return
-            }
-
-            if (currentSorting.typeSorting === SORT_DESC) {
-                dispatch(setProductsFiltered(
-                    productsFiltered.sort((a, b) => b[currentSorting.propertySorted] - a[currentSorting.propertySorted])
-                ))
-
-                return
-            }
-
-            dispatch(setProductsFiltered(
-                productsFiltered.sort((a, b) => a[currentSorting.propertySorted] - b[currentSorting.propertySorted])
-            ))
+        if (productsStatusRequest === STATUS_SUCCEEDED && !searcherValue) {
+            dispatch(setProductsFiltered(products))
         }
 
-    }, [productsStatusRequest, products, getCategoriesSelected, currentSorting, dispatch])
+    }, [productsStatusRequest, products, dispatch])
 }
 
 export default LoadingProducts
