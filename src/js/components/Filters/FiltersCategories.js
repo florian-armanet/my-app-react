@@ -1,15 +1,15 @@
 import FiltersCategoriesItem from './FiltersCategoriesItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { fetchCategories, setCategoriesSelected } from '../../store/filtersCategoriesStore'
+import { setCategoriesSelected } from '../../store/categoriesStore'
 import { SORT_ASC, SORT_DESC } from '../../utils/constants'
 import { setProductsFiltered } from '../../store/productsStore'
 
 const FiltersCategories = () => {
     const dispatch                    = useDispatch()
     const products                    = useSelector(state => state.products.all)
-    const categories                  = useSelector(state => state.filtersCategories.categories)
-    const getCategoriesSelected       = useSelector(state => state.filtersCategories.categoriesSelected)
+    const categories                  = useSelector(state => state.categories.categories)
+    const getCategoriesSelected       = useSelector(state => state.categories.categoriesSelected)
     const currentSorting              = useSelector(state => state.sorting.currentSorting)
 
     /**
@@ -18,10 +18,6 @@ const FiltersCategories = () => {
     const clickResetCheckedValue = () => {
         dispatch(setCategoriesSelected([]))
     }
-
-    useEffect(() => {
-        dispatch(fetchCategories([...products]))
-    }, [products, dispatch])
 
     useEffect(() => {
         const productsFiltered = [...products].filter(product => {

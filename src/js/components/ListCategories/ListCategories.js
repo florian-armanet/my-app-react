@@ -5,7 +5,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import LoaderBlock from '../Loader/LoaderBlock'
 
 const ListCategories = () => {
-    const categories              = useSelector(state => state.categories.all)
+    const categories              = useSelector(state => state.categories.categories)
     const products                = useSelector(state => state.products.all)
     const categoriesStatusRequest = useSelector(state => state.categories.status)
     const productsStatusRequest   = useSelector(state => state.products.status)

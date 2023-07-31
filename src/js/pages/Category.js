@@ -13,7 +13,7 @@ const Category = () => {
     const dispatch                                            = useDispatch()
     const params                                              = useParams()
     const paramCategoryLabelOrigin                            = params.categoryLabelOrigin
-    const categories                                          = useSelector(state => state.categories.all)
+    const categories                                          = useSelector(state => state.categories.categories)
     const currentCategory                                     = [...categories].find(cat => cat.categoryLabelOrigin === paramCategoryLabelOrigin)
     const productsOfCategoryStatusRequest                     = useSelector(state => state.productsOfCategory.status)
     const productsOfCategoryFetched                           = useSelector(state => state.productsOfCategory.productsOfCategoryFetched)

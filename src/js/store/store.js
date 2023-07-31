@@ -3,7 +3,6 @@ import productsReducer from './productsStore'
 import categoriesReducer from './categoriesStore'
 import productsFetchedReducer from './productsFetchedStore'
 import searcherReducer from './searcherStore'
-import filtersCategoriesReducer from './filtersCategoriesStore'
 import filtersReducer from './filtersStore'
 import productsOfCategoryReducer from './productsOfCategoryStore'
 import cartReducer from './cartStore'
@@ -19,7 +18,6 @@ export default configureStore({
         productsOfCategory: productsOfCategoryReducer,
         searcher: searcherReducer,
         filters: filtersReducer,
-        filtersCategories: filtersCategoriesReducer,
         cart: cartReducer,
         menu: menuReducer,
         sorting: sortingReducer,

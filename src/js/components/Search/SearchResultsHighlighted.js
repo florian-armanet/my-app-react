@@ -5,7 +5,7 @@ import { gsap } from 'gsap'
 import { PATH_CATEGORIES } from '../../utils/constants'
 
 const SearchResultsHighlighted = () => {
-    const categories  = useSelector(state => state.categories.all)
+    const categories  = useSelector(state => state.categories.categories)
     const ulRef       = useRef()
     const modalOpened = useSelector(state => state.search.modalOpened)
 

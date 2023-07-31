@@ -120,7 +120,7 @@ const Product = () => {
                     </NavLink>
                 </div>
                 <div className="o-col-12 lg:o-col-6 lg-down:mb-6">
-                    <img src={ currentProduct.image } alt={ currentProduct.title } className="lg-down:max-w-56"/>
+                    <img src={ currentProduct.image } alt={ currentProduct.title } className="lg-down:max-w-56 max-h-96"/>
                 </div>
                 <div className="o-col-12 lg:o-col-6">
                     <p className="font-bold text-2xl mb-1">{ currentProduct.title }</p>

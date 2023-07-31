@@ -5,7 +5,7 @@ import { PATH_CATEGORIES } from '../../utils/constants'
 
 const CategoryMiniature = ({ category }) => {
     const products   = useSelector(state => state.products.all)
-    const categories = useSelector(state => state.categories.all)
+    const categories = useSelector(state => state.categories.categories)
 
     const [firstProductOfCategory, setFirstProductOfCategory] = useState(null)
 

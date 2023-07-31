@@ -14,6 +14,8 @@ const ProductMiniature = ({ product, cardType = 'Card-product' }) => {
     const productsInCart = useSelector(state => state.products.inCart)
     const isCart         = location.pathname === PATH_CART
 
+    const [productInCart, setProductInCart] = useState(null)
+
     /**
      *
      */
@@ -30,35 +32,29 @@ const ProductMiniature = ({ product, cardType = 'Card-product' }) => {
         dispatch(addProductInCart({ ...payload }))
     }
 
-    const renderIconAddToCartEnabled = <i onClick={ addToCart }
-                                          className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded transition-fast hover:bg-primary-hover"></i>
-
-    const [contentAddToCart, setContentAddToCart] = useState(renderIconAddToCartEnabled)
-
     useEffect(() => {
-        const productInCart = productsInCart.find(productInCart => productInCart.id === product.id)
+        setProductInCart(productsInCart.find(productInCart => productInCart.id === product.id))
+
         if (productInCart) {
-            setContentAddToCart(<Quantity product={ productInCart }/>)
             localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCart))
             return
         }
 
-        setContentAddToCart(renderIconAddToCartEnabled)
         localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCart))
     }, [productsInCart, dispatch])
 
     return (
         <li className={ cardType }>
             <div className="group flex flex-col h-full">
-                <NavLink to={ `${ PATH_PRODUCTS + '/' + product.id }` } className="h-56 p-2 overflow-hidden">
+                <NavLink to={ `${ PATH_PRODUCTS + '/' + product.id }` } className="h-32 sm:h-56 p-2 overflow-hidden">
                     <img src={ product.image }
                          alt={ product.title }
                          className="h-full w-full object-contain mb-2 group-hover:scale-105 group-hover:rotate-2 transition"/>
                 </NavLink>
 
-                <div className="flex-1 p-4 flex flex-col justify-between">
+                <div className="flex-1 p-2 sm:p-4 flex flex-col justify-between">
                     <NavLink to={ `${ PATH_PRODUCTS + '/' + product.id }` }
-                             className="font-bold line-clamp-1">
+                             className="font-bold line-clamp-1 line-break-anywhere">
                         { product.title }
                     </NavLink>
 
@@ -73,7 +69,10 @@ const ProductMiniature = ({ product, cardType = 'Card-product' }) => {
                         <div>
                             <p className="font-bold text-primary-base">{ formatNumberToString(product.price) } €</p>
                         </div>
-                        { contentAddToCart }
+
+                        { productInCart && <Quantity product={ productInCart }/> }
+                        { !productInCart && <i onClick={ addToCart }
+                                               className="Icon-basket cursor-pointer text-xl text-white bg-primary-base w-10 h-10 flex-flow-center rounded transition-fast hover:bg-primary-hover"></i> }
                     </div>
                 </div>
             </div>

@@ -169,6 +169,11 @@
         box-shadow: inset 3px 3px #FC766AFF, inset -3px -3px #FC766AFF;
     }
 
+    .line-break-anywhere {
+        line-break: anywhere;
+    }
+
+
     .has-underline {
         @apply relative inline-block;
 

@@ -7,16 +7,32 @@ import matchStrings from '../utils/matchStrings'
 export const categoriesStore = createSlice({
     name: 'categories',
     initialState: {
-        all: [],
+        categories: [],
         categoriesOfSearch: [],
+        categoriesSelected: [],
         status: '',
         error: null,
     },
     reducers: {
         setCategoriesOfSearch: (state, { payload }) => {
-            state.categoriesOfSearch = [...state.all].filter(category => {
+            state.categoriesOfSearch = [...state.categories].filter(category => {
                 return matchStrings(category.categoryLabel, payload) || payload === ''
             })
+        },
+        setCategoriesSelected: (state, { payload }) => {
+            state.categoriesSelected = payload
+        },
+        addCategoriesSelected: (state, { payload }) => {
+            const categoriesSelectedClone = [...state.categoriesSelected]
+
+            categoriesSelectedClone.push(payload)
+            state.categoriesSelected = categoriesSelectedClone
+        },
+        removeCategoriesSelected: (state, { payload }) => {
+            const categoriesSelectedClone = [...state.categoriesSelected]
+
+            categoriesSelectedClone.splice(categoriesSelectedClone.indexOf(payload), 1)
+            state.categoriesSelected = categoriesSelectedClone
         },
     },
     extraReducers (builder) {
@@ -26,11 +42,12 @@ export const categoriesStore = createSlice({
             })
             .addCase(fetchCategories.fulfilled, (state, { payload }) => {
                 state.status = STATUS_SUCCEEDED
-                state.all    = payload.reduce((acc, category) => {
+                state.categories    = payload.reduce((acc, category) => {
                     const objCategory = {
                         categoryLabelOrigin: category,
                         categoryLabel: uppercaseFirstLetter(category),
-                        categoryCode: category.replace(' ', '_').replace('\'', '')
+                        categoryCode: category.replace(' ', '_').replace('\'', ''),
+                        filterActivated: false,
                     }
                     acc.push({ ...objCategory })
 
@@ -44,8 +61,11 @@ export const categoriesStore = createSlice({
     }
 })
 
-export const { setCategoriesOfSearch } = categoriesStore.actions
+export const {
+                 setCategoriesOfSearch,
+                 addCategoriesSelected,
+                 removeCategoriesSelected,
+                 setCategoriesSelected,
+             } = categoriesStore.actions
 
 export default categoriesStore.reducer
-
-// export const { } = categoriesStore.actions

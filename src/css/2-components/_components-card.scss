@@ -9,7 +9,7 @@
         @apply relative flex flex-col mx-2 mb-4 bg-white rounded-sm border border-gray-100 rounded hover:shadow-lg transition;
 
         max-width: 256px;
-        flex: 0 0 256px;
+        flex: 0 0 calc(50% - theme('spacing.2') * 2);
 
         @screen md {
             flex: 0 0 calc(33.33% - theme('spacing.2') * 2);

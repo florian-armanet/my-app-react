@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Searcher from './Searcher'
 import { setProductsFiltered } from '../../store/productsStore'
 import { setCurrentSorting } from '../../store/sortingStore'
-import { setCategoriesSelected } from '../../store/filtersCategoriesStore'
+import { setCategoriesSelected } from '../../store/categoriesStore'
 import { setSearcher } from '../../store/searcherStore'
 
 const FiltersContent = () => {

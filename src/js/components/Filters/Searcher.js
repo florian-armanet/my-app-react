@@ -3,14 +3,14 @@ import { setSearcher } from '../../store/searcherStore'
 import debounce from '../../utils/debounce'
 import { setProductsBySearcher, setProductsFiltered } from '../../store/productsStore'
 import { useCallback, useEffect, useRef } from 'react'
-import { setCategoriesSelected } from '../../store/filtersCategoriesStore'
+import { setCategoriesSelected } from '../../store/categoriesStore'
 import matchStrings from '../../utils/matchStrings'
 import { SORT_ASC, SORT_DESC } from '../../utils/constants'
 
 const Searcher = () => {
     const dispatch              = useDispatch()
     const searcherValue         = useSelector(state => state.searcher.searchValue)
-    const getCategoriesSelected = useSelector(state => state.filtersCategories.categoriesSelected)
+    const getCategoriesSelected = useSelector(state => state.categories.categoriesSelected)
     const inputRef              = useRef()
     const currentSorting        = useSelector(state => state.sorting.currentSorting)
     const products              = useSelector(state => state.products.all)
