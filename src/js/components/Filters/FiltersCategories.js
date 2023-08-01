@@ -12,13 +12,6 @@ const FiltersCategories = () => {
     const getCategoriesSelected       = useSelector(state => state.categories.categoriesSelected)
     const currentSorting              = useSelector(state => state.sorting.currentSorting)
 
-    /**
-     *
-     */
-    const clickResetCheckedValue = () => {
-        dispatch(setCategoriesSelected([]))
-    }
-
     useEffect(() => {
         const productsFiltered = [...products].filter(product => {
             return getCategoriesSelected.includes(product.category.categoryCode) || !getCategoriesSelected.length
@@ -44,7 +37,7 @@ const FiltersCategories = () => {
                 }
             </ul>
             <button className="px-4 py-2 mb-4 underline hover:text-secondary-base transition"
-                    onClick={ clickResetCheckedValue }>
+                    onClick={ () => dispatch(setCategoriesSelected([])) }>
                 Réinitialiser
             </button>
         </>
