@@ -58,7 +58,9 @@ const CartProductsAssociated = () => {
                         unmountOnExit
                         appear
                     >
-                        <ProductMiniature product={ product } cardType="Card-product Card-product--sm" key={ product.id }/>
+                        <li className="Card-product Card-product--sm">
+                            <ProductMiniature product={ product } key={ product.id }/>
+                        </li>
                     </CSSTransition>
                 )) }
             </TransitionGroup>

@@ -9,14 +9,12 @@ const LoadingData = () => {
     const dispatch       = useDispatch()
     const productsInCart = useSelector(state => state.products.inCart)
 
-    useEffect(() => {
-        if (!productsInCart.length) {
-            if (localStorage.getItem(PRODUCTS_IN_CART)) {
-                const initData = JSON.parse(localStorage.getItem(PRODUCTS_IN_CART))
-                dispatch(setProductInCart([...initData]))
-            }
+    if (!productsInCart.length) {
+        if (localStorage.getItem(PRODUCTS_IN_CART)) {
+            const initData = JSON.parse(localStorage.getItem(PRODUCTS_IN_CART))
+            dispatch(setProductInCart([...initData]))
         }
-    }, [dispatch])
+    }
 
     return (
         <>

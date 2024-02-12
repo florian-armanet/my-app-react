@@ -6,7 +6,7 @@ import { PATH_PRODUCTS } from '../../../utils/constants'
 import { NavLink } from 'react-router-dom'
 import { setCartModalOpened } from '../../../store/cartStore'
 
-export const CartModalContentProduct = ({ product }) => {
+const CartModalContentProduct = ({ product }) => {
     const dispatch = useDispatch()
 
     /**
@@ -24,7 +24,7 @@ export const CartModalContentProduct = ({ product }) => {
     }
 
     return (
-        <li className="mb-2 p-4 bg-gray-50/50 rounded flex flex-wrap items-center">
+        <>
             <div className="w-12 mr-4">
                 <img src={ product.image }
                      alt={ product.title }
@@ -45,7 +45,7 @@ export const CartModalContentProduct = ({ product }) => {
                     <p>{ formatNumberToString(product.price) } €</p>
                 </div>
             </div>
-        </li>
+        </>
     )
 }
 

@@ -20,7 +20,7 @@ const LoadingProducts = () => {
             dispatch(setProductsFiltered(products))
         }
 
-    }, [productsStatusRequest, products, dispatch])
+    }, [productsStatusRequest, dispatch])
 }
 
 export default LoadingProducts
