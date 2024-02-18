@@ -1,15 +1,16 @@
 import { Outlet, useLocation } from 'react-router-dom'
-import NavCart from './NavCart'
-import NavMain from './NavMain'
-import { isTablet } from '../../utils/viewport'
-import NavSearch from './NavSearch'
-import Search from '../Search/Search'
-import Logo from '../Logo'
+import NavCart from './Nav/NavCart'
+import NavMain from './Nav/NavMain'
+import { isTablet } from '../utils/viewport'
+import NavSearch from './Nav/NavSearch'
+import Search from './Search/Search'
+import Logo from './Logo'
 
 const Nav = () => {
     const location                  = useLocation()
 
     const routeHomepage = location.pathname === '/'
+    console.log('Layout')
 
     return (
         <>
