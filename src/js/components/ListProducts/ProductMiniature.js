@@ -6,7 +6,6 @@ import { PATH_CART, PATH_PRODUCTS, PRODUCTS_IN_CART } from '../../utils/constant
 import { useDispatch, useSelector } from 'react-redux'
 import { addProductInCart } from '../../store/productsStore'
 import { setCartModalOpened } from '../../store/cartStore'
-import { useState } from 'react'
 import Quantity from '../Quantity'
 
 const ProductMiniature = ({ product}) => {
@@ -14,7 +13,7 @@ const ProductMiniature = ({ product}) => {
     const productsInCart = useSelector(state => state.products.inCart)
     const isCart         = location.pathname === PATH_CART
 
-    const [productInCart, setProductInCart] = useState(productsInCart.find(productInCart => productInCart.id === product.id))
+    const productInCart = productsInCart.find(productInCart => productInCart.id === product.id)
 
     console.log('product miniature')
 
@@ -32,7 +31,6 @@ const ProductMiniature = ({ product}) => {
         }
 
         dispatch(addProductInCart({ ...payload }))
-        setProductInCart([...productsInCart, { ...payload }].find(productInCart => productInCart.id === product.id))
         localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify([...productsInCart, { ...payload }]))
     }
 

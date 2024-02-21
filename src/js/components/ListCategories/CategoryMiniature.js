@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { PATH_CATEGORIES } from '../../utils/constants'
 
 const CategoryMiniature = ({ category }) => {
-    const products   = useSelector(state => state.products.all)
+    const products   = useSelector(state => state.products.products)
     const categories = useSelector(state => state.categories.categories)
 
     const [firstProductOfCategory, setFirstProductOfCategory] = useState(null)

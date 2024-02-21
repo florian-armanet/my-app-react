@@ -14,8 +14,11 @@ const CartInner = () => {
                 <div className="o-grid mb-16">
                     <div className="o-col-12 lg:o-col-8 lg-down:mb-4">
                         <ul className="max-h-600px overflow-auto Scrollbar Scrollbar--light">
-                            { productsInCart.map((product, index) =>
-                                <CartModalContentProduct product={ product } key={ index }/>) }
+                            {productsInCart.map(product =>
+                                <li className="mb-2 p-4 bg-gray-50/50 rounded flex flex-wrap items-center" key={product.id}>
+                                    <CartModalContentProduct product={product} />
+                                </li>
+                            )}
                         </ul>
                     </div>
 
@@ -23,7 +26,7 @@ const CartInner = () => {
                         <div className="p-4 bg-gray-50/50 rounded">
                             <p className="text-center uppercase text-xl mb-8 font-bold">Résumé</p>
 
-                            <CartModalContentTotals/>
+                            <CartModalContentTotals />
 
                             <div className="flex-flow-center">
                                 <button className="Button Button--primary">Paiement indisponible</button>
@@ -32,7 +35,7 @@ const CartInner = () => {
                     </div>
                 </div>
 
-                <CartProductsAssociated/>
+                <CartProductsAssociated />
             </>
         )
     }
@@ -40,7 +43,7 @@ const CartInner = () => {
     return (
         <>
             <p className="bg-primary-lighter text-primary-base p-4 rounded mb-16">Panier vide</p>
-            <CartProductsAssociated/>
+            <CartProductsAssociated />
         </>
     )
 }

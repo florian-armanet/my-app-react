@@ -1,13 +1,10 @@
 import { setProductQuantity } from '../store/productsStore'
 import { useDispatch, useSelector } from 'react-redux'
 import { PRODUCTS_IN_CART } from '../utils/constants'
-import { useState } from 'react'
 
 const Quantity = ({ product }) => {
     const dispatch = useDispatch()
     const productsInCart = useSelector(state => state.products.inCart)
-
-    const [quantity, setQuantity] = useState(product.quantity || 1)
 
     /**
      *
@@ -33,7 +30,6 @@ const Quantity = ({ product }) => {
             quantity: Number(event.target.value)
         }
 
-        setQuantity(Number(event.target.value))
         dispatch(setProductQuantity({ ...payload }))
 
         processLocalStorage(payload)
@@ -43,12 +39,11 @@ const Quantity = ({ product }) => {
      *
      */
     const handleDecrement = () => {
-        if (quantity <= 1) return
-        setQuantity(quantity - 1)
+        if (product.quantity <= 1) return
 
         const payload = {
             id: product.id,
-            quantity: quantity - 1
+            quantity: product.quantity - 1
         }
 
         dispatch(setProductQuantity({ ...payload }))
@@ -62,12 +57,10 @@ const Quantity = ({ product }) => {
     const handleIncrement = () => {
         const payload = {
             id: product.id,
-            quantity: quantity + 1
+            quantity: product.quantity + 1
         }
 
         dispatch(setProductQuantity({ ...payload }))
-
-        setQuantity(quantity + 1)
 
         processLocalStorage(payload)
     }
@@ -77,7 +70,7 @@ const Quantity = ({ product }) => {
             <div onClick={ handleDecrement }
                  className="w-8 flex-flow-center cursor-pointer text-2xl hover:bg-primary-light hover:text-white">-</div>
             <input type="number"
-                   value={ quantity }
+                   value={ product.quantity }
                    onChange={ handleChange }
                    min="1"
                    className="js-input-number bg-transparent text-center font-bold text-lg w-10 h-8 focus:outline-0"/>

@@ -7,7 +7,7 @@ import { setProductsFiltered } from '../../store/productsStore'
 
 const FiltersCategories = () => {
     const dispatch                    = useDispatch()
-    const products                    = useSelector(state => state.products.all)
+    const products                    = useSelector(state => state.products.products)
     const categories                  = useSelector(state => state.categories.categories)
     const getCategoriesSelected       = useSelector(state => state.categories.categoriesSelected)
     const currentSorting              = useSelector(state => state.sorting.currentSorting)

@@ -5,7 +5,7 @@ import { EVENT_OPEN_SEARCH_MODAL } from '../../utils/constants'
 
 const NavSearch = () => {
     const dispatch   = useDispatch()
-    const products   = useSelector(state => state.products.all)
+    const products   = useSelector(state => state.products.products)
     const categories = useSelector(state => state.categories.categories)
 
     const onOpenSearchModal = () => {

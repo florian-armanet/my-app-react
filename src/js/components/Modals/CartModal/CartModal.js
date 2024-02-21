@@ -9,7 +9,7 @@ const CartModal = () => {
     const modalOpened    = useSelector(state => state.cart.modalOpened)
     const productsInCart = useSelector(state => state.products.inCart)
 
-    // console.log('cart modal');
+    console.log('cart modal');
 
     /**
      *
@@ -22,7 +22,7 @@ const CartModal = () => {
         <>
             <CSSTransition in={ modalOpened } classNames="Animation-translateX" timeout={ 300 } unmountOnExit appear>
                 <div
-                    className="z-max fixed top-0 right-0 bottom-0 max-w-450 w-full flex flex-col bg-white shadow flex flex-col overflow-auto">
+                    className="z-max fixed top-0 right-0 bottom-0 max-w-450 w-full flex flex-col bg-white shadowoverflow-auto">
                     <div className="relative p-4 bg-primary-base/10 text-primary-base">
                         <i onClick={ handleCloseModal }
                            className="Icon-close-light absolute left-4 text-xl absolute-y-center cursor-pointer"></i>

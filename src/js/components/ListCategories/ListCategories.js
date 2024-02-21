@@ -6,7 +6,7 @@ import LoaderBlock from '../Loader/LoaderBlock'
 
 const ListCategories = () => {
     const categories              = useSelector(state => state.categories.categories)
-    const products                = useSelector(state => state.products.all)
+    const products                = useSelector(state => state.products.products)
     const categoriesStatusRequest = useSelector(state => state.categories.status)
     const productsStatusRequest   = useSelector(state => state.products.status)
 

@@ -6,7 +6,7 @@ import { STATUS_LOADING } from '../../utils/constants'
 import LoaderBlock from '../Loader/LoaderBlock'
 
 const CartProductsAssociated = () => {
-    const products                                                  = useSelector(state => state.products.all)
+    const products                                                  = useSelector(state => state.products.products)
     const productsInCart                                            = useSelector(state => state.products.inCart)
     const [currentCategory, setCurrentCategory]                     = useState([])
     const [productsOfCurrentCategory, setProductsOfCurrentCategory] = useState([])
