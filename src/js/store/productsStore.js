@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import fetchProducts from '../api/products'
-import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED } from '../utils/constants'
+import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCEEDED, PRODUCTS_IN_CART } from '../utils/constants'
 import matchStrings from '../utils/matchStrings'
 import uppercaseFirstLetter from '../utils/uppercaseFirstLetter'
 
@@ -77,6 +77,11 @@ export const productsStore = createSlice({
                 }, [])
                 state.products = dataTransformed
                 state.filtered = dataTransformed
+
+                if (localStorage.getItem(PRODUCTS_IN_CART)) {
+                    const initData = JSON.parse(localStorage.getItem(PRODUCTS_IN_CART))
+                    state.inCart = [...initData]
+                }
             })
             .addCase(fetchProducts.rejected, (state, { error }) => {
                 state.status = STATUS_FAILED

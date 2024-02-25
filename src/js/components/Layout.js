@@ -10,7 +10,7 @@ const Nav = () => {
     const location                  = useLocation()
 
     const routeHomepage = location.pathname === '/'
-    console.log('Layout')
+    // console.log('Layout')
 
     return (
         <>
