@@ -16,7 +16,7 @@ export const PRODUCTS_IN_CART = 'products_in_cart'
 
 export const EVENT_OPEN_SEARCH_MODAL = 'event_open_search_modal'
 
-export const INPUT_RATINGS = {
+export const INPUT_SORTING = {
     'sortDesc': 'décroissant',
     'sortAsc': 'croissant',
 }
