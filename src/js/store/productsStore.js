@@ -81,6 +81,15 @@ export const productsStore = createSlice({
                 if (localStorage.getItem(PRODUCTS_IN_CART)) {
                     const initData = JSON.parse(localStorage.getItem(PRODUCTS_IN_CART))
                     state.inCart = [...initData]
+
+                    state.quantityInCart = [...state.inCart].reduce((acc, curr) => {
+                        return acc + curr.quantity
+                    }, 0)
+
+
+                    state.totalPrice = [...state.inCart].reduce((acc, curr) => {
+                        return acc + curr.price * curr.quantity
+                    }, 0)
                 }
             })
             .addCase(fetchProducts.rejected, (state, { error }) => {

@@ -4,9 +4,10 @@ import { generateStarRate } from '../../utils/generateStarRate'
 import { roundHalf } from '../../utils/mathRound'
 import { PATH_CART, PATH_PRODUCTS, PRODUCTS_IN_CART } from '../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { addProductInCart } from '../../store/productsStore'
+import { addProductInCart, setQuantityInCart, setTotalPrice } from '../../store/productsStore'
 import { setCartModalOpened } from '../../store/cartStore'
 import Quantity from '../Quantity'
+import updatePriceAndQuantityInCart from '../../modules/updatePriceAndQuantityInCart'
 
 const ProductMiniature = ({ product}) => {
     const dispatch       = useDispatch()
@@ -31,7 +32,12 @@ const ProductMiniature = ({ product}) => {
         }
 
         dispatch(addProductInCart({ ...payload }))
-        localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify([...productsInCart, { ...payload }]))
+
+        const productsInCartUpdated = [...productsInCart, { ...payload }]
+
+        updatePriceAndQuantityInCart(dispatch, productsInCartUpdated)
+
+        localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify([...productsInCartUpdated]))
     }
 
     return (

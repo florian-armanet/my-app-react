@@ -5,6 +5,7 @@ import Quantity from '../../Quantity'
 import { PATH_PRODUCTS, PRODUCTS_IN_CART } from '../../../utils/constants'
 import { NavLink } from 'react-router-dom'
 import { setCartModalOpened } from '../../../store/cartStore'
+import updatePriceAndQuantityInCart from '../../../modules/updatePriceAndQuantityInCart'
 
 const CartModalContentProduct = ({ product }) => {
     const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const CartModalContentProduct = ({ product }) => {
 
         const productsInCartUpdated = [...productsInCart].filter(p => p.id !== product.id)
         localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCartUpdated))
+        updatePriceAndQuantityInCart(dispatch, productsInCartUpdated)
     }
 
     /**

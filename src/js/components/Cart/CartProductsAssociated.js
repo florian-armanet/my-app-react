@@ -1,45 +1,35 @@
 import { useSelector } from 'react-redux'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import ProductMiniature from '../ListProducts/ProductMiniature'
-import { useEffect, useState } from 'react'
 import { STATUS_LOADING } from '../../utils/constants'
 import LoaderBlock from '../Loader/LoaderBlock'
 
 const CartProductsAssociated = () => {
-    const products                                                  = useSelector(state => state.products.products)
-    const productsInCart                                            = useSelector(state => state.products.inCart)
-    const [currentCategory, setCurrentCategory]                     = useState([])
-    const [productsOfCurrentCategory, setProductsOfCurrentCategory] = useState([])
-    const productsStatusRequest                                     = useSelector(state => state.products.status)
+    const products = useSelector(state => state.products.products)
+    const productsInCart = useSelector(state => state.products.inCart)
+    const productsStatusRequest = useSelector(state => state.products.status)
 
-    useEffect(() => {
-        if (!productsInCart.length) {
-            const oneProductByCategory = [...products].reduce((acc, curr, index, arr) => {
-                if (acc.some(pdt => curr.category.categoryCode === pdt.category.categoryCode)) {
-                    return acc
-                }
+    const currentCategory = productsInCart.length ? productsInCart[0].category.categoryCode : null
 
-                acc.push(curr)
-                return acc
-            }, [])
+    const productsOfCurrentCategory = [...products].filter(product => product.category.categoryCode === currentCategory)
+        .filter(product => !productsInCart.some(productInCart => product.id === productInCart.id))
+        .slice(0, 4)
 
-            setProductsOfCurrentCategory(oneProductByCategory)
-            return
+    const oneProductByCategory = [...products].reduce((acc, curr) => {
+        if (acc.some(pdt => curr.category.categoryCode === pdt.category.categoryCode)) {
+            return acc
         }
 
-        setCurrentCategory(productsInCart[0].category.categoryCode)
+        acc.push(curr)
+        return acc
+    }, [])
 
-        setProductsOfCurrentCategory(
-            [...products].filter(product => product.category.categoryCode === currentCategory)
-                .filter(product => !productsInCart.some(productInCart => product.id === productInCart.id))
-                .slice(0, 4)
-        )
-    }, [products, productsInCart, currentCategory])
+    const productsHighlightedInCart = productsInCart.length ? productsOfCurrentCategory : oneProductByCategory
 
     if (!productsStatusRequest || productsStatusRequest === STATUS_LOADING) {
         return (
             <div className="flex-flow-center mt-6">
-                <LoaderBlock nbBlocks={ 4 }/>
+                <LoaderBlock nbBlocks={4} />
             </div>
         )
     }
@@ -49,20 +39,20 @@ const CartProductsAssociated = () => {
             <p className="text-center text-xl mb-6">Vous pourriez aimer</p>
 
             <TransitionGroup component="ul" className="flex-flow-center -mx-2">
-                { productsOfCurrentCategory.map(product => (
+                {productsHighlightedInCart.map(product => (
                     <CSSTransition
-                        in={ true }
-                        key={ product.id }
-                        timeout={ 500 }
+                        in={true}
+                        key={product.id}
+                        timeout={500}
                         classNames="Animation-list-item"
                         unmountOnExit
                         appear
                     >
                         <li className="Card-product Card-product--sm">
-                            <ProductMiniature product={ product } key={ product.id }/>
+                            <ProductMiniature product={product} key={product.id} />
                         </li>
                     </CSSTransition>
-                )) }
+                ))}
             </TransitionGroup>
         </>
     )

@@ -15,8 +15,8 @@ const SearchResultsProducts = () => {
 
             <ul className="flex flex-wrap justify-center lg:justify-start -mx-2">
                 { productsOfSearch.map(product =>
-                    <li className="Card-product">
-                        <ProductMiniature product={ product } key={ product.id }/>
+                    <li className="Card-product" key={ product.id }>
+                        <ProductMiniature product={ product }/>
                     </li>
                 ) }
             </ul>

@@ -1,16 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { setSearchModalOpened } from '../../store/searchStore'
-import EventBusVanilla from '../../utils/eventBusVanilla'
-import { EVENT_OPEN_SEARCH_MODAL } from '../../utils/constants'
 
 const NavSearch = () => {
     const dispatch   = useDispatch()
     const products   = useSelector(state => state.products.products)
     const categories = useSelector(state => state.categories.categories)
 
-    const onOpenSearchModal = () => {
+    const handleOpenSearchModal = () => {
         dispatch(setSearchModalOpened(true))
-        EventBusVanilla.dispatchEvent(EVENT_OPEN_SEARCH_MODAL)
+        document.body.classList.add('remove-scrollbar')
     }
 
     if (!products.length || !categories.length) {
@@ -20,7 +18,7 @@ const NavSearch = () => {
     }
 
     return (
-        <i onClick={ onOpenSearchModal } className="Icon-search text-xl mr-4 cursor-pointer"></i>
+        <i onClick={ handleOpenSearchModal } className="Icon-search text-xl mr-4 cursor-pointer"></i>
     )
 }
 
