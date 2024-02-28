@@ -21,7 +21,9 @@ const ListProducts = () => {
                             unmountOnExit
                             appear
                         >
-                            <ProductMiniature product={ product } key={ product.id }/>
+                            <li className="Card-product">
+                                <ProductMiniature product={ product } key={ product.id }/>
+                            </li>
                         </CSSTransition>
                     )) }
             </TransitionGroup>

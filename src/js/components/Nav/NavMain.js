@@ -23,14 +23,24 @@ const NavMain = () => {
 
     if (isTablet()) {
         return (
-            <i onClick={ onClick } className="Icon-menu text-xl mr-5"></i>
+            <i onClick={onClick} className="Icon-menu text-xl mr-5"></i>
         )
     }
 
     return (
         <nav className="flex-flow-center">
-            <NavLink to={ PATH_PRODUCTS } className={ classesHandler }>Produits</NavLink>
-            <NavLink to={ PATH_CATEGORIES } className={ classesHandler }>Catégories</NavLink>
+            <NavLink to={PATH_PRODUCTS} className={classesHandler}>
+                <div className='flex-flow-center'>
+                    <span>Produits</span>
+                    <i className='Icon-product text-2xl ml-2'></i>
+                </div>
+            </NavLink>
+            <NavLink to={PATH_CATEGORIES} className={classesHandler}>
+                <div className='flex-flow-center'>
+                    <span>Catégories</span>
+                    <i className='Icon-categories text-2xl ml-2'></i>
+                </div>
+            </NavLink>
         </nav>
     )
 }

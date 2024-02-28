@@ -1,30 +1,36 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import formatNumberToString from '../../../utils/formatNumberToString'
 import { removeProductInCart } from '../../../store/productsStore'
 import Quantity from '../../Quantity'
-import { PATH_PRODUCTS } from '../../../utils/constants'
+import { PATH_PRODUCTS, PRODUCTS_IN_CART } from '../../../utils/constants'
 import { NavLink } from 'react-router-dom'
 import { setCartModalOpened } from '../../../store/cartStore'
+import updatePriceAndQuantityInCart from '../../../modules/updatePriceAndQuantityInCart'
 
-export const CartModalContentProduct = ({ product }) => {
+const CartModalContentProduct = ({ product }) => {
     const dispatch = useDispatch()
+    const productsInCart = useSelector(state => state.products.inCart)
 
     /**
      *
      */
-    const onRemoveProduct = () => {
+    const handleRemoveProduct = () => {
         dispatch(removeProductInCart(product.id))
+
+        const productsInCartUpdated = [...productsInCart].filter(p => p.id !== product.id)
+        localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCartUpdated))
+        updatePriceAndQuantityInCart(dispatch, productsInCartUpdated)
     }
 
     /**
      *
      */
-    const closeModal = () => {
+    const handleCloseModal = () => {
         dispatch(setCartModalOpened(false))
     }
 
     return (
-        <li className="mb-2 p-4 bg-gray-50/50 rounded flex flex-wrap items-center">
+        <>
             <div className="w-12 mr-4">
                 <img src={ product.image }
                      alt={ product.title }
@@ -33,11 +39,11 @@ export const CartModalContentProduct = ({ product }) => {
             <div className="flex-1 flex flex-col">
                 <div className="flex-flow-between items-center mb-2">
                     <NavLink to={ `${ PATH_PRODUCTS + '/' + product.id }` }
-                             onClick={ closeModal }
+                             onClick={ handleCloseModal }
                              className="line-clamp-1 flex-1 mr-4 transition-fast hover:text-primary-base">
                         { product.title }
                     </NavLink>
-                    <i onClick={ onRemoveProduct } className="Icon-trash text-red-500 cursor-pointer"></i>
+                    <i onClick={ handleRemoveProduct } className="Icon-trash text-red-500 cursor-pointer"></i>
                 </div>
                 <div className="flex-flow-between items-center">
                     <Quantity product={ product }/>
@@ -45,7 +51,7 @@ export const CartModalContentProduct = ({ product }) => {
                     <p>{ formatNumberToString(product.price) } €</p>
                 </div>
             </div>
-        </li>
+        </>
     )
 }
 

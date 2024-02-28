@@ -6,7 +6,7 @@ import { setMenuOpened } from '../../../store/menuStore'
 import { useEffect } from 'react'
 
 const MenuModal = () => {
-    const dispatch   = useDispatch()
+    const dispatch = useDispatch()
     const menuOpened = useSelector(state => state.menu.menuOpened)
 
     const classesHandler = ({ isActive }) =>
@@ -32,20 +32,31 @@ const MenuModal = () => {
 
     return (
         <>
-            <CSSTransition in={ menuOpened } classNames="Animation-translateX" timeout={ 300 } unmountOnExit appear>
+            <CSSTransition in={menuOpened} classNames="Animation-translateX" timeout={300} unmountOnExit appear>
                 <div
                     className="z-max fixed top-0 right-0 bottom-0 p-4 max-w-450 w-full bg-primary-base shadow text-white overflow-auto">
                     <div className="relative p-4 h-full text-primary-base">
-                        <i onClick={ closeMenu }
-                           className="Icon-close-light absolute top-4 right-4 text-xl text-white absolute-y-center cursor-pointer"></i>
+                        <i onClick={closeMenu}
+                            className="Icon-close-light absolute top-4 right-4 text-xl text-white absolute-y-center cursor-pointer"></i>
 
                         <nav className="flex flex-col justify-center items-center h-full">
-                            <NavLink to={ PATH_PRODUCTS }
-                                     onClick={ closeMenu }
-                                     className={ classesHandler }>Produits</NavLink>
-                            <NavLink to={ PATH_CATEGORIES }
-                                     onClick={ closeMenu }
-                                     className={ classesHandler }>Catégories</NavLink>
+                            <NavLink to={PATH_PRODUCTS}
+                                onClick={closeMenu}
+                                className={classesHandler}>
+                                <div className='flex-flow-center'>
+                                    <span>Produits</span>
+                                    <i className='Icon-product text-xl ml-2'></i>
+                                </div>
+                            </NavLink>
+
+                            <NavLink to={PATH_CATEGORIES}
+                                onClick={closeMenu}
+                                className={classesHandler}>
+                                <div className='flex-flow-center'>
+                                    <span>Catégories</span>
+                                    <i className='Icon-categories text-xl ml-2'></i>
+                                </div>
+                            </NavLink>
                         </nav>
                     </div>
                 </div>

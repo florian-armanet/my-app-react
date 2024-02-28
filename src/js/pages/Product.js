@@ -10,22 +10,38 @@ import { addProductInCart, setProductQuantity } from '../store/productsStore'
 import { setCartModalOpened } from '../store/cartStore'
 
 const Product = () => {
-    const dispatch                                            = useDispatch()
-    const params                                              = useParams()
-    const paramId                                             = Number(params.id)
-    const productsStatusRequest                               = useSelector(state => state.productsFetched.status)
-    const productsFetched                                     = useSelector(state => state.productsFetched.productsFetched)
-    const productsInCart                                      = useSelector(state => state.products.inCart)
-    const products                                            = useSelector(state => state.products.all)
-    const [currentProduct, setCurrentProduct]                 = useState({})
-    const [productQty, setProductQty]                         = useState(1)
+    const dispatch = useDispatch()
+    const params = useParams()
+    const paramId = Number(params.id)
+    const productsStatusRequest = useSelector(state => state.productsFetched.status)
+    const productsFetched = useSelector(state => state.productsFetched.productsFetched)
+    const products = useSelector(state => state.products.products)
+    const productsInCart = useSelector(state => state.products.inCart)
+    const [productQty, setProductQty] = useState(1)
     const [contentFetchingProcess, setContentFetchingProcess] = useState(<p>En attente d\'une requête...</p>)
+
+    const currentProduct = [...products].find(pdt => pdt.id === paramId) || []
+    const productFetched = productsFetched.some(productFetched => productFetched.id === paramId)
+
+    /**
+     *
+     * @param p
+     */
+    const processLocalStorage = (p = {}) => {
+        localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify([
+            ...productsInCart.filter(p => p.id !== product.id),
+            {
+                ...product,
+                ...p,
+            }
+        ]))
+    }
 
     /**
      *
      * @param event
      */
-    const changeQty = (event) => {
+    const handleChangeQty = (event) => {
         setProductQty(event.target.value)
     }
 
@@ -43,6 +59,8 @@ const Product = () => {
 
             dispatch(setProductQuantity({ ...payload }))
             dispatch(setCartModalOpened(true))
+
+            processLocalStorage(payload)
             return
         }
 
@@ -53,13 +71,15 @@ const Product = () => {
 
         dispatch(addProductInCart({ ...payload }))
         dispatch(setCartModalOpened(true))
+
+        localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify([...productsInCart, payload]))
     }
 
     /**
      *
      */
     useEffect(() => {
-        if (productsStatusRequest === STATUS_LOADING && !Object.keys(currentProduct).length) {
+        if (productsStatusRequest === STATUS_LOADING) {
             setContentFetchingProcess(<div className="Loader mx-auto my-20"></div>)
             return
         }
@@ -78,67 +98,46 @@ const Product = () => {
 
         setContentFetchingProcess(<></>)
 
-    }, [productsStatusRequest, currentProduct, dispatch])
+    }, [productsStatusRequest, dispatch])
 
     /**
      *
      */
     useEffect(() => {
-        const productFetched = productsFetched.some(productFetched => productFetched.id === paramId)
         if (productFetched) return
 
         dispatch(fetchProduct(params.id))
     }, [productsFetched, dispatch])
 
-    /**
-     *
-     */
-    useEffect(() => {
-        if (!products.length) return
-
-        const currentPdt = [...products].find(pdt => pdt.id === paramId)
-        setCurrentProduct(currentPdt)
-    }, [products, dispatch, paramId])
-
-    useEffect(() => {
-        const productInCart = productsInCart.find(productInCart => productInCart.id === currentProduct.id)
-        if (productInCart) {
-            localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCart))
-            return
-        }
-
-        localStorage.setItem(PRODUCTS_IN_CART, JSON.stringify(productsInCart))
-    }, [productsInCart, dispatch])
-
     if (Object.keys(currentProduct).length) {
         return (
             <div className="o-grid pb-12">
                 <div className="o-col-12">
-                    <NavLink to={ PATH_PRODUCTS } className="Button Button--primary mb-8">
+                    <NavLink to={PATH_PRODUCTS} className="Button Button--primary mb-8">
                         <i className="Icon-arrow-left mr-2"></i>
                         <span>Retour aux produits</span>
                     </NavLink>
                 </div>
                 <div className="o-col-12 lg:o-col-6 lg-down:mb-6">
-                    <img src={ currentProduct.image } alt={ currentProduct.title } className="lg-down:max-w-56 max-h-96"/>
+                    <img src={currentProduct.image} alt={currentProduct.title} className="lg-down:max-w-56 max-h-96" />
                 </div>
                 <div className="o-col-12 lg:o-col-6">
-                    <p className="font-bold text-2xl mb-1">{ currentProduct.title }</p>
-                    <p className="text-sm mb-4">{ currentProduct.category.categoryLabel }</p>
-                    <p className="mb-4">{ currentProduct.description }</p>
+                    <p className="font-bold text-2xl mb-1">{currentProduct.title}</p>
+                    <p className="text-sm mb-4">{currentProduct.category.categoryLabel}</p>
+                    <p className="mb-4">{currentProduct.description}</p>
                     <p className="flex-flow-centerY mb-4">
-                        { generateStarRate(roundHalf(currentProduct.rating.rate)) }
-                        <span className="ml-1">({ currentProduct.rating.count } avis)</span>
+                        {generateStarRate(roundHalf(currentProduct.rating.rate))}
+                        <span className="ml-1">({currentProduct.rating.count} avis)</span>
                     </p>
-                    <p className="font-bold text-primary-base text-2xl mb-4">{ formatNumberToString(currentProduct.price) } €</p>
+                    <p className="font-bold text-primary-base text-2xl mb-4">{formatNumberToString(currentProduct.price)} €</p>
                     <div className="flex flex-wrap">
                         <input type="number"
-                               min="1"
-                               value={ productQty }
-                               onChange={ changeQty }
-                               className="text-center text-primary-base appearance-none font-bold outline-none border-2 border-primary-light w-14 py-2 rounded"/>
-                        <button onClick={ addToCart }
-                                className="bg-primary-base hover:bg-primary-hover transition text-white px-4 py-2 rounded ml-2">
+                            min="1"
+                            value={productQty}
+                            onChange={handleChangeQty}
+                            className="text-center text-primary-base appearance-none font-bold outline-none border-2 border-primary-light w-14 py-2 rounded" />
+                        <button onClick={addToCart}
+                            className="bg-primary-base hover:bg-primary-hover transition text-white px-4 py-2 rounded ml-2">
                             Ajouter au panier
                         </button>
                     </div>
@@ -149,7 +148,7 @@ const Product = () => {
 
     return (
         <>
-            { contentFetchingProcess }
+            {contentFetchingProcess}
         </>
     )
 }

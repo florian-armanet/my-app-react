@@ -9,7 +9,7 @@ import { setSearcher } from '../../store/searcherStore'
 
 const FiltersContent = () => {
     const dispatch = useDispatch()
-    const products = useSelector(state => state.products.all)
+    const products = useSelector(state => state.products.products)
 
     /**
      *

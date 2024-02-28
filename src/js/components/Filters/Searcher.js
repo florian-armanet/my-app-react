@@ -13,7 +13,7 @@ const Searcher = () => {
     const getCategoriesSelected = useSelector(state => state.categories.categoriesSelected)
     const inputRef              = useRef()
     const currentSorting        = useSelector(state => state.sorting.currentSorting)
-    const products              = useSelector(state => state.products.all)
+    const products              = useSelector(state => state.products.products)
 
     const changeHandler = (event) => {
         dispatch(setCategoriesSelected([]))

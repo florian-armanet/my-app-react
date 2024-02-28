@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { PATH_HOME } from '../utils/constants'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setSearchModalOpened } from '../store/searchStore'
 
 const Logo = ({ color = 'white' }) => {

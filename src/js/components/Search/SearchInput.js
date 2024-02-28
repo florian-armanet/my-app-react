@@ -6,12 +6,12 @@ import { setCategoriesOfSearch } from '../../store/categoriesStore'
 import { setSearchValue } from '../../store/searchStore'
 
 const SearchInput = () => {
-    const dispatch    = useDispatch()
+    const dispatch = useDispatch()
     const searchValue = useSelector(state => state.search.searchValue)
     const modalOpened = useSelector(state => state.search.modalOpened)
-    const inputRef    = useRef()
+    const inputRef = useRef()
 
-    const changeHandler = (event) => {
+    const handleChange = (event) => {
         dispatch(setSearchValue(event.target.value))
 
         if (!event.target.value) {
@@ -28,12 +28,12 @@ const SearchInput = () => {
      *
      * @type {(function(...[*]): void)|*}
      */
-    const changeHandlerDebounced = useCallback(debounce(changeHandler, 1000), [searchValue])
+    const handleChangeDebounced = useCallback(debounce(handleChange, 1000), [searchValue])
 
     /**
-     *
+     * 
      */
-    const onResetSearch = () => {
+    const handleResetSearch = () => {
         dispatch(setSearchValue(''))
         inputRef.current.value = ''
     }
@@ -49,13 +49,13 @@ const SearchInput = () => {
         <div
             className="lg-down:order-3 flex-flow-centerY justify-between bg-white rounded bg-primary-light/20 py-2 px-4 lg:px-8 hover:bg-primary-lighter transition-fast lg:max-w-xs w-full lg:mr-16 lg-down:mt-4">
             <input type="text"
-                   ref={ inputRef }
-                   placeholder="Rechercher un produit..."
-                   onChange={ changeHandlerDebounced }
-                   className="text-primary-hover font-bold placeholder:text-primary-light/75 bg-transparent outline-none flex-1 max-w-[200px]"/>
+                ref={inputRef}
+                placeholder="Rechercher un produit..."
+                onChange={handleChangeDebounced}
+                className="text-primary-hover font-bold placeholder:text-primary-light/75 bg-transparent outline-none flex-1 max-w-[200px]" />
             <div className="flex-flow-centerY">
-                { searchValue && <i onClick={ onResetSearch }
-                                    className="Icon-close-light mr-2 text-primary-base cursor-pointer"></i> }
+                {searchValue && <i onClick={handleResetSearch}
+                    className="Icon-close-light mr-2 text-primary-base cursor-pointer"></i>}
                 <i className="Icon-search text-lg text-primary-base"></i>
             </div>
         </div>

@@ -4,7 +4,6 @@ import { setSearchModalOpened } from '../../store/searchStore'
 import Logo from '../Logo'
 import SearchResults from './SearchResults'
 import SearchInput from './SearchInput'
-import { useEffect } from 'react'
 
 const Search = () => {
     const dispatch    = useDispatch()
@@ -13,18 +12,10 @@ const Search = () => {
     /**
      *
      */
-    const closeModal = () => {
+    const handleCloseModal = () => {
         dispatch(setSearchModalOpened(false))
-    }
-
-    useEffect(() => {
-        if (modalOpened) {
-            document.body.classList.add('remove-scrollbar')
-            return
-        }
-
         document.body.classList.remove('remove-scrollbar')
-    }, [modalOpened])
+    }
 
     return (
         <>
@@ -39,7 +30,7 @@ const Search = () => {
 
                         <SearchInput/>
 
-                        <div onClick={ closeModal }
+                        <div onClick={ handleCloseModal }
                              className="lg-down:order-2 w-8 h-8 rounded-full flex-flow-center bg-primary-lighter hover:bg-gray-50 transition-fast cursor-pointer">
                             <i className="Icon-close-light text-lg text-primary-base font-bold"></i>
                         </div>
@@ -50,7 +41,7 @@ const Search = () => {
             </CSSTransition>
 
             <CSSTransition in={ modalOpened } classNames="Animation-opacity" timeout={ 300 } unmountOnExit appear>
-                <div onClick={ closeModal } className="z-5 fixed inset-0 backdrop-blur-sm backdrop-brightness-95"></div>
+                <div onClick={ handleCloseModal } className="z-5 fixed inset-0 backdrop-blur-sm backdrop-brightness-95"></div>
             </CSSTransition>
         </>
 

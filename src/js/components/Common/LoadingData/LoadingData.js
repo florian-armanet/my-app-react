@@ -1,29 +1,18 @@
-import LoadingProducts from './LoadingProducts'
-import LoadingCategories from './LoadingCategories'
-import { PRODUCTS_IN_CART } from '../../../utils/constants'
-import { setProductInCart } from '../../../store/productsStore'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import fetchProducts from '../../../api/products'
 
 const LoadingData = () => {
-    const dispatch       = useDispatch()
-    const productsInCart = useSelector(state => state.products.inCart)
+    const dispatch = useDispatch()
+
+    const productsStatusRequest = useSelector(state => state.products.status)
 
     useEffect(() => {
-        if (!productsInCart.length) {
-            if (localStorage.getItem(PRODUCTS_IN_CART)) {
-                const initData = JSON.parse(localStorage.getItem(PRODUCTS_IN_CART))
-                dispatch(setProductInCart([...initData]))
-            }
+        if (!productsStatusRequest) {
+            dispatch(fetchProducts())
+            return
         }
-    }, [dispatch])
-
-    return (
-        <>
-            <LoadingProducts/>
-            <LoadingCategories/>
-        </>
-    )
+    }, [productsStatusRequest, dispatch])
 }
 
 export default LoadingData
