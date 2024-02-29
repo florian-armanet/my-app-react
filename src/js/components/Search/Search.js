@@ -14,7 +14,6 @@ const Search = () => {
      */
     const handleCloseModal = () => {
         dispatch(setSearchModalOpened(false))
-        document.body.classList.remove('remove-scrollbar')
     }
 
     return (

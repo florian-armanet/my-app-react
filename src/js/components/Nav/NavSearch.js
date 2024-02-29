@@ -8,7 +8,6 @@ const NavSearch = () => {
 
     const handleOpenSearchModal = () => {
         dispatch(setSearchModalOpened(true))
-        document.body.classList.add('remove-scrollbar')
     }
 
     if (!products.length || !categories.length) {
