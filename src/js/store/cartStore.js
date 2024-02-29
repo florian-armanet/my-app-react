@@ -8,6 +8,13 @@ export const cartStore = createSlice({
     reducers: {
         setCartModalOpened: (state, { payload: bool }) => {
             state.modalOpened = bool
+
+            if (state.modalOpened) {
+                document.body.classList.add('remove-scrollbar')
+                return
+            }
+        
+            document.body.classList.remove('remove-scrollbar')
         },
     },
 })

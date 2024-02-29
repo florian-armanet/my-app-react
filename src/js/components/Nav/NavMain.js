@@ -9,6 +9,7 @@ const NavMain = () => {
 
     const onClick = () => {
         dispatch(setMenuOpened(true))
+        document.body.classList.add('remove-scrollbar')
     }
 
     /**

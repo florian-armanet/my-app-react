@@ -9,8 +9,6 @@ const CartModal = () => {
     const modalOpened    = useSelector(state => state.cart.modalOpened)
     const productsInCart = useSelector(state => state.products.inCart)
 
-    // console.log('cart modal');
-
     /**
      *
      */
