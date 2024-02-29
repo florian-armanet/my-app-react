@@ -8,6 +8,13 @@ export const filtersStore = createSlice({
     reducers: {
         setFiltersOpened: (state, { payload: bool }) => {
             state.filtersOpened = bool
+
+            if (state.filtersOpened) {
+                document.body.classList.add('remove-scrollbar')
+                return
+            }
+        
+            document.body.classList.remove('remove-scrollbar')
         },
     },
 })

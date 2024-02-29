@@ -28,7 +28,6 @@ const FiltersContent = () => {
      */
     const closeFilters = () => {
         dispatch(setFiltersOpened(false))
-        document.body.classList.remove('remove-scrollbar')
     }
 
     if (!products.length) {

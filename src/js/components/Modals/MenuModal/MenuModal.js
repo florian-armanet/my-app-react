@@ -18,7 +18,6 @@ const MenuModal = () => {
      */
     const closeMenu = () => {
         dispatch(setMenuOpened(false))
-        document.body.classList.remove('remove-scrollbar')
     }
 
     return (

@@ -8,6 +8,13 @@ export const menuStore = createSlice({
     reducers: {
         setMenuOpened: (state, { payload: bool }) => {
             state.menuOpened = bool
+
+            if (state.menuOpened) {
+                document.body.classList.add('remove-scrollbar')
+                return
+            }
+        
+            document.body.classList.remove('remove-scrollbar')
         },
     },
 })

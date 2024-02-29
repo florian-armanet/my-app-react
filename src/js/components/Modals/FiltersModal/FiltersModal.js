@@ -12,7 +12,6 @@ const FiltersModal = () => {
      */
     const closeFilters = () => {
         dispatch(setFiltersOpened(false))
-        document.body.classList.remove('remove-scrollbar')
     }
 
     return (

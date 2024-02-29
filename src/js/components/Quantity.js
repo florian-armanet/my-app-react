@@ -68,7 +68,7 @@ const Quantity = ({ product }) => {
     }
 
     return (
-        <div className="flex-flow-centerY bg-primary-base/25 text-primary-base mr-4 rounded-lg overflow-hidden">
+        <div className="flex-flow-centerY bg-primary-base/25 text-primary-base rounded-lg overflow-hidden">
             <div onClick={handleDecrement}
                 className="w-8 flex-flow-center cursor-pointer text-2xl hover:bg-primary-light hover:text-white">-</div>
             <input type="number"
