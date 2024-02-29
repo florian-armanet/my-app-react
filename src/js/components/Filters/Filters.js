@@ -11,6 +11,7 @@ const Filters = () => {
      */
     const onClick = () => {
         dispatch(setFiltersOpened(true))
+        document.body.classList.add('remove-scrollbar')
     }
 
     return (

@@ -16,8 +16,6 @@ const ProductMiniature = ({ product}) => {
 
     const productInCart = productsInCart.find(productInCart => productInCart.id === product.id)
 
-    console.log('product miniature')
-
     /**
      *
      */

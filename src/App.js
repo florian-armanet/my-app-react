@@ -3,16 +3,12 @@ import Layout from './js/components/Layout'
 import Loading from './js/components/Loader/Loading'
 import LoadingData from './js/components/Common/LoadingData/LoadingData'
 import Modals from './js/components/Modals/Modals'
-import UseEffects from './js/components/Common/UseEffects/UseEffects'
 import LoadingCategories from './js/components/Common/LoadingData/LoadingCategories'
 import { STATUS_SUCCEEDED } from './js/utils/constants'
 import { useSelector } from 'react-redux'
 
 function App() {
     const productsStatusRequest = useSelector(state => state.products.status)
-
-    console.log('App')
-    console.log(productsStatusRequest)
 
     return (
         <div className="App">
@@ -22,9 +18,8 @@ function App() {
             {
                 (productsStatusRequest === STATUS_SUCCEEDED) ?
                     [
-                        <Layout key={1} />,
-                        <UseEffects key={2} />,
-                        <Modals key={3} />,
+                        <Layout key={1} />, 
+                        <Modals key={2} />,
                     ]
                     :
                     <div className="flex-flow-center flex-col w-screen h-screen">
