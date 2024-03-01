@@ -5,7 +5,6 @@ import { setProductsFiltered } from '../../store/productsStore'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
 import { clickOut } from '../../utils/clickOut'
-import { SORT_ASC, SORT_DESC } from '../../utils/constants'
 
 const Sortings = () => {
     const dispatch = useDispatch()
