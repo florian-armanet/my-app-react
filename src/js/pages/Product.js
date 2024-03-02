@@ -18,7 +18,6 @@ const Product = () => {
     const products = useSelector(state => state.products.products)
     const productsInCart = useSelector(state => state.products.inCart)
     const [productQty, setProductQty] = useState(1)
-    const [contentFetchingProcess, setContentFetchingProcess] = useState(<p>En attente d\'une requête...</p>)
 
     const currentProduct = [...products].find(pdt => pdt.id === paramId) || []
     const productFetched = productsFetched.some(productFetched => productFetched.id === paramId)
@@ -79,37 +78,12 @@ const Product = () => {
      *
      */
     useEffect(() => {
-        if (productsStatusRequest === STATUS_LOADING) {
-            setContentFetchingProcess(<div className="Loader mx-auto my-20"></div>)
-            return
-        }
-
-        if (productsStatusRequest === STATUS_SUCCEEDED) {
-            setContentFetchingProcess(<></>)
-            return
-        }
-
-        if (productsStatusRequest === STATUS_FAILED) {
-            setContentFetchingProcess(
-                <p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>
-            )
-            return
-        }
-
-        setContentFetchingProcess(<></>)
-
-    }, [productsStatusRequest, dispatch])
-
-    /**
-     *
-     */
-    useEffect(() => {
         if (productFetched) return
 
         dispatch(fetchProduct(params.id))
     }, [productsFetched, dispatch])
 
-    if (Object.keys(currentProduct).length) {
+    if (productsStatusRequest === STATUS_SUCCEEDED) {
         return (
             <div className="o-grid pb-12">
                 <div className="o-col-12">
@@ -146,11 +120,17 @@ const Product = () => {
         )
     }
 
-    return (
-        <>
-            {contentFetchingProcess}
-        </>
-    )
+    if (productsStatusRequest === STATUS_LOADING || !productsStatusRequest) {
+        return (
+            <div className="Loader mx-auto my-20"></div>
+        )
+    }
+
+    if (productsStatusRequest === STATUS_FAILED) {
+        return (
+            <p className="p-4 bg-tertiary-light/75 text-primary-dark font-bold">Echec de la requête !</p>
+        )
+    }
 }
 
 export default Product

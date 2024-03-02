@@ -11,11 +11,7 @@ export const productsOfCategoryStore = createSlice({
         status: '',
         error: null,
     },
-    reducers: {
-        setCurrentProductsOfCategory: (state, { payload }) => {
-            state.currentProductsOfCategory = payload
-        }
-    },
+    reducers: {},
     extraReducers (builder) {
         builder
             .addCase(fetchProductsOfCategory.pending, (state, { payload }) => {
@@ -45,7 +41,5 @@ export const productsOfCategoryStore = createSlice({
             })
     }
 })
-
-export const { setCurrentProductsOfCategory } = productsOfCategoryStore.actions
 
 export default productsOfCategoryStore.reducer
