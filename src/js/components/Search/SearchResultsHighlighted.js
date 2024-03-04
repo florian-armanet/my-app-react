@@ -27,7 +27,11 @@ const SearchResultsHighlighted = () => {
         }, 200)
     }, [modalOpened])
 
-    const handleCLick = (category) => {
+    /**
+     * 
+     * @param {*} category 
+     */
+    const handleCLick = (category = {}) => {
         dispatch(setSearchModalOpened(false))
         navigate(`${PATH_CATEGORIES + '/' + category.categoryLabelOrigin}`)
     }

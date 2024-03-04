@@ -25,7 +25,7 @@ const Category = () => {
         if (!productsOfCategoryFetched.some(product => product.category.categoryLabelOrigin === paramCategoryLabelOrigin)) {
             dispatch(fetchProductsOfCategory(paramCategoryLabelOrigin))
         }
-    }, [])
+    }, [params])
 
     if (productsOfCategoryStatusRequest === STATUS_SUCCEEDED) {
         return (
